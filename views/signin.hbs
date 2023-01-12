@@ -1,0 +1,19 @@
+
+<div class="container" >
+    <form class="form-1" action="/user/signin" method="post">
+        <h1 style="display: flex; justify-content:center">log In</h1>
+
+
+        <input type="text" name="email" id="email" placeholder="E-mail" />
+        <input type="password" name="password" id="password" placeholder="password" />
+
+        <button id="submit" type="submit">Sign In</button>
+        <div class="error">{{errMessage}}</div>
+         <div class="valid" style="background-color:rgb(243, 69, 69); color:aliceblue">{{message2}}</div>
+          <div class="error"></div>
+        <p style="display: flex; justify-content:center"><a href="">Forgot password</a></p>
+
+        <p style="display: flex; justify-content:center">Do you have an account ? <a href="/user/signup"> &nbsp; Sign Up</a></p>
+    </form>
+</div>
+

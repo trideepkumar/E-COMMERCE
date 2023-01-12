@@ -1,0 +1,209 @@
+@import url('../node_modules/font-awesome/css/font-awesome.min.css');
+*{
+    margin: 0;
+    padding: 0;
+    
+    
+  }
+body{
+  background-image: url('../images/—Pngtree—green\ nutrition\ healthy\ milk\ poster_1113700.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+
+}
+
+.navbar{
+    background-color:#89CFF0;
+    display: flex;
+    justify-content:space-between;
+    align-content: space-between;
+
+    
+    
+}
+.deliver{
+    color: #000000;
+    font-size:xx-large;
+    text-decoration: none;
+}
+.menu{
+    display: flex;
+    justify-content:space-between;
+    align-content: space-between;
+    width: 30vw;
+    font-size: larger;   
+    color: #000000;
+    
+}
+a{
+   color: #000000;
+}
+ul{
+    list-style: none;
+    display: flex;
+    justify-content:space-between;
+    align-content: space-between;
+    width: 30vw;
+    font-size:large;   
+    padding-top: 10px;
+    
+}
+
+.icon{
+    display: flex;
+    justify-content:space-between;
+    align-content: space-between;
+    font-size: larger;
+    width: 8vw;
+    color: #000000;
+    
+}
+
+/*signup style*/
+
+.container .form-1 {
+   
+    display: flex;
+    flex-direction: column;
+    margin-left: 10rem;
+    align-content: center;
+    width: 48vw;
+    gap: 2rem;
+    
+  
+  
+    
+}
+input{
+    margin-top:10px;
+    height: 40px;
+    border-radius: 15px;
+    border-color: #cdcdcd;
+    border-width: 1px;
+    padding-left: 20px;
+    
+}
+
+#submit{
+    margin-top: 35px;
+    margin-bottom: 25px;
+    border-radius: 20px;
+    border-width: 1px;
+    height: 40px;   
+}
+/*for responsive*/
+
+
+@media (max-width: 501px) {
+    html {
+      font-size: 15px;
+    }
+  
+    .container .form-1 {
+      width: 300px;
+    }
+  }
+  
+  @media (min-width: 501px) and (max-width: 768px) {
+    html {
+      font-size: 14px;
+    }
+    .container .form-1 {
+      width: 450px;
+    }
+  }
+  
+  @media (min-width: 765px) and (max-width: 1200px) {
+    html {
+      font-size: 18px;
+    }
+  
+    .container .form-1 {
+      width: 540px;
+      height: 550px;
+    }
+  }
+  
+  @media (orientation: landscape) and (max-height: 500px) {
+    .container {
+      height: 100vmax;
+    }}
+
+    /*for validation*/
+
+    .valid{
+      color:rgb(243, 69, 69);
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      border-radius: 25px;
+
+    }
+    .error{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: red;
+    }
+
+    .error{
+      background-color: rgb(243, 69, 69);
+      color: rgb(255, 255, 255);
+      border-radius: 25px;
+      
+    }
+    p{
+      
+      font-size:large;
+    }
+    
+
+    /*for otp page*/
+    .text-color {
+      color: #000000;
+    }
+    .card {
+      width: 450px;
+      height: 300px;
+      padding: 10px;
+      border-radius: 20px;
+      background: #ffffff;
+      border: none;
+      position: relative;
+      margin-top: 7rem;
+      border-color: #495057;
+      border-width: 10px;
+      box-shadow: 2px 2px 2px 2px rgb(83, 83, 83);    
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+    .container {
+      height: 100vh;
+    }
+    .mobile-text {
+      color: #cd5c5c;
+      font-size: 15px;
+    }
+    .form-control {
+      margin-right: 12px;
+    }
+    .form-control:focus {
+      color: #ffffff;
+      background-color: #d4efdf;
+      border-color: #c0392b;
+      box-shadow: 60px -16px rgb(0, 0, 0);    
+      cursor: pointer;
+    }
+    #submit-otp{
+      background-color: white;
+      border-radius: 10px;
+      height: 3rem;
+      width: 7rem;
+      border-color: none;
+      border-width: .01ch;
+
+    }
+    
