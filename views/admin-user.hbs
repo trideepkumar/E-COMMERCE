@@ -1,0 +1,54 @@
+<div class="main-container">
+<aside class="aside">
+    <a href="/admin/admin-dash" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-table-columns"></i>dashboard</a>
+    <a href="" class="admin-dash p-5"><i class="fa-solid fa-user"></i>profile</a>
+    <a href="" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-bag-shopping"></i>products</a>
+    <a href="" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"></i></i>coupons</a>
+    <a href="" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-calendar"></i></i>orders</a>
+    <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"></i>users</a>
+       <a href="/admin/logout" class="logout-button">logout</a>
+
+</aside>
+
+  <section class="container pt-5">
+    <div class="row">
+      <div class="col-12 table-overflow">
+        <table id="datatable" class="table table-striped">
+          <thead>
+            <tr>
+              <th>Sno:</th>
+              <th>firstname</th>
+              <th>lastname</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+             {{#each users}}
+              <tr>
+              <th><i class="fa-solid fa-users"></i></th>
+              <th>{{firstname}}</th>
+              <th>{{lastname}}</th>
+              <th>{{Email}}</th>
+              <th>{{phone}}</th>
+              {{#if Action}}
+              <th><button class="btn block green" id="unblock-button" data-url={{_id}}  >block</button></th>  
+              {{else}}
+              <th><button class="btn block red" id="unblock-button" data-url={{_id}}  >unblock</button></th>  
+            </tr>
+            {{/if}}
+            {{/each}}
+          </tbody>
+          <tfoot>
+         </tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+<script src="/javascript/admin.js"></script>
+
+{{!-- <div class="footer" style="background-color: rgb(211, 209, 209); display:flex; justify-content:center">copyright@2023</div> --}}
+
+

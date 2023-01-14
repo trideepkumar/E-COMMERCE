@@ -1,12 +1,17 @@
+
+
 const form = document.querySelector('.form-1');
 
-form.addEventListener('submit', (event) => {
-    if (validateForm()) {
-        form.submit();
-    } else {
-        event.preventDefault();
-    }
-})
+if(form) {
+    form.addEventListener('submit', (event) => {
+        if (validateForm()) {
+            form.submit();
+        } else {
+            event.preventDefault();
+        }
+    })
+}
+
 
 function validateForm() {
     console.log('Checking');
@@ -68,3 +73,6 @@ function validateForm() {
     }
     return true;
 }
+
+
+//for blocking user

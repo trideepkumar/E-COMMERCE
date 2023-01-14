@@ -1,20 +1,49 @@
+
+
+    <nav class="navbar mb-0">
+        
+        <a class="deliver" href="#">dELIVER</a>
+        
+        <div class="menu">
+            <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">Shop</a></li>
+            <li><a href="">About</a></li>
+            </ul>
+           
+        </div>
+        <div class="icon">
+           <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a> 
+          <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>  
+           <a href="#"> <i class="fa-solid fa-user"></i></a>
+        </div>
+    </nav>
+  
+
+
+
+
+
+    </nav>
+
 <div class="contain">
 <div class="container">
     <form class="form-1" action="/user/signup" method="post">
         <h1 style="display: flex; justify-content:center">Sign Up</h1>
-        <input type="text" name="firstname" id="firstname" placeholder="firstname"/>
-        <input type="text" name="lastname" id="lastname" placeholder="lastname"/>
+        <input class="mb-3"type="text" name="firstname" id="firstname" placeholder="firstname"/>
+        <input class="mb-3"type="text" name="lastname" id="lastname" placeholder="lastname"/>
 
-        <input type="text" name="email" id="email" placeholder="E-mail"/>
-       <input type="tel" name="phone" id="phone" placeholder="phone number"/>
-        <input type="password" name="password" id="password" placeholder="password"/>
-        <input type="password" name="password1" id="password1" placeholder="confirm password"/>
+        <input class="mb-3"type="text" name="email" id="email" placeholder="E-mail"/>
+       <input class="mb-3"type="tel" name="phone" id="phone" placeholder="phone number"/>
+        <input class="mb-3" type="password" name="password" id="password" placeholder="password"/>
+        <input class="mb-3"type="password" name="password1" id="password1" placeholder="confirm password"/>
          <div class="valid">{{message2}}</div>
            <div class="valid">{{message1}}</div>
-        <button id="submit" type="submit">Sign Up</button>
-        <div class="error">{{errMessage}}</div>
+            <div class="error">{{errMessage}}</div>
 
      <p style="display: flex; justify-content:center ">already have an account ? <a href="/user/signin">  login</a></p>
+        <button id="submit" type="submit">Sign Up</button>
+       
     </form>
 </div>
 </div>

@@ -12,9 +12,12 @@ const registerUser = async (req, res, next) => {
     const existing = await User.find({ $or: [{ Email: req.body.email }, { phone: req.body.phone }] })
     if (existing == 0) {
         req.session.user = {
+            firstname:req.body.firstname,
+            lastname:req.body.lastname,
             Email: req.body.email,
             phone: req.body.phone,
             password: req.body.password,
+            
         }
         console.log(req.session.user)
         res.render('user-otp')
@@ -34,7 +37,6 @@ const generateOtp = (req, res, next) => {
 }
 
 const sendOtp = (otp, number) => {
-    console.log('sendotp')
     console.log(otp)
     const body = {
         "authorization": process.env.authorization,

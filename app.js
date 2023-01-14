@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 const userRoute = require('./routes/user/user');
-
+const adminRoute= require('./routes/admin/admin');
 //for session
 
 //session to db
@@ -76,6 +76,8 @@ app.engine(
 //route set up for user
 
 app.use('/user', userRoute);
+
+app.use('/admin',adminRoute);
 
 // app.get('/user', (req, res) => {
 //       res.render('signup');

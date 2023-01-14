@@ -16,11 +16,8 @@ body{
 .navbar{
     background-color:#89CFF0;
     display: flex;
-    justify-content:space-between;
+    justify-content:flex-start space-between;
     align-content: space-between;
-
-    
-    
 }
 .deliver{
     color: #000000;
@@ -66,22 +63,26 @@ ul{
    
     display: flex;
     flex-direction: column;
-    margin-left: 10rem;
     align-content: center;
     width: 48vw;
-    gap: 2rem;
+    height: 60rem;
+   
+
     
   
   
     
 }
 input{
-    margin-top:10px;
+    display: flex;
+    flex-direction: column;
+    column-gap: 19rem;
     height: 40px;
     border-radius: 15px;
     border-color: #cdcdcd;
     border-width: 1px;
     padding-left: 20px;
+    
     
 }
 
@@ -181,7 +182,11 @@ input{
 
     }
     .container {
-      height: 100vh;
+      height: 90vh;
+      width: 100vw;
+                                 
+      
+      
     }
     .mobile-text {
       color: #cd5c5c;
@@ -191,19 +196,194 @@ input{
       margin-right: 12px;
     }
     .form-control:focus {
-      color: #ffffff;
+      color: #000000;
       background-color: #d4efdf;
       border-color: #c0392b;
       box-shadow: 60px -16px rgb(0, 0, 0);    
       cursor: pointer;
     }
     #submit-otp{
-      background-color: white;
+      background-color: rgb(4, 202, 237);
       border-radius: 10px;
       height: 3rem;
       width: 7rem;
-      border-color: none;
+      border-color: black;
       border-width: .01ch;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
 
     }
+
+
+
+    /* admin login page start*/
+  
+body{
+  background-color: #efeeef;
+}
+.background{
+  width: 430px;
+  height: 520px;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  left: 50%;
+  top: 50%;
+}
+.background .shape{
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  border-radius: 50%;
+}
+
+form{
+  height: 520px;
+  width: 400px;
+  background-color: rgba(255,255,255,0.13);
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  border-radius: 10px;
+  backdrop-filter: blur(0px);
+  border: 2px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 40px rgba(8,7,16,0.6);
+  padding: 50px 35px;
+}
+form *{
+  font-family: 'Poppins',sans-serif;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  outline: none;
+  border: none;
+}
+form h3{
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 42px;
+  text-align: center;
+}
+
+label{
+  display: block;
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  color:#e1f5fe;
+}
+.admin-input{
+  display: block;
+  height: 50px;
+  width: 100%;
+  background-color: rgba(237, 236, 236, 0.81);
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  border-radius:5px ;
+  font-size: 14px;
+  font-weight: 300;
+  
+}
+::placeholder{
+  color: #575656;
+}
+button{
+  margin-top: 100px;
+  width: 100%;
+  background-color: #ffffff;
+  color: #080710;
+  padding: 15px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor:pointer;
+}
+#btn{
+  color: #000000;
+  background-color: #06c1ff;
+  margin-top: 4rem;
+}
+
+
+  
+    /* admin login page end*/
+
+    .main-container{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      align-content: center;
+    }
+    .aside{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items:flex-start;
+      align-content: space-around;
+      background-color: #89CFF0;
+      width: 20rem;
+      height: 95vh;
+      color: white;
+    }
+
+    .admin-dash {
+      color: #000000;
+      font-size: medium;
+      text-decoration: none;
+    }
+    .admin-dash:hover{
+      color:white;
+    }
+
+    .logout-button{
+      background-color: red;
+      margin-left: 3rem;
+      width:70px;
+      height:25px;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+      border-radius: 12px;
+      color: #d4efdf;
+      
+    }
+
+  
+    /* admin dashboard*/
     
+    /* admin dashboard*/
+
+
+  @media (min-width: 501px) and (max-width: 768px) {
+    .aside{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items:flex-start;
+      align-content: space-around;
+      background-color: #c9c9c9;
+      width: 5rem;
+      height: 94vh;
+      color: white;
+      
+    }
+   
+  }
+
+  
+  
+  /* admin dashboard end*/
+
+
+  /*admin -user */
+ .btn{
+  background-color: greenyellow;
+ }
+ .red{
+  background-color:rgb(234, 59, 59);
+ }
+ .green{
+  background-color: greenyellow;
+ }

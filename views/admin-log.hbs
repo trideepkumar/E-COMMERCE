@@ -1,0 +1,19 @@
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form action="/admin/admin-log" method="post">
+        <h3 style="color: #06c1ff;">ADMIN LOGIN</h3>
+
+        <label for="username">Email</label>
+        <input type="text" placeholder="Email id" id="email" name="email" class="admin-input">
+
+        <label for="password">Password</label>
+        <input type="password" placeholder="Password" name="password" id="password" class="admin-input">
+                <div class="valid">{{info}}</div>
+
+        <button id="btn" type="submit" >Log In</button>
+        
+    </form>
+</body>

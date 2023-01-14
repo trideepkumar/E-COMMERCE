@@ -20,6 +20,12 @@ router.post('/signup',userController.registerUser, userController.generateOtp)
 
 router.post('/otp',userController.checkOtp)
 
+router.get('/otp',(req,res)=>{
+    res.render('user-otp')
+})
+
+
+
 router.get('/signin', (req, res) => {
 
     if(req.session.email){
@@ -33,12 +39,18 @@ router.post('/signin', async (req, res) => {
 
     const user = await Register.findOne( { Email: req.body.email } )
     if(user) {
+        
             try {
+                
                 const match = await bcrypt.compare(req.body.password,user.password)
                 if(!match){
-                  
+                    console.log('1');
                   return res.render('signin',{message2:'invalid password entered!'})
-                  }else{
+                  }else if(user.Action==false){
+                    console.log(user.Action);
+                     return res.render('signin',{message2:'You cannot signin '})
+                  }
+                  else{
                     let session =req.session;
                     session.email =req.body.email;
                     res.redirect('/user/home')
@@ -47,6 +59,7 @@ router.post('/signin', async (req, res) => {
                 console.log(error)
               }
         }else{
+            console.log(user);
             return res.render('signin', {message2: 'User does not exist!' })
     
         }
