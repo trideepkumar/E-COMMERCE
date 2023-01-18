@@ -39,20 +39,20 @@ router.post('/signin', async (req, res) => {
 
     const user = await Register.findOne( { Email: req.body.email } )
     if(user) {
-        
-            try {
-                
-                const match = await bcrypt.compare(req.body.password,user.password)
-                if(!match){
-                    console.log('1');
-                  return res.render('signin',{message2:'invalid password entered!'})
-                  }else if(user.Action==false){
-                    console.log(user.Action);
-                     return res.render('signin',{message2:'You cannot signin '})
-                  }
-                  else{
-                    let session =req.session;
-                    session.email =req.body.email;
+            
+                try {
+                    
+                    const match = await bcrypt.compare(req.body.password,user.password)
+                    if(!match){
+                        console.log('1');
+                    return res.render('signin',{message2:'invalid password entered!'})
+                    }else if(user.Action==false){
+                        console.log(user.Action);
+                        return res.render('signin',{message2:'You cannot signin '})
+                    }
+                    else{
+                        let session =req.session;
+                        session.email =req.body.email;
                     res.redirect('/user/home')
                   }
               } catch (error) {

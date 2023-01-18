@@ -19,7 +19,7 @@ async function blockUser(e){
     console.log(`${userId}`)
     console.log(userId)
     const id = `${userId}`
-    const url = `http://localhost:3000/admin/admin-user/block/${userId}` ;
+    const url = `http://localhost:4000/admin/admin-user/block/${userId}` ;
     console.log(url)
 
 

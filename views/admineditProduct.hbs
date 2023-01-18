@@ -1,0 +1,42 @@
+<div class="conatiner">
+
+
+  <form action="/products/edit/{{_id}}" method="put" enctype="multipart/form-data" style="height:65rem; width:50rem">
+    <h3 style="margin-top:0px;">Update Product Details</h3>
+    <div class="form-group ">
+      <label for="productname" style="margin-top:0px;">Product Name</label>
+      <input type="text" class="form-control" name="name" id="productname" value="{{product.name}}">
+    </div>
+    <div class="form-group ">
+      <label for="price" style="margin-top:0px;">Price</label>
+      <input type="text" class="form-control" name="price" id="price" value="{{product.price}}">
+    </div>
+
+    <div class="form-group " style="margin-top:0px;">
+      <p for="fileName" class="">Image</p><img src="{{product.image}}" alt="" style="width:3rem; margin-left:2rem;">
+      <input type="file" class="form-control-file" name="fileName" id="fileName" value="{{product.image}}">
+    </div>
+
+
+    <div class="form-group ">
+      <label for="description" style="margin-top:0px;">Description</label>
+      <textarea class="form-control" name="description" id="description" value="{{product.description}}"
+        rows="2">{{product.description}}</textarea>
+    </div>
+
+    <div class="form ">
+      <label for="inputCat">Category</label>
+      <select id="inputCat" class="form-control" name="category">
+        <option value="">{{product.category.name}}</option>
+        {{#each categories}}
+        <option class="text-success" value="{{_id}}" name="category">{{this.name}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <button id="update-button" type="submit" class="btn btn-primary mt-4 px-5 btn-success" onclick="updateProduct()" data-url={{product.id}}>Update</button>
+    
+  </form>
+</div>
+
+<script src="/javascript/editProduct.js"></script>

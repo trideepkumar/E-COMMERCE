@@ -1,0 +1,14 @@
+<div class="conatiner mx-5 ps-5 vh-100 my-2">
+    <form method="post" action="/admin/add-category" style="height:35rem;">
+        <h1 class="mx-5">Add Category</h1>
+        <div class="form-group col-md-12 mt-3">
+            <label for="name" style="color: black;">Category Name</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Category">
+        </div>
+        <button type="submit" class="btn btn-primary mt-4 px-5 btn-success">Add</button>
+        <div style="color: rgb(255, 255, 255); background-color:red; border-radius:12px" class="mx-5 mt-3 text-center">
+            {{message}}</div>
+        <div style="color: rgb(255, 255, 255); background-color:rgb(43, 255, 0); border-radius:12px"
+            class="mx-5 mt-3 text-center">{{message1}}</div>
+    </form>
+</div>

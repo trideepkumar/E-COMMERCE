@@ -1,0 +1,34 @@
+<form style="height:67rem; width:60rem" method="post" action="/admin/add-products" enctype="multipart/form-data">
+  <h3 style="margin-top:0px;"> ADD PRODUCTS</h3>
+  <div class="form">
+    <label for="exampleFormControlInput1" style="color: black;">Product name</label>
+    <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="product name">
+  </div>
+  <div class="form ">
+    <label for="inputCat">Category</label>
+    <select id="inputCat" class="form-control" name="category">
+      <option value="" selected>Choose...</option>
+      {{#each category}}
+      <option class="text-success" value="{{_id}}" name="category">{{name}}</option>
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form ">
+    <label for="exampleFormControlInput1" style="color: black;">Price</label>
+    <input type="number" name="price" class="form-control" id="exampleFormControlInput1" placeholder="price">
+  </div>
+
+
+  <div class="form">
+    <label for="fileName" style="color: black;">Image</label>
+    <input type="file" class="form-control-file" name="fileName" id="fileName">
+  </div>
+
+  <div class="form">
+    <label for="exampleFormControlTextarea1" style="color: black;">Description</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="description"></textarea>
+  </div>
+  <button type="submit" class="btn btn-grey mt-4 btn-success " >Add</button>
+  <div  class="error">{{message}}</div>
+</form>

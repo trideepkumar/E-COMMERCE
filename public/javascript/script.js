@@ -36,6 +36,11 @@ function validateForm() {
         err.textContent = text;
         err.style.height = '2.5rem';
         return false;
+    }else if (Email.match(mailformat) === null) {
+        text = "Please enter a valid email";
+        err.textContent = text;
+        err.style.height = '4rem';
+        return false;
     }
     else if(Phone.length<=9){
         text = "Please enter valid phone number";
@@ -43,12 +48,7 @@ function validateForm() {
         err.style.height = '2.5rem';
         return false;
     }
-    else if (Email === "") {
-        text = "Please enter a valid email";
-        err.textContent = text;
-        err.style.height = '2.5rem';
-        return false;
-    } else if (Email.match(mailformat) === null) {
+     else if (Email.match(mailformat) === null) {
         text = "Please enter a valid email";
         err.textContent = text;
         err.style.height = '2.5rem';

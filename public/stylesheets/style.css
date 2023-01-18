@@ -14,64 +14,20 @@ body{
 }
 
 .navbar{
-    background-color:#89CFF0;
+    background-color:#97d4f0;
     display: flex;
-    justify-content:flex-start space-between;
+    justify-content: space-between;
     align-content: space-between;
-}
-.deliver{
-    color: #000000;
-    font-size:xx-large;
-    text-decoration: none;
-}
-.menu{
-    display: flex;
-    justify-content:space-between;
-    align-content: space-between;
-    width: 30vw;
-    font-size: larger;   
-    color: #000000;
-    
-}
-a{
-   color: #000000;
-}
-ul{
-    list-style: none;
-    display: flex;
-    justify-content:space-between;
-    align-content: space-between;
-    width: 30vw;
-    font-size:large;   
-    padding-top: 10px;
-    
+    z-index: 10;
 }
 
-.icon{
-    display: flex;
-    justify-content:space-between;
-    align-content: space-between;
-    font-size: larger;
-    width: 8vw;
-    color: #000000;
-    
-}
-
-/*signup style*/
-
+/*signup form*/
 .container .form-1 {
-   
     display: flex;
     flex-direction: column;
     align-content: center;
-    width: 48vw;
-    height: 60rem;
-   
-
-    
-  
-  
-    
+    width: 30vw;
+    height: 60rem;   
 }
 input{
     display: flex;
@@ -79,19 +35,23 @@ input{
     column-gap: 19rem;
     height: 40px;
     border-radius: 15px;
-    border-color: #cdcdcd;
+    border-color: #1c1b1b 1px solid;
     border-width: 1px;
     padding-left: 20px;
-    
-    
 }
-
 #submit{
     margin-top: 35px;
     margin-bottom: 25px;
     border-radius: 20px;
     border-width: 1px;
-    height: 40px;   
+    height: 40px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+  
+}
+.navbarNav{
+  width: 5rem;
 }
 /*for responsive*/
 
@@ -182,8 +142,8 @@ input{
 
     }
     .container {
-      height: 90vh;
-      width: 100vw;
+      height: 50vh;
+      width: 98vw;
                                  
       
       
@@ -239,7 +199,7 @@ body{
 }
 
 form{
-  height: 520px;
+  height: 500px;
   width: 400px;
   background-color: rgba(255,255,255,0.13);
   position: absolute;
@@ -251,6 +211,8 @@ form{
   border: 2px solid rgba(255,255,255,0.1);
   box-shadow: 0 0 40px rgba(8,7,16,0.6);
   padding: 50px 35px;
+  margin-top: 10px;
+
 }
 form *{
   font-family: 'Poppins',sans-serif;
@@ -258,6 +220,7 @@ form *{
   letter-spacing: 0.5px;
   outline: none;
   border: none;
+  
 }
 form h3{
   font-size: 32px;
@@ -265,7 +228,6 @@ form h3{
   line-height: 42px;
   text-align: center;
 }
-
 label{
   display: block;
   margin-top: 30px;
@@ -307,14 +269,22 @@ button{
 }
 
 
+@media (max-width: 501px) {
+ 
+
+  form{
+    width: 300px;
+  }
+}
+
   
     /* admin login page end*/
 
     .main-container{
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      align-content: center;
+      flex-direction:row;
+      align-items:flex-start;
+      align-content:flex-start;
     }
     .aside{
       display: flex;
@@ -322,9 +292,9 @@ button{
       justify-content: space-around;
       align-items:flex-start;
       align-content: space-around;
-      background-color: #89CFF0;
+      background-color: #cbdae1;
       width: 20rem;
-      height: 95vh;
+      height: 100vh;
       color: white;
     }
 
@@ -332,20 +302,20 @@ button{
       color: #000000;
       font-size: medium;
       text-decoration: none;
+      font-size: large;
+      font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
     .admin-dash:hover{
       color:white;
     }
-
     .logout-button{
       background-color: red;
-      margin-left: 3rem;
-      width:70px;
+      /* margin-left: 6rem; */
+      width:200px;
       height:25px;
       display: flex;
       justify-content: center;
       align-content: center;
-      border-radius: 12px;
       color: #d4efdf;
       
     }
@@ -386,4 +356,9 @@ button{
  }
  .green{
   background-color: greenyellow;
+ }
+
+ #descript{
+  margin-top:1rem;
+  
  }
