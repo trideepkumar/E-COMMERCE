@@ -23,7 +23,8 @@ const storage = multer.diskStorage({
         const fileName=file.originalname.split('  ').join('_')
         const extension = FILE_TYPE_MAP[file.mimetype]
         cb(null, `${fileName}-${Date.now()}.${extension}`)
-    }
+    },
+    
 });  
 const uploadOptions = multer({ storage: storage })
 

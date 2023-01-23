@@ -1,0 +1,17 @@
+{{#each productList}}
+<div class="card col-md-3 mx-4 mb-0 " style="width: 22rem; margin-top:7rem; height:43rem ">
+    <img class="card-img-top" src="{{image}}" alt="Card image cap" style="width: 15rem; height:15rem  ">
+    <div class="card-body">
+        <h5 class="card-title">{{name}}</h5>
+        <p class="card-text"> RS.{{price}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">Category:{{category.name}}</li>
+        <li class="list-group-item">About:{{description}}</li>
+    </ul>
+    <div class="card-body">
+        <a href="#" class="card-link btn mb-2" style="background-color:lightblue; width:20rem ">Add to cart</a><br>
+        <a href="#" class="card-link btn" style=" width:20rem ">Add wishlist</a>
+    </div>
+</div>
+{{/each}}

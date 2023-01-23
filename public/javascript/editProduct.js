@@ -35,11 +35,11 @@ document.addEventListener('submit', e => {
         body: JSON.stringify(body,{_id:id})
       })
       .then(response => response.json())
-      .then(response => {
-        if(response.successStatus){
-          window.location.href = response.redirect
-        }else{
-          error.innerHTML = response.message
-        }
-      })
+      // .then(response => {
+      //   if(response.successStatus){
+      //     window.location.href = response.redirect
+      //   }else{
+      //     error.innerHTML = response.message
+      //   }
+      // })
     }

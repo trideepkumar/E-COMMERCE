@@ -16,10 +16,10 @@ const productSchema=new mongoose.Schema({
       default:0, 
       required: true,
     },
-    image:{
+    image:[{
       type: String,
-      required: true,
-    },  
+      required: [true,'images added '],
+    }],  
     description:{
       type: String,
       required: true,

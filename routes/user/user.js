@@ -6,11 +6,13 @@ const bcrypt = require("bcrypt");
 const { emitKeypressEvents } = require('readline');
 const session = require('express-session');
 const userController = require('../../controllers/userController')
+const userAuth =require('../../middlewares/userAuth');
+const adminAuth = require('../../middlewares/adminAuth');
 
 //for cache control
 
 
-router.get('/signup', (req, res) => {
+router.get('/signup' ,(req, res) => {
     if(req.session.email){
         res.redirect('/user/home')
     }else
@@ -24,9 +26,7 @@ router.get('/otp',(req,res)=>{
     res.render('user-otp')
 })
 
-
-
-router.get('/signin', (req, res) => {
+router.get('/signin',(req, res) => {
 
     if(req.session.email){
         res.redirect('/user/home')
@@ -34,8 +34,7 @@ router.get('/signin', (req, res) => {
    return res.render('signin')
 })
 
-
-router.post('/signin', async (req, res) => {
+router.post('/signin',async (req, res) => {
 
     const user = await Register.findOne( { Email: req.body.email } )
     if(user) {
@@ -65,18 +64,17 @@ router.post('/signin', async (req, res) => {
         }
 })
 
-router.get('/home', (req, res) => {
+router.get('/home',(req, res) => {
     res.render('home')
 })
-
-
-  
 
 //for session logout
 router.get('/logout',(req,res) => {
     req.session.destroy();
     res.render('signin');
   });
+
+router.get('/products',userController.getUserProducts)
 
 
 

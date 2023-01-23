@@ -185,34 +185,53 @@ const getProducts = async (req,res) =>{
 
 
 const addProducts = async (req, res) => {
-    console.log(req.body.name);
-    // console.log(fileName)
-    if(req.body.name === '' || req.body.category === '' || req.body.price === '' || req.body.fileName === '' || req.body.description === '') {
-        console.log('error')
-        return res.render('admin-Addproducts' ,{message: 'Please enter valid details!'})
-    }
-    const productName = await Product.findOne({ name:req.body.name })
-    console.log(productName)
-    if (productName) {
-        res.render('admin-Addproducts', { message: 'product already exists!' })
-    }
-    else {
-        const fileName = await req.file.filename;
-        const basePath = `${req.protocol}://${req.get('host')}/uploads/`;
-        let product = new Product({
-            name: req.body.name,
-            category: req.body.category,
-            price: req.body.price,
-            image: `${basePath}${fileName}`,
-            description: req.body.description
-        })
-        product = await product.save();
-        if (!product)
-            return res.status(500).send('The product cannot be created')
-        res.redirect('/admin/add-products')
-    }
-
-
+   try{
+    const existing = await Product.find({name:req.body.name})
+    const images = []
+    for(key in req.files){
+        const imPath = req.files[key].path
+        const path = imPath.substring(imPath.lastIndexOf("\\")-8);
+        // images.push(req.files[key].path);
+        images.push(path);
+      }
+    //   console.log(images)
+      let product = new Product({
+        name:req.body.name,
+        category:req.body.category,
+        price:req.body.price,
+        description:req.body.description,
+        image:images,
+      }) 
+      console.log(product)
+      console.log(req.body)
+      if(existing.length == 0){
+        if(images.length < 3 ){
+            console.log('image not satisfied')
+           return res.redirect('/admin/add-products')
+        }else{
+          try {
+          console.log('save entered')
+         product = await Product.create({
+            name:req.body.name,
+        category:req.body.category,
+        price:req.body.price,
+        description:req.body.description,
+        image:images,
+          });
+            return res.redirect('/admin/products')
+          } catch (error) {
+            console.log(error)
+            return res.redirect('/admin/add-products')
+          }  
+        }
+      }else{
+        console.log('not working');
+        return res.redirect('/admin/add-products')
+  
+      }
+   }catch(error){
+     console.log(error)
+   }
 
 }
 
@@ -233,9 +252,9 @@ const editProduct = async (req,res) =>{
     }
 
   const updateProduct = async (req,res)=>{
-    console.log('update working started!!');
+    // console.log('update working started!!');
     const id = req.params._id
-    console.log(id);
+    // console.log(id);
     try{
         // console.log(req.body.name)
         // console.log(req.body.price)
@@ -247,7 +266,9 @@ const editProduct = async (req,res) =>{
             price:req.body.price,
             // category:req.body.category,
             description:req.body.description
-        })
+        }).then(()=>{     
+              return res.status(200).json({redirect:"http://localhost:4000/admin/products"})
+            })
         console.log("confirm updation")
     }catch{
         return res.json({

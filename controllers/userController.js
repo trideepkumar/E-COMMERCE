@@ -5,6 +5,9 @@ const axios = require('axios')
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 require('dotenv').config()
+const { Category } = require('../model/category')
+const { Product } = require('../model/product')
+
 
 //for saving userinfo in db 
 
@@ -19,7 +22,6 @@ const registerUser = async (req, res, next) => {
             password: req.body.password,
             
         }
-        console.log(req.session.user)
         res.render('user-otp')
         return next()
     } else {
@@ -27,11 +29,9 @@ const registerUser = async (req, res, next) => {
     }
 }
 
-
-
 const generateOtp = (req, res, next) => {
     otp = Math.floor(100000 + Math.random() * 900000)
-    console.log(otp)
+    // console.log(otp)
     sendOtp(otp, req.body.phone)
     req.session.otp = otp
 }
@@ -71,6 +71,16 @@ const checkOtp = async (req, res) => {
     }
 }
 
+const getUserProducts = async (req,res)=>{
+    const productList=await Product.find().populate('category');
+    // console.log(productList)
+    if(!productList){
+        res.staus(500).json({success:false})
+      }
+      res.render('user-products',{productList}) 
+   
+}
+
 
 
 
@@ -79,6 +89,7 @@ module.exports = {
     generateOtp,
     sendOtp,
     checkOtp,
+    getUserProducts
     
 
 }
