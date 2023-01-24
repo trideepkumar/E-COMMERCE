@@ -22,7 +22,7 @@ router.get('/products',adminAuth.isLoggedIn,adminController.getProducts)
 
 router.get('/add-products',adminAuth.isLoggedIn,adminController.getAddproducts)
 
-router.get('/edit-product/:id',adminAuth.isLoggedIn,adminController.editProduct)
+router.get('/edit/product/:id',adminAuth.isLoggedIn,adminController.editProduct)
 
 
  
@@ -36,7 +36,7 @@ router.put('/admin-user/block/:id',adminController.actionBlock)
 
 router.put('/category/:id',adminController.deleteCategory)
 
-router.put('/edit-product/:_id',adminController.updateProduct)
+router.post('/edit/:id',uploadOptions.array('fileName',4),adminController.updateProduct)
 
 router.delete('/products/delete/:_id',adminController.deleteProduct)  
 

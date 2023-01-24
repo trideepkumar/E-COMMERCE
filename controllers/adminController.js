@@ -107,7 +107,7 @@ const getAddproducts = async (req, res) => {
     if (!category) {
         res.staus(500).json({ success: false })
     }
-    res.render('admin-Addproducts', { category : category})
+    res.render('admin-Addproducts', { category: category })
 }
 
 const addCategory = async (req, res) => {
@@ -173,138 +173,144 @@ const deleteCategory = async (req, res) => {
     }
 }
 
-const getProducts = async (req,res) =>{ 
+const getProducts = async (req, res) => {
     // console.log("getAdminProduct listing")
-      const productList=await Product.find().populate('category');
+    const productList = await Product.find().populate('category');
     //   console.log(productList)
-      if(!productList){
-        res.staus(500).json({success:false})
-      }
-      res.render('admin-products',{productList}) 
-  }    
+    if (!productList) {
+        res.staus(500).json({ success: false })
+    }
+    res.render('admin-products', { productList })
+}
 
 
 const addProducts = async (req, res) => {
-   try{
-    const existing = await Product.find({name:req.body.name})
-    const images = []
-    for(key in req.files){
-        const imPath = req.files[key].path
-        const path = imPath.substring(imPath.lastIndexOf("\\")-8);
-        // images.push(req.files[key].path);
-        images.push(path);
-      }
-    //   console.log(images)
-      let product = new Product({
-        name:req.body.name,
-        category:req.body.category,
-        price:req.body.price,
-        description:req.body.description,
-        image:images,
-      }) 
-      console.log(product)
-      console.log(req.body)
-      if(existing.length == 0){
-        if(images.length < 3 ){
-            console.log('image not satisfied')
-           return res.redirect('/admin/add-products')
-        }else{
-          try {
-          console.log('save entered')
-         product = await Product.create({
-            name:req.body.name,
-        category:req.body.category,
-        price:req.body.price,
-        description:req.body.description,
-        image:images,
-          });
-            return res.redirect('/admin/products')
-          } catch (error) {
-            console.log(error)
-            return res.redirect('/admin/add-products')
-          }  
+    try {
+        const existing = await Product.find({ name: req.body.name })
+        const images = []
+        for (key in req.files) {
+            const imPath = req.files[key].path
+            const path = imPath.substring(imPath.lastIndexOf("/") - 8);
+            // images.push(req.files[key].path);
+            images.push(path);
         }
-      }else{
-        console.log('not working');
-        return res.redirect('/admin/add-products')
-  
-      }
-   }catch(error){
-     console.log(error)
-   }
+        console.log(images)
+
+        let product = new Product({
+            name: req.body.name,
+            category: req.body.category,
+            price: req.body.price,
+            description: req.body.description,
+            image: images,
+        })
+        console.log(product)
+        console.log(req.body)
+        if (existing.length == 0) {
+            if (images.length < 3) {
+                console.log('image not satisfied')
+                return res.redirect('/admin/add-products')
+            } else {
+                try {
+                    console.log('save entered')
+                    product = await Product.create({
+                        name: req.body.name,
+                        category: req.body.category,
+                        price: req.body.price,
+                        description: req.body.description,
+                        image: images,
+                    });
+                    return res.redirect('/admin/products')
+                } catch (error) {
+                    console.log(error)
+                    return res.redirect('/admin/add-products')
+                }
+            }
+        } else {
+            console.log('not working');
+            return res.redirect('/admin/add-products')
+
+        }
+    } catch (error) {
+        console.log(error)
+    }
 
 }
 
-//edit product not done completely
-const editProduct = async (req,res) =>{
+
+const editProduct = async (req, res) => {
     try {
         // console.log("edit product working started!");
         const id = req.params.id
+        // console.log(req.params);
         // console.log(req.params.id)
-        const product = await Product.findById({_id: id}).populate('category')
+        const product = await Product.findById({ _id: mongoose.Types.ObjectId(id) }).populate('category')
         // console.log(product);
         const categories = await Category.find({})
         // console.log(categories)
-        return res.render('admineditProduct', {product,categories})
-      } catch (error) {
+        return res.render('admineditProduct', { product, categories })
+    } catch (error) {
         console.log(error)
-      }
     }
+}
 
-  const updateProduct = async (req,res)=>{
-    // console.log('update working started!!');
-    const id = req.params._id
+const updateProduct = async (req, res) => {
+    console.log('update working started!!');
+    // console.log(req.params);
+    const id = req.params.id
     // console.log(id);
-    try{
+    // console.log(req.files);
+    // console.log(req.body);
+    const images = []
+    for (key in req.files) {
+        const imPath = req.files[key].path
+        // console.log(imPath)
+        const path = imPath.substring(imPath.lastIndexOf("/") -8);
+        // images.push(req.files[key].path);
+         console.log(path);
+        images.push(path);
+    }
+    // console.log(images)
+    req.body.image = images;
+    // console.log(id);
+    try {
         // console.log(req.body.name)
         // console.log(req.body.price)
         // console.log(req.body.category)
         // console.log(req.body.description)
-
-        await Product.findByIdAndUpdate({_id:id},{
-            name:req.body.name,
-            price:req.body.price,
-            // category:req.body.category,
-            description:req.body.description
-        }).then(()=>{     
-              return res.status(200).json({redirect:"http://localhost:4000/admin/products"})
-            })
-        console.log("confirm updation")
-    }catch{
-        return res.json({
-            successStatus: false,
-          })
+        await Product.findByIdAndUpdate(id, req.body);
+    } catch (e) {
+        console.log(e);
     }
 
-    
-  }
+
+}
 
 
-  const deleteProduct = async (req, res) =>{
+const deleteProduct = async (req, res) => {
     console.log("delete working started!")
-      const id = req.params._id
-    //   console.log(id)
-      const product = await Product.findById(id)
+    const id = req.params._id
+      console.log(id)
+    const product = await Product.findById(id)
     //   console.log(id)
     //   console.log(product) 
 
-    try{
-    await Product.findByIdAndRemove(id)     
-    .then((product)=>{        
-      if(product){          
-        return res.status(200).json({redirect:"http://localhost:4000/admin/products"})
-      }else{
-        return res.status(404).json({redirect:"http://localhost:4000/admin/products"})
-      }
-    }).catch(err=>{
-      return res.status(400).json({redirect:"http://localhost:4000/admin/products"})
-    })
-    
-  } catch (error) {
-    console.log(error)
-  }    
+    try {
+        await Product.findByIdAndRemove(id)
+            .then((product) => {
+                if (product) {
+                    return res.status(200).json({ redirect: "http://localhost:4000/admin/products" })
+                } else {
+                    return res.status(404).json({ redirect: "http://localhost:4000/admin/products" })
+                }
+            }).catch(err => {
+                return res.status(400).json({ redirect: "http://localhost:4000/admin/products" })
+            })
 
-  }
+    } catch (error) {
+        console.log(error)
+    }
+
+}
 
 
 

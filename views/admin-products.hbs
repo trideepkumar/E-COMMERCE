@@ -26,7 +26,7 @@
 
                 <td>
                     <div class="d-flex align-items-center">
-                        <img src="{{image}}" alt=""
+                        <img src="{{image.[0]}}" alt=""
                             style="width: 45px; height: 45px; display: block; margin-left: auto; margin-right: auto;"
                             class="mx-0 mb-0 d-flex justify-content-start rounded" />
                     </div>
@@ -40,8 +40,8 @@
                 <td class="text-center ">
                     <ul class="mx-4 d-flex flex-row" style="list-style-type: none;">
                         <li class="px-lg-3">
-                            <a class="mx-0 mb-0 d-flex justify-content-start btn btn-success "
-                                href="/admin/edit-product/{{this._id}}">Edit</a>
+                         <a class="mx-0 mb-0 d-flex justify-content-start btn btn-success "
+                                href="/admin/edit/product/{{_id}}">Edit</a>
                         </li>
                         <li class="px-lg-3">
                             <a class="mx-0 mb-0 d-flex justify-content-start btn btn-danger delete-prod" data-url={{_id}}>Delete</a>

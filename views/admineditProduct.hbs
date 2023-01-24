@@ -1,7 +1,7 @@
 <div class="conatiner">
 
 
-  <form action="/products/edit/{{_id}}" method="put" enctype="multipart/form-data" style="height:65rem; width:50rem">
+  <form action="/admin/edit/{{product._id}}" method="post" enctype="multipart/form-data" style="height:65rem; width:50rem">
     <h3 style="margin-top:0px;">Update Product Details</h3>
     <div class="form-group ">
       <label for="productname" style="margin-top:0px;">Product Name</label>
@@ -13,8 +13,8 @@
     </div>
 
     <div class="form-group " style="margin-top:0px;">
-      <p for="fileName" class="">Image</p><img src="{{product.image}}" alt="" style="width:3rem; margin-left:2rem;">
-      <input type="file" class="form-control-file" name="fileName" id="fileName" value="{{product.image}}">
+      <p for="fileName" class="">Image</p><img src="{{product.image.[0]}}" alt="" style="width:3rem; margin-left:2rem;">
+      <input multiple type="file" class="form-control-file" name="fileName" id="fileName">
     </div>
 
 

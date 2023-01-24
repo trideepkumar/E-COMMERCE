@@ -81,6 +81,16 @@ const getUserProducts = async (req,res)=>{
    
 }
 
+const getSingleProduct = async (req,res)=>{
+    const id = req.params.id
+    // console.log(id);
+    const product = await Product.findById({ _id: mongoose.Types.ObjectId(id) }).populate('category')
+    // console.log(product)
+    const categories = await Category.find({})
+    // console.log(categories);
+    res.render('user-Singleproduct',{product,categories})
+}
+
 
 
 
@@ -89,7 +99,8 @@ module.exports = {
     generateOtp,
     sendOtp,
     checkOtp,
-    getUserProducts
+    getUserProducts,
+    getSingleProduct
     
 
 }
