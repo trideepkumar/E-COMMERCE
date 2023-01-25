@@ -1,5 +1,5 @@
 {{#each productList}}
-<div class="card col-md-3 mx-4 mb-0 " style="width: 22rem; margin-top:7rem; height:43rem ">
+<div class="card col-md-3 mx-4  mb-0  " style="width: 22rem; margin-top:7rem;  height:44rem  ">
     <img class="card-img-top" src="{{image.[0]}}" alt="Card image cap" style="width: 15rem; height:15rem  ">
     <div class="card-body">
         <h5 class="card-title">{{name}}</h5>
@@ -11,6 +11,8 @@
     </ul>
     <div class="card-body">
         <a href="/user/singleProduct/{{_id}}" class="card-link btn mb-2" style="background-color:rgb(210, 254, 106); width:20rem ">view details</a><br>
+                <a href="/cart" class="card-link btn mb-2" style="background-color:rgb(162, 235, 248); width:20rem ">Go to cart</a><br>
+
     </div>
 </div>
 {{/each}}

@@ -4,44 +4,61 @@ const bcrypt = require("bcrypt");
 
 
 const userSchema = new mongoose.Schema({
-  firstname:{
+  firstname: {
     type: String,
-    required:true,
+    required: true,
   },
-  lastname:{
+  lastname: {
     type: String,
-    required:true,
+    required: true,
   },
-  Email:{
-        type: String,
-        required:true,
+  Email: {
+    type: String,
+    required: true,
   },
   phone: {
-        type: String,
-        required:true
+    type: String,
+    required: true
   },
   password: {
-        type:String,
-        required:true
-  }, 
+    type: String,
+    required: true
+  },
   Action: {
     type: Boolean,
     default: true
   },
-    
+  cart: [
+    {
+      id: {
+        type: mongoose.SchemaTypes.ObjectId ,
+        ref: "Product"
+      },
+      quantity: {
+        type: Number
+      },
+      increment: {
+        type: Boolean
+      },
+      decrement: {
+        type: Boolean
+      }
+    }
+  ]
+
 })
 
 
-userSchema.pre('save', async function(next){
-    try {
-      hashedPassword = await bcrypt.hash(this.password, 10)
-      this.password = hashedPassword
-      next();
-    } catch (error) {
-      console.log(error)
-    }
-  })
-  
+userSchema.pre('save', async function (next) {
+  try {
+    hashedPassword = await bcrypt.hash(this.password, 10)
+    this.password = hashedPassword
+    next();
+  } catch (error) {
+    console.log(error)
+  }
+})
 
-const User =mongoose.model('User',userSchema)
-module.exports=User
+
+const User = mongoose.model('User', userSchema)
+module.exports = User

@@ -257,13 +257,13 @@ const updateProduct = async (req, res) => {
     console.log('update working started!!');
     // console.log(req.params);
     const id = req.params.id
-    // console.log(id);
+    console.log(id);
     // console.log(req.files);
     // console.log(req.body);
     const images = []
     for (key in req.files) {
         const imPath = req.files[key].path
-        // console.log(imPath)
+        console.log(imPath)
         const path = imPath.substring(imPath.lastIndexOf("/") -8);
         // images.push(req.files[key].path);
          console.log(path);
@@ -277,7 +277,9 @@ const updateProduct = async (req, res) => {
         // console.log(req.body.price)
         // console.log(req.body.category)
         // console.log(req.body.description)
+        console.log('work update!!');
         await Product.findByIdAndUpdate(id, req.body);
+        return res.redirect('/admin/products')
     } catch (e) {
         console.log(e);
     }

@@ -20,6 +20,7 @@ app.use((req, res, next) => {
 
 const userRoute = require('./routes/user/user');
 const adminRoute= require('./routes/admin/admin');
+const cartController = require('./routes/cart/cart');
 //for session
 
 //session to db
@@ -79,9 +80,9 @@ app.use('/user', userRoute);
 
 app.use('/admin',adminRoute);
 
-// app.get('/user', (req, res) => {
-//       res.render('signup');
-// })
+app.use('/cart' , cartController);
+
+
 
 
 //mongoose
