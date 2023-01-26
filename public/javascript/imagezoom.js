@@ -11,11 +11,11 @@
       opacity:0.5,
       cursor:'crosshair',
       zindex:2147483647,
-      zoomviewsize:[400,300],
+      zoomviewsize:[400,400],
       zoomviewposition:'right',
-      zoomviewmargin:25,
+      zoomviewmargin:100,
       zoomviewborder:'none',
-      magnification:4
+      magnification:3
     };
   
     var imagezoomCursor,imagezoomView,settings,imageWidth,imageHeight,offset;

@@ -58,7 +58,7 @@ router.post('/otp', userController.checkOtp)
 router.post('/signin', async (req, res) => {
 
     const user = await Register.findOne({ Email: req.body.email })
-    console.log(user)
+    // console.log(user)
     if (user) {
         try {
             const match = await bcrypt.compare(req.body.password, user.password)

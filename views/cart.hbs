@@ -1,31 +1,35 @@
-<section class="vh-100" style="background-color: #eaeaea;">
-    <div class="container h-100">
-        <div class="row d-flex   h-100">
-            <div class="col" style="padding-top:10rem;">
-                <p><span class="h2">Shopping Cart </span><span class="h4">(Total items: 2)</span></p>
+<section class="" style="background-color: #eaeaea;">
+    <div class="container h-100" ">
+       
+
+        <div class="row d-flex  h-auto"  ">
+            {{!-- <p><span class="h2">Shopping Cart </span><span class="h4">(Total items: 2)</span></p> --}}
+
+            <div class="col  cart-items-container" style="padding-top:5rem;">
                 {{#each cartItems}}
                 <div class="card-body">
+
                     <div class="row d-flex justify-content-between  "
                         style="background-color:rgb(212, 214, 214) ; border-radius:10px;">
-                        <div class="col-md-2 ">
+                        <div class="col-md-2  pt-3">
                             <img src="{{id.image.[0]}}" class="img-fluid" alt="product images">
                         </div>
                         <div class="col-md-2   pt-5">
                             <div>
-                                <p class="lead text-muted mb-4 pb-2">Name:{{id.name}}</p>
+                                <p class="lead text-muted mb-4  pb-2">Name:{{id.name}}</p>
                                 <p class="lead fw-normal mb-0">RS.{{id.price}}</p>
                             </div>
                         </div>
 
                         <div class="col-md-2 ">
-                            <div class="card-quantity-details">
-                                <button {{#if decrement}} disabled {{/if}} data-url="{{id._id}}"
+                            <div class="card-quantity-details  pt-2">
+                                <button {{#if decrement}} disabled {{/if}} data-url="{{id._id}}" class="quantity-minus"
                                     style="background:orange; width:3rem; height:1px; display:flex; justify-content:center; align-items:center; margin-top:1rem;">
                                     - </button>
 
-                                <h4 class="quantity">quantity</h4>
+                                <h4 class="quantity">quantity:{{quantity}}</h4>
 
-                                <button {{#if increment}} disabled {{/if}} data-url="{{id._id}}"
+                                <button {{#if increment}} disabled {{/if}} data-url="{{id._id}}" class="quantity-plus"
                                     style="background:skyblue; width:3rem; height:1rem; display:flex; justify-content:center; align-items:center;">
                                     + </button>
                             </div>
@@ -34,17 +38,16 @@
                         <div class="col-md-2 ">
                             <div class="col-md-2  ">
                                 <div>
-                                    <p class="small text-muted mb-4 pb-2 pl-5"> Price</p>
+                                    <p class="small text-muted mb-4 pb-2 pt-5 pl-5"> Price</p>
                                     <p class="lead fw-normal mb-0">RS.{{id.price}}</p>
                                 </div>
                             </div>
 
                         </div>
-                        <div class="col-md-2 ">
-                            <div>
-                                <p class="small text-muted mb-4 pb-2 pl-5">Total Price</p>
-                                <p class="lead fw-normal mb-0">RS.{{id.price}}</p>
-                            </div>
+                        <div class="col-md-2 delete" style="padding-top: 5rem;">
+                            <button class="btn btn-danger delete-btn">
+                                delete &nbsp;<i class="fas fa-trash-alt " data-url="{{id._id}}"></i>
+                            </button>
                         </div>
                         <div>
 
@@ -56,25 +59,40 @@
                 {{!--
             </div> --}}
             {{/each}}
-            <div class="card mb-5" style="width: 110rem; height:11rem;">
-                <div class="card-body p-4">
-
+            <div class="card  " style="width: 110rem; height:11rem; postion:fixed;">
+                <div class="card-body">
                     <div class="float-end">
-                        <p class="d-flex justify-content-center align-items-center">
-                            <span class="bold text-muted me-2">Cart Total Price</span>&nbsp; <span class=" fw-normal">Rs:</span>
+                        <p class="d-flex justify-content-left align-items-left">
+                            <a class="bold  me-2"
+                                style="background: rgb(191, 190, 190); height:4rem; width:20rem; display:flex; justify-content:center; align-items:center; border-radius:12px; color:white;">place
+                                order</a>
                         </p>
                     </div>
-
                 </div>
+                <div class="card-body">
+                    <div class="float-end pt-2">
+                        <p class="d-flex justify-content-left align-items-left">
+                            <span class="bold text-muted me-2">Cart Total Price:</span>&nbsp; <span>Rs:
+                                {{totalPrice}}/-</span>
+                        </p>
+                    </div>
+                    
             </div>
-            <div class="d-flex " style="position:fixed;  marging-left:6rem margin: bottom 2rem;">
-                <a type="button" class="btn btn-light btn-lg  "
+                </div>
+                 <div class="d-flex " style="position:fixed;  marging-left:6rem padding-top:10rem;">
+                <a type="button" class="btn btn-light btn-lg bg-info "
                     style="background: rgb(241, 243, 175); width:55rem; border-width:1px; border-color:black"
                     href="/user/products">Continue shopping</a>
-                <a type="button" class="btn btn btn-lg" style="border-width:1px;  width:55rem; border-color:black">Buy
+                <a type="button" class="btn btn btn-lg bg-orange"
+                    style="border-width:1px;  width:55rem; border-color:black">Buy
                     Now</a>
             </div>
         </div>
+         
     </div>
 
 </section>
+ 
+            
+        
+<script src="/public/javascript/cart.js"></script>
