@@ -1,4 +1,6 @@
-<section class="" style="background-color: #eaeaea;">
+<link rel="stylesheet" href="/public/stylesheets/cart.css">
+
+<section class="">
     <div class="container h-100" ">
        
 
@@ -11,7 +13,7 @@
 
                     <div class="row d-flex justify-content-between  "
                         style="background-color:rgb(212, 214, 214) ; border-radius:10px;">
-                        <div class="col-md-2  pt-3">
+                        <div class="col-md-2  ">
                             <img src="{{id.image.[0]}}" class="img-fluid" alt="product images">
                         </div>
                         <div class="col-md-2   pt-5">
@@ -63,9 +65,8 @@
                 <div class="card-body">
                     <div class="float-end">
                         <p class="d-flex justify-content-left align-items-left">
-                            <a class="bold  me-2"
-                                style="background: rgb(191, 190, 190); height:4rem; width:20rem; display:flex; justify-content:center; align-items:center; border-radius:12px; color:white;">place
-                                order</a>
+                            <a class="bold  me-2 " href="/order"
+                                style="background: rgb(191, 190, 190); height:4rem; width:20rem; display:flex; justify-content:center; align-items:center; border-radius:12px; color:white; text-decoration:none;">Go To CheckOut</a>
                         </p>
                     </div>
                 </div>
@@ -83,7 +84,7 @@
                 <a type="button" class="btn btn-light btn-lg bg-info "
                     style="background: rgb(241, 243, 175); width:55rem; border-width:1px; border-color:black"
                     href="/user/products">Continue shopping</a>
-                <a type="button" class="btn btn btn-lg bg-orange"
+                <a type="button" class="btn btn btn-lg bg-success"
                     style="border-width:1px;  width:55rem; border-color:black">Buy
                     Now</a>
             </div>

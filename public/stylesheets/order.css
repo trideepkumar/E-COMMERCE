@@ -1,0 +1,70 @@
+body{
+    background: white;
+    height: 100vh;
+}
+form{
+    margin-top:4rem;
+    background-color:rgb(185, 228, 235);
+    height:80rem;
+    margin-left:30rem;
+    width:50%;
+}
+#adress{
+    background-color: aliceblue;
+    color: blue;
+}
+input{
+    width: 60rem;
+    border-radius:5px;
+    color: black;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.order-page-right{
+    background: aliceblue;
+    margin-top:3rem;
+    width:40%;
+    height:40rem;
+    margin-left:3rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    align-content: center;
+    box-shadow: 3px -5px rgb(197, 196, 196)
+  
+    
+}
+.adress-details-card-container{
+    background: rgb(209, 218, 225);
+    width:40%;
+    margin-top:5rem;
+    height:20rem;
+    margin-left:3rem;
+    border-radius: 10px;
+    /* display: flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+    align-content:flex-start; */
+    padding-left: 2rem;
+}
+.add{ 
+        display: grid;
+        justify-content:flex-start; 
+}
+a.btn{
+    width: 50rem;
+}
+#main-adress{
+    display: grid;
+    grid-template-columns: row;
+}
+
+#address{
+    width:2rem;
+}

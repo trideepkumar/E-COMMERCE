@@ -1,0 +1,80 @@
+     <link rel="stylesheet" href="/public/stylesheets/order.css">
+
+ <section class="order-page-left" id="main-adress">
+           <br><br><br><br>
+           
+        <section class="adress-details-card-container">
+             <h5>current address:</h5>
+             <div class="add">
+                {{#each user.address}}
+                    <input type="radio" id="address" name="address" value="{{_id}}">
+                        {{houseName}},
+                        {{phone}},
+                        {{city}} , {{pincode}}
+                        {{state}} , {{coutry}}
+                {{/each}}
+                </div>
+        </section>
+
+ 
+        <section class="adress-form-container" id="adress-form">
+                <form action="/order/address/{{user.id}}" method="POST" class="adress-form" id="order">
+                  <h1 class="address-heading">Add New Address</h1>
+                        <div class="row-one">
+                            <div class="input-container">
+                                <label for="name">House Name</label>
+                                <input type="text" name="houseName" id="name">
+                            </div>
+                            <div class="input-container">
+                                <label for="email">Phone</label>
+                                <input type="text" name="phone" id="email">
+                            </div>
+                            <div class="input-container">
+                                <label for="email">City</label>
+                                <input type="text" name="city" id="email">
+                            </div>
+                        </div>
+                        <div class="row-one">
+                            <div class="input-container">
+                                <label for="name">Postal Code</label>
+                                <input type="text" name="postalCode">
+                            </div>
+                            <div class="input-container">
+                                <label for="email">State</label>
+                                <input type="text" name="state">
+                            </div>
+                            <div class="input-container">
+                                <label for="email">Country</label>
+                                <input type="text" name="coutry">
+                            </div>
+                        </div>
+                        <div class="row-one pt-5">
+                            <input type="submit" value="Save" class="btn btn-success btn-address ">
+                        </div>
+                </form>
+        </section> 
+            
+
+    <section class="order-page-right" style="background-color: antiquewhite;">            
+            </div>
+            <div class="order-summary">
+                <div class="orders">
+                    <h1>Order Summary</h1>
+                    <div class="total-order-items">
+                    <h3>Total Items :<span style="color:#388e3c;">{{totalQuantity}} items</span> </h3>
+                    
+                    </div>
+                    <div class="total-order-items">
+                        <h3>Total Payable : Rs.<span style="color:#388e3c;" class="order-price">{{totalPrice}}</span></h3>
+                        
+                    </div>
+                    <a class="btn btn-payment btn-cod bg-primary mb-3">Cash On Delivery</a>
+                    <a class="btn btn-payment bg-warning mb-3">Pay Now</a>
+                   <a class="btn btn-razor bg-info mb-3">Razor pay</a>
+                   <a class="btn btn-paypal bg-success mb-3">paypal</a>
+
+                </div>
+            </div>
+    </section>
+
+<script src="/public/javascript/order.js"></script>

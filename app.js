@@ -21,6 +21,7 @@ app.use((req, res, next) => {
 const userRoute = require('./routes/user/user');
 const adminRoute= require('./routes/admin/admin');
 const cartController = require('./routes/cart/cart');
+const orderRouter = require('./routes/order/order');
 //for session
 
 //session to db
@@ -82,6 +83,7 @@ app.use('/admin',adminRoute);
 
 app.use('/cart' , cartController);
 
+app.use('/order' , orderRouter);
 
 
 

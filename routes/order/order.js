@@ -1,0 +1,18 @@
+const express = require('express');
+const router = express.Router();
+const orderController = require('../../controllers/orderController')
+const userAuth = require('../../middlewares/userAuth');
+const order = require('../../model/order');
+
+
+
+router.get('/',userAuth.isLoggedIn,orderController.getOrder);
+
+router.post('/address/:id' , userAuth.isLoggedIn,orderController.newShippingAddress);
+
+router.post('/create',userAuth.isLoggedIn ,orderController.createOrder );   
+
+router.get('/success',orderController.orderSuccess)
+
+
+module.exports= router;

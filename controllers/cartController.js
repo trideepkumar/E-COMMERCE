@@ -83,7 +83,6 @@ const addToCart = async (req, res) => {
     }
 }
 
-
 const increment = async (req, res) => {
     console.log('increment works!!')
     const { id } = req.params;

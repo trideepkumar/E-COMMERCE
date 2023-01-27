@@ -1,0 +1,16 @@
+body{
+    background: rgb(164, 227, 234);
+}
+section{
+    background: rgb(164, 227, 234);
+}
+a.btn{
+    margin-top: 2rem;
+        
+}
+.row{
+    margin:2px 2px 2px 2px;
+}
+img{
+    margin:2px 2px 2px 2px;
+}
