@@ -20,7 +20,6 @@ const registerUser = async (req, res, next) => {
             Email: req.body.email,
             phone: req.body.phone,
             password: req.body.password,
-            
         }
         res.render('user-otp')
         return next()
@@ -91,7 +90,9 @@ const getSingleProduct = async (req,res)=>{
     res.render('user-Singleproduct',{product,categories})
 }
 
-
+const getProfile = async (req,res)=>{
+    res.render('user-profile')
+}
 
 
 module.exports = {
@@ -100,7 +101,8 @@ module.exports = {
     sendOtp,
     checkOtp,
     getUserProducts,
-    getSingleProduct
+    getSingleProduct,
+    getProfile  
     
 
 }

@@ -48,8 +48,6 @@ router.get('/singleProduct/:id',userAuth.isLoggedIn, userController.getSinglePro
 
 
 
-
-
 router.post('/signup', userController.registerUser, userController.generateOtp)
 
 router.post('/otp', userController.checkOtp)
@@ -84,6 +82,7 @@ router.post('/signin', async (req, res) => {
     }
 })
 
+router.get('/profile',userController.getProfile)
 
 
 

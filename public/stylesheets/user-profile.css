@@ -1,0 +1,94 @@
+body{
+    background: white;
+}
+section{
+    margin-top: 10rem;
+    padding-top: 2rem;
+    background: rgb(228, 231, 233);
+    width:85%;
+    height:24rem;
+    margin-left:3rem;
+    border-radius: 10px;
+    padding-left: 2rem;
+    
+}
+.flex{
+    display: flex;  
+}
+.main{
+    width:20%;
+    position:fixed;
+}
+
+
+section:hover{
+    background-color: rgb(192, 240, 240);
+    color: black;
+    border-style: solid;
+    border-width:1px;
+    border-color: black ;
+}
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    height:4rem;
+    background-color: bisque;
+    margin-left: 3rem;
+    margin-top: 2rem;
+    border-radius:5px;
+    text-decoration:none;
+    color:black;
+}
+.button:hover{
+   background-color: lemonchiffon;
+   border-style: solid;
+   border-width:1px;
+   border-color: black ;
+}
+.button2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    height:4rem;
+    background-color: bisque;
+    margin-left: 3rem;
+    margin-top:0.3rem;
+    border-radius:5px;
+    text-decoration:none;
+    color:black;
+}
+.button2:hover{
+   background-color: lemonchiffon;
+   border-style: solid;
+   border-width:1px;
+   border-color: black ;
+}
+#order{
+    background: rgb(246, 246, 247);
+    margin-top:10rem;
+    width:70%;
+    height:100%;
+    margin-left:30rem;
+    border-radius: 10px;
+    display:grid;
+    border-style: solid;
+    border-color: black;
+}
+.order-cancel-btn{
+    background:whitesmoke;
+    color: grey;
+    border-style: solid;
+    border-color: black;
+}
+.order-cancel-btn:hover{
+    background-color: rgb(211, 144, 144);
+    color: white;
+    border-style: solid;
+    border-color:white;
+}
+h4{
+    color:rgb(82, 81, 81);
+}

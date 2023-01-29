@@ -1,0 +1,89 @@
+<link rel="stylesheet" href="/public/stylesheets/user-profile.css">
+<div class="flex">
+    <div class="main">
+        <section class=" ">
+            <p style="display: flex; justify-content:center; align-items:center; text-decoration:underline">User Profile
+            </p>
+            <div class="add" style="color:rgb(0, 0, 0); ">
+                {{#each user}}
+                NAME: <p>{{firstname}}{{lastname}}</p>
+                EMAIL: <p>{{Email}}</p>
+                PHONE: <p>{{phone}}</p>
+                {{/each}}
+            </div>
+        </section>
+        <div class="buttons">
+            <div class="btn button ">
+                <a href="/order/user-order">my orders</a>
+            </div>
+            <div class="btn button2 ">
+                <a href="/user/products">Change Profile </a>
+            </div>
+            <div class="btn button2 ">
+                <a href="/user/products">Change Password</a>
+            </div>
+            <div class="btn button2 ">
+                <a href="/user/products">LogOut</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="userorder-container mt-5" id="order">
+        <h1 style="display: flex; justify-content:center; align-items:center; color: #8AAAE5">MY ORDERS</h1><br>
+        <hr>
+        <div class="one">
+            {{#each order}}
+            ORDERED TIME: <h4 class="date">{{createdAt}}</h4>
+            <div class="my-details-order">
+                <div class="order-shipping-address">
+                    ADDRESS: <h4>{{shippingInfo.houseName}}</h4>
+                    PHONE: <h4>{{shippingInfo.phone}}</h4>
+                    PINCODE: <h4> {{shippingInfo.postalCode}}</h4>
+                    COUNTRY: <h4>{{shippingInfo.city}},{{shippingInfo.state}} , {{shippingInfo.coutry}}</h4>
+                </div>
+                <div class="order-payment-mode">
+                    ORDER STATUS:
+                    {{#if isDelivered}}
+                    <h4>Deleivered</h4>
+                    {{else}}
+                    {{#if isCancelled}}
+                    <h4>Cancelled</h4>
+                    {{else}}
+                    <h4>Processing</h4>
+                    {{/if}}
+                    {{/if}}
+                </div>
+                <div class="order-payment-status">
+                    PAYMENT METHOD:
+                    <h4>{{paymentMode}}</h4>
+                </div>
+                <div class="order-total">
+                    TOTAL AMOUNT:
+                    <h4>RS.{{totalAmount}}/-</h4>
+                </div>
+                {{#if isDelivered}}
+                <div class="order-cancel">
+                    <a class="success">Success</a>
+                </div>
+                {{else}}
+                <div class="order-cancel">
+                    {{#if isDelivered}}
+                    <a class="success">Processed</a>
+                    {{else}}
+                    {{#if isCancelled}}
+                    <a class=" " style="height:5rem; width:2rem; color:red; border-radius:10px">Cancelled</a>
+                    {{else}}
+                    <a data-url="{{id}}" class="btn order-cancel-btn">
+                        Cancel Order
+                    </a>
+                    {{/if}}
+                    {{/if}}
+                </div>
+                {{/if}}
+            </div>
+            <br>
+            {{/each}}
+        </div>
+    </section>
+</div>
+<script src="/javascript/order.js"></script>

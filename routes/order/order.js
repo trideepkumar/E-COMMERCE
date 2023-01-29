@@ -12,7 +12,12 @@ router.post('/address/:id' , userAuth.isLoggedIn,orderController.newShippingAddr
 
 router.post('/create',userAuth.isLoggedIn ,orderController.createOrder );   
 
-router.get('/success',orderController.orderSuccess)
+router.get('/success',userAuth.isLoggedIn,orderController.orderSuccess)
+
+router.get('/user-order',userAuth.isLoggedIn,orderController.getUserOrder)
+
+router.put('/cancel/:id' ,orderController.cancelOrder); 
+
 
 
 module.exports= router;
