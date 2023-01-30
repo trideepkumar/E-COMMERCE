@@ -2,6 +2,7 @@ const User = require('../model/user');
 const Order = require('../model/order');
 const Product = require('../model/product');
 const order = require('../model/order');
+const Razorpay = require('razorpay');
 
 
 const getOrder = async (req, res) => {
@@ -58,27 +59,63 @@ const createOrder = async (req, res) => {
         // console.log(shippingAddres);
         // console.log(req.session.userid)
         //order schemadetails setup
-        const newOrder = await Order.create({
-            shippingInfo: shippingAddres,
-            user: user[0]._id,
-            orderItems: user[0].cart,
-            totalAmount: totalAmount,
-            orderStatus: orderStatus,
-            paymentMode: paymentMethod,
-        })
-        console.log('1');
-        console.log(user[0].cart);
-        console.log('order item below');
-        console.log(newOrder.orderItems);
-       
+        if (paymentMethod == 'cash on delivery') {
+            console.log('if  cod controller wroks!!');
+            const newOrder = await Order.create({
+                shippingInfo: shippingAddres,
+                user: user[0]._id,
+                orderItems: user[0].cart,
+                totalAmount: totalAmount,
+                orderStatus: orderStatus,
+                paymentMode: paymentMethod,
+            })
+            // console.log('1');
+            // console.log(user[0].cart);
+            // console.log('order item below');
+            // console.log(newOrder.orderItems);
 
 
-        user[0].cart.splice(0);
-        // console.log(user[0].cart);
-        await user[0].save({ validateBeforeSave: false });
-        //saving the order
-        await newOrder.save();
-        res.json({ redirect: '/order/success' });
+
+            user[0].cart.splice(0);
+            // console.log(user[0].cart);
+            await user[0].save({ validateBeforeSave: false });
+            //saving the order
+            await newOrder.save();
+            console.log('order saved in db!!!');
+            res.json({ redirect: '/order/success' });
+        } else if (paymentMethod === 'Razor pay') {
+            console.log('if razor pay controller wroks!!')
+            let instance = new Razorpay({
+                key_id: 'rzp_test_yoGhuX06uJTTMD',
+                key_secret: 'dPnKGP0F5TByLAAyNJ3a04SA'
+            });
+            // console.log(instance);
+            const myOrder = await instance.orders.create({
+                amount: totalAmount * 100,
+                currency: "INR",
+                order_id:order.id,
+                receipt: "receipt@1"
+            })
+            console.log(myOrder);
+
+            const newOrder = await Order.create({
+                shippingInfo: shippingAddres,
+                user: user[0]._id,
+                orderItems: user[0].cart,
+                totalAmount: totalAmount,
+                orderStatus: orderStatus,
+                paymentMode: paymentMethod,
+            })
+            // console.log(newOrder);
+            user[0].cart.splice(0);
+            // console.log(user[0].cart);
+            await user[0].save({ validateBeforeSave: false });
+            //saving the order
+            await newOrder.save();
+            console.log('order saved in db!!!');
+            res.json({myOrder: myOrder , redirect: '/order/success'})
+            console.log('end');
+        }
     } catch (e) {
         console.log(e);
     }
@@ -92,17 +129,19 @@ const orderSuccess = async (req, res) => {
 const getUserOrder = async (req, res) => {
     console.log('getUser order works!');
     console.log(req.session.userid);
-    const user = await User.find({Email:req.session.email});
-    console.log(user);
-    
-    const orders = await Order.find({user:req.session.userid}).populate('orderItems.id');
+    const user = await User.find({ Email: req.session.email });
+    // console.log(user[0]._id);
+    const userId = user[0]._id
+    console.log(userId);
+
+    const orders = await Order.find({ user: userId }).populate('orderItems.id');
     console.log(orders)
     // const user = await User.find({ Email: req.session.email })
     // console.log(user)
     if (orders.length == 0) {
         res.render('user-order-empty')
     } else {
-        res.render('user-profile', { order: orders, id:req.session.id, user: user })
+        res.render('user-profile', { order: orders, id: req.session.id, user: user })
     }
 }
 
