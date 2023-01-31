@@ -45,6 +45,7 @@ async function createOrder(e) {
         })
     })
     const redirectPath = await res.json()
+    //for razor pay setup  (getting response from the controller and opening the razorpay payment..  )
     console.log(redirectPath);
     if (redirectPath.myOrder) {
         console.log(' response redirecting works!!');

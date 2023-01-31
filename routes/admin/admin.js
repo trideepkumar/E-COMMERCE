@@ -12,6 +12,12 @@ router.get('/admin-log',adminAuth.isLoggedOut,adminController.getLogin );
 
 router.get('/admin-dash',adminAuth.isLoggedIn,adminController.getadminDash );
 
+//for chart 
+router.get('/chart',adminController.getchartData)
+
+
+
+
 router.get('/admin-user',adminAuth.isLoggedIn,adminController.adminUser);
 
 router.get('/category',adminController.getCategory);

@@ -94,7 +94,7 @@ const createOrder = async (req, res) => {
                 amount: totalAmount * 100,
                 currency: "INR",
                 order_id:order.id,
-                receipt: "receipt@1"
+                receipt: order.id, 
             })
             console.log(myOrder);
 

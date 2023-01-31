@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const Register = require('../model/user')
 const { Category } = require('../model/category')
 const { Product } = require('../model/product')
-
+const User = require('../model/user');
+const Order = require('../model/order');
 
 //for admin login
 const myemail = "trideep@gmail.com"
@@ -30,15 +31,61 @@ const postLogin = (req, res) => {
     }
 }
 
-const getadminDash = (req, res) => {
+const getadminDash = async (req, res) => {
     if (req.session.adminid) {
-        res.render('admin-home')
+        try {
+            const user = await User.find({});
+            const product = await Product.find({});
+            const order = await Order.find({});
+            // console.log(`${user.length} ${product.length} ${order.length}`);
+            res.render('admin-home', { user: user.length, product: product.length, order: order.length });
+        } catch (e) {
+            console.log(e);
+        }
+
     } else {
         res.redirect('/admin/admin-log')
     }
 
 }
 
+
+//for chart
+
+const getchartData = async (req, res) => {
+    console.log('getchartData controller works');
+    try {
+
+        const productWiseSale = await Order.aggregate(
+            [
+                {
+                    '$lookup': {
+                        'from': 'products',
+                        'localField': 'orderItems.id',
+                        'foreignField': '_id',
+                        'as': 'test'
+                    }
+                }, {
+                    '$unwind': {
+                        'path': '$test'
+                    }
+                }, {
+                    '$group': {
+                        '_id': '$test.name',
+                        'totalAmount': {
+                            '$sum': '$totalAmount'
+                        }
+                    }
+                }
+            ]
+        )
+
+        console.log(productWiseSale);
+        return res.json({productWiseSale: productWiseSale})
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 const adminUser = async (req, res) => {
     const user = await Register.find();
@@ -264,9 +311,9 @@ const updateProduct = async (req, res) => {
     for (key in req.files) {
         const imPath = req.files[key].path
         console.log(imPath)
-        const path = imPath.substring(imPath.lastIndexOf("/") -8);
+        const path = imPath.substring(imPath.lastIndexOf("/") - 8);
         // images.push(req.files[key].path);
-         console.log(path);
+        console.log(path);
         images.push(path);
     }
     // console.log(images)
@@ -291,7 +338,7 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
     console.log("delete working started!")
     const id = req.params._id
-      console.log(id)
+    console.log(id)
     const product = await Product.findById(id)
     //   console.log(id)
     //   console.log(product) 
@@ -332,5 +379,7 @@ module.exports = {
     addProducts,
     editProduct,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    getchartData
 }
+

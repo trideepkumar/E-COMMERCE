@@ -1,0 +1,32 @@
+body{
+    background: rgb(194, 192, 192);
+}
+
+.box-container {
+    display: flex;
+    justify-content:space-around;
+    align-items: flex-start;
+    align-content: space-around;
+}
+.box{
+    width: 25rem;
+    height: 15rem;
+    background: rgb(246, 245, 245);
+    margin-left: 19rem;
+    padding-left: 5rem;
+    border:solid;
+    border-width:1px;
+    border-color: black;
+    margin-top: 10rem;
+    display: flex;
+    justify-content:flex-start;
+    align-content: flex-start;
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+}
+.chart{
+    width:5rem;
+    margin-left: 25rem;
+    margin-top:15rem;
+
+}

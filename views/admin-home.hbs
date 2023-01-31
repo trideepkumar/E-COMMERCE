@@ -1,15 +1,44 @@
-<div class="main-container" >
-<aside class="aside " style="position: fixed; margin: top 5rem;">
-    <a href="" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-table-columns"></i>dashboard</a>
-    <a href="/admin/category" class="admin-dash p-5"><i class="fa-solid fa-user"></i>Category</a>
-    <a href="/admin/products" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-bag-shopping"></i>products</a>
-    <a href="" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"></i>coupons</a>
-    <a href="" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-calendar"></i>orders</a>
-    <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"></i>users</a>
-       <a href="/admin/logout" class="logout-button">logout</a>
+<link rel="stylesheet" href="/public/stylesheets/admin-dash.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="/public/javascript/chart.js"></script>
+<div class="main-container">
+    <aside class="aside " style="position: fixed; margin: top 5rem;">
+        <a href="" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-table-columns"></i>dashboard</a>
+        <a href="/admin/category" class="admin-dash p-5"><i class="fa-solid fa-user"></i>Category</a>
+        <a href="/admin/products" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-bag-shopping"></i>products</a>
+        <a href="" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"></i>coupons</a>
+        <a href="" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-calendar"></i>orders</a>
+        <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"></i>users</a>
+        <a href="/admin/logout" class="logout-button">logout</a>
 
-</aside>
+    </aside>
 </div>
-<div class="footer" style="background-color: rgb(211, 209, 209); display:flex; justify-content:center">copyright@2022</div>
 
+<section>
+    <div class="box-container ">
+        <div class="box ">
+            <div>
+                 <h4>USERS</h4>     
+                <h3>{{user}}</h3>       
+            </div>
+        </div>
+        <div class="box ">
+            <div>
+                <h4>PRODUCTS</h4>
+                <h3>{{product}}</h3>   
+            </div>
+        </div>
+        <div class="box ">
+            <div>
+                 <h4> ORDERS</h4>
+                <h3>{{order}}</h3>   
+            </div>
+        </div>
+    </div>
+</section>
 
+{{!-- for product chart --}}
+{{!-- <canvas id="products"></canvas> --}}
+<section class="chart">
+<div style="width:700px; heigth:700px"><canvas id="products"></canvas></div>
+</section>
