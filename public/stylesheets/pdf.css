@@ -1,0 +1,21 @@
+body {
+    background: white;
+}
+
+.pdf {
+    background: rgb(181, 181, 181);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-top: 5rem;
+}
+
+.product-report {
+    height: auto;
+    margin-top: 2rem;
+    background: rgb(189, 189, 189);
+    width: 80%;
+    margin-left: 10rem;
+    
+}

@@ -1,37 +1,45 @@
 <link rel="stylesheet" href="/public/stylesheets/admin-dash.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <script src="/public/javascript/chart.js"></script>
+<style>
+    i{
+        color:black;
+        margin-right:1.3rem;
+    }
+</style>
 <div class="main-container">
     <aside class="aside " style="position: fixed; margin: top 5rem;">
-        <a href="" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-table-columns"></i>dashboard</a>
+        <a href="" class="admin-dash p-5 mt-5"><i class="fa-sharp fa-solid fa-table-columns"></i>dashboard</a>
         <a href="/admin/category" class="admin-dash p-5"><i class="fa-solid fa-user"></i>Category</a>
         <a href="/admin/products" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-bag-shopping"></i>products</a>
         <a href="" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"></i>coupons</a>
         <a href="" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-calendar"></i>orders</a>
         <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"></i>users</a>
+                <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"></i>testing</a>
+
         <a href="/admin/logout" class="logout-button">logout</a>
 
     </aside>
 </div>
 
-<section>
+<section style="width: 100%">
     <div class="box-container ">
         <div class="box ">
             <div>
-                 <h4>USERS</h4>     
-                <h3>{{user}}</h3>       
+                 <h4 style="padding-left:3rem;"> Total Users</h4>     
+                <h3 style="padding-left:6rem;">{{user}}</h3>       
             </div>
         </div>
         <div class="box ">
             <div>
-                <h4>PRODUCTS</h4>
-                <h3>{{product}}</h3>   
+                <h4 style="padding-left:3rem;">Total Products</h4>
+                <h3 style="padding-left:6rem;">{{product}}</h3>   
             </div>
         </div>
         <div class="box ">
             <div>
-                 <h4> ORDERS</h4>
-                <h3>{{order}}</h3>   
+                 <h4 style="padding-left:3rem;">Total Orders</h4>
+                <h3 style="padding-left:6rem;" >{{order}}</h3>   
             </div>
         </div>
     </div>
@@ -40,5 +48,10 @@
 {{!-- for product chart --}}
 {{!-- <canvas id="products"></canvas> --}}
 <section class="chart">
-<div style="width:700px; heigth:700px"><canvas id="products"></canvas></div>
+<div style="width:750px; heigth:700px"><canvas id="products"></canvas></div>
+<div class="grid">
+<p class="text" style="color: grey;">Total Product Sale Report&nbsp;<span style="font-weight: bold; color:black"> Download here </span></p><br>
+<a class="btn btn-info download" href="/admin/report-Download" style="color:black; border-color:azure">Download here</a>
+</div>
 </section>
+

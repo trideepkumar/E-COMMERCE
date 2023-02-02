@@ -5,6 +5,7 @@ const { Category } = require('../model/category')
 const { Product } = require('../model/product')
 const User = require('../model/user');
 const Order = require('../model/order');
+const puppeteer = require('puppeteer');
 
 //for admin login
 const myemail = "trideep@gmail.com"
@@ -80,8 +81,8 @@ const getchartData = async (req, res) => {
             ]
         )
 
-        console.log(productWiseSale);
-        return res.json({productWiseSale: productWiseSale})
+        // console.log(productWiseSale);
+        return res.json({ productWiseSale: productWiseSale })
     } catch (err) {
         console.log(err)
     }
@@ -362,6 +363,141 @@ const deleteProduct = async (req, res) => {
 }
 
 
+const getreportDownload = async (req,res)=>{
+
+
+
+
+
+
+    try {
+  
+        // Create a browser instance
+        const browser = await puppeteer.launch();
+        // Create a new page
+        const page = await browser.newPage();
+
+        // this needs to change {Hosting}
+        const website_url = 'http://localhost:4000/admin/generateTable';
+
+        await page.goto(website_url, { waitUntil: 'networkidle0' });
+
+        //To reflect CSS used for screens instead of print
+        await page.emulateMediaType('screen');
+
+        const pdf = await page.pdf({
+          path: 'result.pdf',
+        //   margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+          printBackground: true,
+          format: 'A4',
+        });
+
+        res.download('result.pdf');
+
+
+        await browser.close();
+
+  } catch(e) {
+     console.log(e);
+  }
+
+
+//     try {
+//         // const productWiseSale = await Order.aggregate(
+//         //     [
+//         //         {
+//         //             '$lookup': {
+//         //                 'from': 'products',
+//         //                 'localField': 'orderItems.id',
+//         //                 'foreignField': '_id',
+//         //                 'as': 'test'
+//         //             }
+//         //         }, {
+//         //             '$unwind': {
+//         //                 'path': '$test'
+//         //             }
+//         //         }, {
+//         //             '$group': {
+//         //                 '_id': '$test.name',
+//         //                 'totalAmount': {
+//         //                     '$sum': '$totalAmount'
+//         //                 }
+//         //             }
+//         //         }
+//         //     ]
+//         // )
+//         // console.log(productWiseSale);
+//         console.log('pdf controller works')
+//         const browser = await puppeteer.launch();
+//         const page = await browser.newPage();
+//         // console.log(page);
+//         await page.goto('http://localhost:4000/admin/report-Download', { waitUntil: 'networkidle0' });
+//         await page.pdf({ path: 'productsalesreport.pdf', format: 'A4' });
+//         res.download('productsalesreport.pdf');
+//         await browser.close();
+//     }
+//     // res.render('productPdf',{productWiseSale:productWiseSale})
+//     // const browser = await puppeteer.launch();
+//     // const page = await browser.newPage();
+//     // const url = 'http://localhost:4000/admin/report-Download';
+//     // await page.goto(url, { waitUntil: 'networkidle0' });
+//     // await page.emulateMediaType('screen');
+//     // await page.goto('http://localhost:4000/admin/report-Download');
+//     // await page.pdf({ path: 'productsalesreport.pdf' });
+//     // const pdf = await page.pdf({
+//     //     path: 'productsalesreport.pdf',
+//     //     margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+//     //     // printBackground: true,
+//     //     format: 'A4',
+//     // });
+//     // console.log(pdf);
+//     // res.download('productsalesreport.pdf');
+//     // await browser.close();
+//     // res.redirect('/admin/admin-dash')
+//     catch (err) {
+//         console.log(err);
+//     }
+// }
+}
+
+  const generateTable = async(req,res)=>{
+      const productSale = await Order.aggregate(
+            [
+                {
+                    '$lookup': {
+                        'from': 'products',
+                        'localField': 'orderItems.id',
+                        'foreignField': '_id',
+                        'as': 'test'
+                    }
+                }, {
+                    '$unwind': {
+                        'path': '$test'
+                    }
+                }, {
+                    '$group': {
+                        '_id': '$test.name',
+                        'totalAmount': {
+                            '$sum': '$totalAmount'
+                        }
+                    }
+                }
+            ]
+        )
+        console.log(productSale);
+    res.render('productPdf',{productSale:productSale})
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = {
     getLogin,
@@ -380,6 +516,8 @@ module.exports = {
     editProduct,
     deleteProduct,
     updateProduct,
-    getchartData
+    getchartData,
+    getreportDownload,
+    generateTable
 }
 

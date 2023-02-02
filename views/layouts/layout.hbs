@@ -2,80 +2,86 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="/public/stylesheets/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="/public/stylesheets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
-    <title>dELIVER</title>
+  <title>dELIVER</title>
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-light vw-100 mt-0 pt-0 fixed-top" style="background-color: lightblue; margin: bottom 0px; position:fixed;">
-  <a class="navbar-brand" href="#" style="font-weight: bold; font-size:x-large; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">dELIVER</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse fa-align-justify fa fa-align-right mobile-text" id="navbarNavDropdown" style="display: flex; justify-content:center; align-items:center; margin-left:88rem;">
-    <ul class="navbar-nav">
-      <li class="nav-item ">
-        <a class="nav-link" href="/user/home">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/user/products">Products</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/order/user-order">Profile</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          media
+  <nav class="navbar navbar-expand-lg navbar-light vw-100 mt-0 pt-0 fixed-top"
+    style="background-color: rgb(226, 240, 245); margin: bottom 0px; position:fixed;">
+    <a class="navbar-brand" href="#"
+      style="font-weight: bold; font-size:x-large; font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">dELIVER</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse fa-align-justify fa fa-align-right mobile-text" id="navbarNavDropdown"
+      style="display: flex; justify-content:center; align-items:center; margin-left:88rem;">
+      <ul class="navbar-nav">
+        <li class="nav-item ">
+          <a class="nav-link" href="/user/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/user/products">Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/order/user-order">Profile</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            media
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">gallery</a>
+            <a class="dropdown-item" href="#">photo</a>
+            <a class="dropdown-item" href="#">video</a>
+          </div>
+        </li>&nbsp;
+        <a href="/cart">
+          <li class="nav-item">
+            <i class="fa-solid fa-cart-shopping" style="color: black; padding-top:14px;"></i>
+          </li>
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">gallery</a>
-          <a class="dropdown-item" href="#">photo</a>
-          <a class="dropdown-item" href="#">video</a>
-        </div>
-      </li>&nbsp;
-      <a href="/cart">
-       <li class="nav-item">
-       <i class="fa-solid fa-cart-shopping" style="color: black; padding-top:14px;" ></i>
-      </li>
-      </a>
-    </ul>
-  </div>
-</nav>
-    {{{body}}}
+      </ul>
+    </div>
+  </nav>
+  {{{body}}}
 
 
- 
 
-    <script src="/javascript/script.js"></script>
 
-      {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"
-        integrity="sha512-rpLlll167T5LJHwp0waJCh3ZRf7pO6IT1+LZOhAyP6phAirwchClbTZV3iqL3BMrVxIYRbzGTpli4rfxsCK6Vw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/conflict-detection.min.js"
-        integrity="sha512-58PZ2FlYRr1lsJq9mPeR9Dxh0ZU7FECn0YOhXApeGE8HPslFu+mWdwEpQu26Itx4dmaGAuT7A6Cg4tgC5v/eJQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-</body> 
+  <script src="/javascript/script.js"></script>
+
+  {{!--
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/all.min.js"
+    integrity="sha512-rpLlll167T5LJHwp0waJCh3ZRf7pO6IT1+LZOhAyP6phAirwchClbTZV3iqL3BMrVxIYRbzGTpli4rfxsCK6Vw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/js/conflict-detection.min.js"
+    integrity="sha512-58PZ2FlYRr1lsJq9mPeR9Dxh0ZU7FECn0YOhXApeGE8HPslFu+mWdwEpQu26Itx4dmaGAuT7A6Cg4tgC5v/eJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+</body>
+
 </html>
-

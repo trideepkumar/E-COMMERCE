@@ -66,8 +66,9 @@ async function createOrder(e) {
 
     } else {
         console.log('Y');
+        window.location.href = redirectPath.redirect; 
     }
-    // window.location.href = redirectPath.redirect;   
+      
 
 
 

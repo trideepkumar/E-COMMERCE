@@ -1,3 +1,19 @@
 body{
-    background: rgb(200, 221, 229);
+    background: rgb(255, 255, 255);
+}
+
+.btn{
+    color:#ffffff;
+    transition: transform 1s;
+}
+.btn:hover{
+    transform: scale(1.05);
+}
+.buynow{
+    color: #ffffff;
+    background-color: rgb(67, 211, 0);
+    transition: background-color 1s ease;
+}
+.buynow:hover{
+    background-color: rgb(231, 153, 93);
 }

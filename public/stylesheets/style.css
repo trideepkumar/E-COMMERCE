@@ -134,19 +134,38 @@ input{
       width: 450px;
       height: 300px;
       padding: 10px;
-      border-radius: 20px;
+      /* border-radius: 20px; */
       background: #ffffff;
-      border: none;
+      border:solid;
       position: relative;
       margin-top: 7rem;
-      border-color: #495057;
-      border-width: 10px;
-      box-shadow: 2px 2px 2px 2px rgb(83, 83, 83);    
+      border-width: 0px;
+      box-shadow: 8px 8px 8px 8px rgb(230, 230, 230);    
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: transform 1s;
 
+      /* transition: transform 1.5s ease-in-out; */
+      /* transition: border-radius 1s ease-in-out;
+      transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition-duration: .8s;
+    transition-property: transform; */
     }
+    .card:hover{
+      /* transform: scale(1.05); */
+      border-radius: 15px;
+      border-color: #3c3c3c;
+  border-width: .1px;
+      /* transform: scale(1.1); */
+      transform: scale(1.05);
+
+    
+    }
+
     .container {
       height: 50vh;
       width: 98vw;

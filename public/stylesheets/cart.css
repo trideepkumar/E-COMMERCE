@@ -1,8 +1,8 @@
 body{
-    background: rgb(164, 227, 234);
+    background: rgb(255, 255, 255);
 }
 section{
-    background: rgb(164, 227, 234);
+    background: rgb(255, 255, 255);
 }
 a.btn{
     margin-top: 2rem;
@@ -13,4 +13,7 @@ a.btn{
 }
 img{
     margin:2px 2px 2px 2px;
+}
+.card{
+    background: rgb(241, 241, 241);
 }
