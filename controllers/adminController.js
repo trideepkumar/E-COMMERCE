@@ -6,6 +6,8 @@ const { Product } = require('../model/product')
 const User = require('../model/user');
 const Order = require('../model/order');
 const puppeteer = require('puppeteer');
+const xlsx = require('xlsx')
+
 
 //for admin login
 const myemail = "trideep@gmail.com"
@@ -54,7 +56,7 @@ const getadminDash = async (req, res) => {
 //for chart
 
 const getchartData = async (req, res) => {
-    console.log('getchartData controller works');
+    // console.log('getchartData controller works');
     try {
 
         const productWiseSale = await Order.aggregate(
@@ -488,7 +490,59 @@ const getreportDownload = async (req,res)=>{
     res.render('productPdf',{productSale:productSale})
   }
 
+const excelTable = async(req,res)=>{
+    const productSale = await Order.aggregate(
+        [
+            {
+                '$lookup': {
+                    'from': 'products',
+                    'localField': 'orderItems.id',
+                    'foreignField': '_id',
+                    'as': 'test'
+                }
+            }, {
+                '$unwind': {
+                    'path': '$test'
+                }
+            }, {
+                '$group': {
+                    '_id': '$test.name',
+                    'totalAmount': {
+                        '$sum': '$totalAmount'
+                    }
+                }
+            }
+        ]
+    )
+    // console.log(productSale);
+     let saleReport =[]
+   productSale.forEach(items =>{
+     excel = {
+        Product :  items._id,
+        TotalAmount : items.totalAmount,
 
+    }
+    saleReport.push(excel)
+   })
+   
+   console.log(saleReport);
+   //creating a workBook
+   let newWB = xlsx.utils.book_new()
+   //creating a worksheet
+   let newWS = xlsx.utils.json_to_sheet(saleReport)
+   //worksheet to workbook
+   xlsx.utils.book_append_sheet(newWB,newWS,'SalesReport')
+   //write to excel 
+   xlsx.writeFile(newWB,'./public/files/SalesReport.xlsx')
+   res.download('./public/files/SalesReport.xlsx','salesReport.xlsx')
+     
+    // const ws = reader.utils.json_to_sheet(saleReport)
+    // reader.utils.book_append_sheet(file,ws,"Sheet3")
+    // // Writing to our file
+    // reader.writeFile(file,'./test.xlsx')
+  
+    // res.render('excel',{productSale:productSale})
+}
 
 
 
@@ -518,6 +572,7 @@ module.exports = {
     updateProduct,
     getchartData,
     getreportDownload,
-    generateTable
+    generateTable,
+    excelTable
 }
 

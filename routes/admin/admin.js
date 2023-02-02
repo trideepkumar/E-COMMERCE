@@ -19,6 +19,8 @@ router.get('/generateTable',adminController.generateTable)
 
 router.get('/report-Download',adminController.getreportDownload)
 
+router.get('/excel-Data',adminController.excelTable)
+
 
 
 router.get('/admin-user',adminAuth.isLoggedIn,adminController.adminUser);
