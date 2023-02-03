@@ -1,0 +1,30 @@
+body{
+    background:white;
+}
+form{
+    background: rgb(249, 248, 248);
+    box-shadow: 8px 8px 8px 8px rgb(230, 230, 230);  
+    height: 60rem; 
+     
+
+}
+label{
+    color: rgb(151, 151, 151);
+}
+input{
+    border: solid;
+    border-width: 1px;
+    border-color: black;
+    width: 30rem;
+    color: black;
+}
+button{
+    background: rgb(106, 191, 210);
+    margin-top: 2rem;
+}
+input::placeholder{
+    color: grey;
+}
+h2{
+    padding-left: 6rem;
+}

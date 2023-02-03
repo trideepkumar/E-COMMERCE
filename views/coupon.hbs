@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="/stylesheets/coupon.css">
+<div class="main-container">
+    <aside class="aside " style="position: fixed; margin: top 5rem;">
+        <a href="admin/admin-dash" class="admin-dash p-5 mt-5"><i
+                class="fa-sharp fa-solid fa-table-columns"></i>dashboard</a>
+        <a href="/admin/category" class="admin-dash p-5"><i class="fa-solid fa-user"></i>Category</a>
+        <a href="/admin/products" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-bag-shopping"></i>products</a>
+        <a href="/admin/coupons" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"></i>coupons</a>
+        <a href="" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-calendar"></i>orders</a>
+        <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"></i>users</a>
+        <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"></i>testing</a>
+        <a href="/admin/logout" class="logout-button">logout</a>
+    </aside>
+</div>
+
+
+<section class="dashboard-container">
+    <div class="top">
+    <h3 class="dashboard-heading">
+        COUPON BOARD
+    </h3>
+    <a href="/admin/add-coupons" class="btn create ">CREATE COUPON</a>
+    </div>
+    <div class="dashboard">
+        <table width="95%" class="table">
+            <thead>
+                <tr>
+                    <td> Coupon code</td>
+                    <td>Expiry</td>
+                    <td>Discount</td>
+                    <td>Purchase Amount</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each coupon}}
+                <tr>
+                    <td>{{couponCode}}</td>
+                    <td class="date">{{expiryDate}}</td>
+                    <td>{{discountPercentage}}%</td>
+                    <td>{{minDiscountAmount}}</td>
+                    <td class="coupon-action">
+                        {{#if isAvailable}}
+                        <a data-url="{{_id}}" class="btn btn-success block">
+                           block
+                        </a>
+                        {{else}}
+                        <a data-url="{{_id}}" class="btn btn-danger block">
+                            unblock
+                        </a>
+                        {{/if}}
+                    </td>
+                </tr>
+                {{/each}}
+
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<script src="/javascript/coupon.js"></script>

@@ -52,6 +52,14 @@ router.post('/edit/:id',uploadOptions.array('fileName',4),adminController.update
 router.delete('/products/delete/:_id',adminController.deleteProduct)  
 
 
+router.get('/coupons', adminController.getcouponDash)
+
+router.get('/add-coupons',adminController.addCoupons)
+
+router.post('/add-coupons',adminController.postaddCoupon)
+
+router.put('/updatecoupon/:id' , adminController.updateCoupon)
+
 
 //for session logout
 router.get('/logout',adminController.getLogout);

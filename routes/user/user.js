@@ -7,6 +7,7 @@ const { emitKeypressEvents } = require('readline');
 const session = require('express-session');
 const userController = require('../../controllers/userController')
 const userAuth = require('../../middlewares/userAuth');
+
 // const adminAuth = require('../../middlewares/adminAuth');
 
 //for cache control
@@ -60,7 +61,7 @@ router.post('/signin', async (req, res) => {
     if (user) {
         try {
             console.log('try works!!');
-            const match = await bcrypt.compare(req.body.password, user.password)
+            const match = await bcrypt.compare(req.body.password,user.password)
             console.log(match);
             if (!match) {
                 console.log('1');

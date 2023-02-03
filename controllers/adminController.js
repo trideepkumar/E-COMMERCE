@@ -7,6 +7,7 @@ const User = require('../model/user');
 const Order = require('../model/order');
 const puppeteer = require('puppeteer');
 const xlsx = require('xlsx')
+const Coupon = require('../model/coupon');
 
 
 //for admin login
@@ -53,6 +54,7 @@ const getadminDash = async (req, res) => {
 }
 
 
+
 //for chart
 
 const getchartData = async (req, res) => {
@@ -89,6 +91,190 @@ const getchartData = async (req, res) => {
         console.log(err)
     }
 }
+
+//for pdf and excel download
+
+
+const getreportDownload = async (req,res)=>{
+
+
+
+
+
+
+    try {
+  
+        // Create a browser instance
+        const browser = await puppeteer.launch();
+        // Create a new page
+        const page = await browser.newPage();
+
+        // this needs to change {Hosting}
+        const website_url = 'http://localhost:4000/admin/generateTable';
+
+        await page.goto(website_url, { waitUntil: 'networkidle0' });
+
+        //To reflect CSS used for screens instead of print
+        await page.emulateMediaType('screen');
+
+        const pdf = await page.pdf({
+          path: 'result.pdf',
+        //   margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+          printBackground: true,
+          format: 'A4',
+        });
+
+        res.download('result.pdf');
+
+
+        await browser.close();
+
+  } catch(e) {
+     console.log(e);
+  }
+
+
+//     try {
+//         // const productWiseSale = await Order.aggregate(
+//         //     [
+//         //         {
+//         //             '$lookup': {
+//         //                 'from': 'products',
+//         //                 'localField': 'orderItems.id',
+//         //                 'foreignField': '_id',
+//         //                 'as': 'test'
+//         //             }
+//         //         }, {
+//         //             '$unwind': {
+//         //                 'path': '$test'
+//         //             }
+//         //         }, {
+//         //             '$group': {
+//         //                 '_id': '$test.name',
+//         //                 'totalAmount': {
+//         //                     '$sum': '$totalAmount'
+//         //                 }
+//         //             }
+//         //         }
+//         //     ]
+//         // )
+//         // console.log(productWiseSale);
+//         console.log('pdf controller works')
+//         const browser = await puppeteer.launch();
+//         const page = await browser.newPage();
+//         // console.log(page);
+//         await page.goto('http://localhost:4000/admin/report-Download', { waitUntil: 'networkidle0' });
+//         await page.pdf({ path: 'productsalesreport.pdf', format: 'A4' });
+//         res.download('productsalesreport.pdf');
+//         await browser.close();
+//     }
+//     // res.render('productPdf',{productWiseSale:productWiseSale})
+//     // const browser = await puppeteer.launch();
+//     // const page = await browser.newPage();
+//     // const url = 'http://localhost:4000/admin/report-Download';
+//     // await page.goto(url, { waitUntil: 'networkidle0' });
+//     // await page.emulateMediaType('screen');
+//     // await page.goto('http://localhost:4000/admin/report-Download');
+//     // await page.pdf({ path: 'productsalesreport.pdf' });
+//     // const pdf = await page.pdf({
+//     //     path: 'productsalesreport.pdf',
+//     //     margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+//     //     // printBackground: true,
+//     //     format: 'A4',
+//     // });
+//     // console.log(pdf);
+//     // res.download('productsalesreport.pdf');
+//     // await browser.close();
+//     // res.redirect('/admin/admin-dash')
+//     catch (err) {
+//         console.log(err);
+//     }
+// }
+}
+
+  const generateTable = async(req,res)=>{
+      const productSale = await Order.aggregate(
+            [
+                {
+                    '$lookup': {
+                        'from': 'products',
+                        'localField': 'orderItems.id',
+                        'foreignField': '_id',
+                        'as': 'test'
+                    }
+                }, {
+                    '$unwind': {
+                        'path': '$test'
+                    }
+                }, {
+                    '$group': {
+                        '_id': '$test.name',
+                        'totalAmount': {
+                            '$sum': '$totalAmount'
+                        }
+                    }
+                }
+            ]
+        )
+        console.log(productSale);
+    res.render('productPdf',{productSale:productSale})
+}
+
+
+const excelTable = async(req,res)=>{
+    const productSale = await Order.aggregate(
+        [
+            {
+                '$lookup': {
+                    'from': 'products',
+                    'localField': 'orderItems.id',
+                    'foreignField': '_id',
+                    'as': 'test'
+                }
+            }, {
+                '$unwind': {
+                    'path': '$test'
+                }
+            }, {
+                '$group': {
+                    '_id': '$test.name',
+                    'totalAmount': {
+                        '$sum': '$totalAmount'
+                    }
+                }
+            }
+        ]
+    )
+    // console.log(productSale);
+     let saleReport =[]
+   productSale.forEach(items =>{
+     excel = {
+        Product :  items._id,
+        TotalAmount : items.totalAmount,
+
+    }
+    saleReport.push(excel)
+   })
+   
+   console.log(saleReport);
+   //creating a workBook
+   let newWB = xlsx.utils.book_new()
+   //creating a worksheet
+   let newWS = xlsx.utils.json_to_sheet(saleReport)
+   //worksheet to workbook
+   xlsx.utils.book_append_sheet(newWB,newWS,'SalesReport')
+   //write to excel 
+   xlsx.writeFile(newWB,'./public/files/SalesReport.xlsx')
+   res.download('./public/files/SalesReport.xlsx','salesReport.xlsx')
+     
+    // const ws = reader.utils.json_to_sheet(saleReport)
+    // reader.utils.book_append_sheet(file,ws,"Sheet3")
+    // // Writing to our file
+    // reader.writeFile(file,'./test.xlsx')
+  
+    // res.render('excel',{productSale:productSale})
+}
+
 
 const adminUser = async (req, res) => {
     const user = await Register.find();
@@ -364,190 +550,50 @@ const deleteProduct = async (req, res) => {
 
 }
 
-
-const getreportDownload = async (req,res)=>{
-
-
-
-
-
-
-    try {
-  
-        // Create a browser instance
-        const browser = await puppeteer.launch();
-        // Create a new page
-        const page = await browser.newPage();
-
-        // this needs to change {Hosting}
-        const website_url = 'http://localhost:4000/admin/generateTable';
-
-        await page.goto(website_url, { waitUntil: 'networkidle0' });
-
-        //To reflect CSS used for screens instead of print
-        await page.emulateMediaType('screen');
-
-        const pdf = await page.pdf({
-          path: 'result.pdf',
-        //   margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
-          printBackground: true,
-          format: 'A4',
-        });
-
-        res.download('result.pdf');
-
-
-        await browser.close();
-
-  } catch(e) {
-     console.log(e);
-  }
-
-
-//     try {
-//         // const productWiseSale = await Order.aggregate(
-//         //     [
-//         //         {
-//         //             '$lookup': {
-//         //                 'from': 'products',
-//         //                 'localField': 'orderItems.id',
-//         //                 'foreignField': '_id',
-//         //                 'as': 'test'
-//         //             }
-//         //         }, {
-//         //             '$unwind': {
-//         //                 'path': '$test'
-//         //             }
-//         //         }, {
-//         //             '$group': {
-//         //                 '_id': '$test.name',
-//         //                 'totalAmount': {
-//         //                     '$sum': '$totalAmount'
-//         //                 }
-//         //             }
-//         //         }
-//         //     ]
-//         // )
-//         // console.log(productWiseSale);
-//         console.log('pdf controller works')
-//         const browser = await puppeteer.launch();
-//         const page = await browser.newPage();
-//         // console.log(page);
-//         await page.goto('http://localhost:4000/admin/report-Download', { waitUntil: 'networkidle0' });
-//         await page.pdf({ path: 'productsalesreport.pdf', format: 'A4' });
-//         res.download('productsalesreport.pdf');
-//         await browser.close();
-//     }
-//     // res.render('productPdf',{productWiseSale:productWiseSale})
-//     // const browser = await puppeteer.launch();
-//     // const page = await browser.newPage();
-//     // const url = 'http://localhost:4000/admin/report-Download';
-//     // await page.goto(url, { waitUntil: 'networkidle0' });
-//     // await page.emulateMediaType('screen');
-//     // await page.goto('http://localhost:4000/admin/report-Download');
-//     // await page.pdf({ path: 'productsalesreport.pdf' });
-//     // const pdf = await page.pdf({
-//     //     path: 'productsalesreport.pdf',
-//     //     margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
-//     //     // printBackground: true,
-//     //     format: 'A4',
-//     // });
-//     // console.log(pdf);
-//     // res.download('productsalesreport.pdf');
-//     // await browser.close();
-//     // res.redirect('/admin/admin-dash')
-//     catch (err) {
-//         console.log(err);
-//     }
-// }
-}
-
-  const generateTable = async(req,res)=>{
-      const productSale = await Order.aggregate(
-            [
-                {
-                    '$lookup': {
-                        'from': 'products',
-                        'localField': 'orderItems.id',
-                        'foreignField': '_id',
-                        'as': 'test'
-                    }
-                }, {
-                    '$unwind': {
-                        'path': '$test'
-                    }
-                }, {
-                    '$group': {
-                        '_id': '$test.name',
-                        'totalAmount': {
-                            '$sum': '$totalAmount'
-                        }
-                    }
-                }
-            ]
-        )
-        console.log(productSale);
-    res.render('productPdf',{productSale:productSale})
-  }
-
-const excelTable = async(req,res)=>{
-    const productSale = await Order.aggregate(
-        [
-            {
-                '$lookup': {
-                    'from': 'products',
-                    'localField': 'orderItems.id',
-                    'foreignField': '_id',
-                    'as': 'test'
-                }
-            }, {
-                '$unwind': {
-                    'path': '$test'
-                }
-            }, {
-                '$group': {
-                    '_id': '$test.name',
-                    'totalAmount': {
-                        '$sum': '$totalAmount'
-                    }
-                }
-            }
-        ]
-    )
-    // console.log(productSale);
-     let saleReport =[]
-   productSale.forEach(items =>{
-     excel = {
-        Product :  items._id,
-        TotalAmount : items.totalAmount,
-
+const getcouponDash = async(req,res)=>{
+    try{
+          const  coupon = await Coupon.find({})
+          res.render('coupon',{coupon:coupon})
+    }catch(err){
+        console.log(err);
     }
-    saleReport.push(excel)
-   })
-   
-   console.log(saleReport);
-   //creating a workBook
-   let newWB = xlsx.utils.book_new()
-   //creating a worksheet
-   let newWS = xlsx.utils.json_to_sheet(saleReport)
-   //worksheet to workbook
-   xlsx.utils.book_append_sheet(newWB,newWS,'SalesReport')
-   //write to excel 
-   xlsx.writeFile(newWB,'./public/files/SalesReport.xlsx')
-   res.download('./public/files/SalesReport.xlsx','salesReport.xlsx')
-     
-    // const ws = reader.utils.json_to_sheet(saleReport)
-    // reader.utils.book_append_sheet(file,ws,"Sheet3")
-    // // Writing to our file
-    // reader.writeFile(file,'./test.xlsx')
-  
-    // res.render('excel',{productSale:productSale})
+
 }
 
+const addCoupons = async(req,res)=>{
+   return res.render('add-coupons')
+}
 
+const postaddCoupon = async(req,res)=>{
+    let {couponCode , expiryDate , minDiscountAmount  , discountPercentage} = req.body ;
+    try {
+        const coupon = await Coupon.create({
+            couponCode: couponCode ,
+            expiryDate: new Date(expiryDate) ,
+            minDiscountAmount: parseInt(minDiscountAmount) ,
+            discountPercentage: parseInt(discountPercentage),
+            isAvailable:true,
+        });
+        console.log(coupon);
+        await coupon.save();
+        res.redirect('/admin/coupons');
+}catch(err){
+    console.log(err);
+}
+}
 
-
-
+const updateCoupon = async(req,res)=>{
+    const {id} = req.params ;
+    try {
+        const coupon = await Coupon.findById({ _id: id});
+        const isAvailable = coupon.isAvailable ;
+        coupon.isAvailable = !isAvailable;
+        await coupon.save();
+        res.json({redirect: '/admin/coupons'});
+    } catch(e) {
+        console.log(e);
+    }
+  }
 
 
 
@@ -573,6 +619,10 @@ module.exports = {
     getchartData,
     getreportDownload,
     generateTable,
-    excelTable
+    excelTable,
+    getcouponDash,
+    addCoupons,
+    postaddCoupon,
+    updateCoupon
 }
 

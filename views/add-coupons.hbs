@@ -1,0 +1,26 @@
+<link rel="stylesheet" href="/public/stylesheets/add-coupons.css">
+
+            <form class="" action="/admin/add-coupons" method="post">
+                <h2>ADD COUPON</h2>
+               <div class="input-container">
+                 <label for="couponCode">Coupon Code</label>
+                 <input type="text" name="couponCode" placeholder="enter coupon code" required>
+               </div>
+               <div class="input-container">
+                 <label for="couponCode">Expiry Date</label>
+                 <input type="date" name="expiryDate" placeholder="enter the expiry date" required>
+               </div>
+               <div class="input-container">
+                 <label for="couponCode">Discount Rate</label>
+                 <input type="number" name="discountPercentage" placeholder="enter discount rate" required>
+               </div>
+               <div class="input-container">
+                 <label for="minDiscountAmount">Minimum Parchase Amount</label>
+                 <input type="number" name="minDiscountAmount" placeholder="enter minimum purchase amount" required>
+               </div>
+               <div class="input-container">
+                 <button type="submit" class="btn-coupon">Save</button>   
+               </div>
+            </form>
+
+        </section>
