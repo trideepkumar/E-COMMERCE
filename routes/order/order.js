@@ -20,4 +20,12 @@ router.put('/cancel/:id' ,orderController.cancelOrder);
 
 
 
+//for coupon apply
+
+router.get('/user-coupon', orderController.getCouponpage)
+
+router.post('/coupon',orderController.applyCoupon)
+
+
+
 module.exports= router;

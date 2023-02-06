@@ -582,9 +582,11 @@ const postaddCoupon = async(req,res)=>{
 }
 }
 
+//for blocking unblocking coupon
 const updateCoupon = async(req,res)=>{
     const {id} = req.params ;
     try {
+        // console.log('block works');
         const coupon = await Coupon.findById({ _id: id});
         const isAvailable = coupon.isAvailable ;
         coupon.isAvailable = !isAvailable;
@@ -595,8 +597,34 @@ const updateCoupon = async(req,res)=>{
     }
   }
 
+const adminOrder = async(req,res)=>{
+    console.log('admin-order works!!')
+    const orders = await Order.find({})
+    // console.log(orders)
+    if (orders.length == 0) {
+        res.render('user-order-empty')
+    } else {
+        res.render('admin-order', { order: orders})
+    }
+}
 
 
+const cancelOrder = async (req, res) => {
+    console.log('cancel order works!')
+    const id = req.params.id
+    const user = await User.find({ Email: req.session.email })
+    console.log(user);
+    // console.log(id);
+    try {
+        const order = await Order.find({ id: id })
+        console.log(order);
+        const cancelOrder = await Order.findOneAndUpdate({ _id: id }, { isCancelled: true }, { user: user });
+        res.json({ redirect: '/admin/admin-order' });
+    } catch (err) {
+        console.log(err);
+    }
+
+}
 
 
 module.exports = {
@@ -623,6 +651,8 @@ module.exports = {
     getcouponDash,
     addCoupons,
     postaddCoupon,
-    updateCoupon
+    updateCoupon,
+    adminOrder,
+    cancelOrder
 }
 

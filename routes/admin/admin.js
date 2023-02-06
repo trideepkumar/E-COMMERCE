@@ -60,6 +60,13 @@ router.post('/add-coupons',adminController.postaddCoupon)
 
 router.put('/updatecoupon/:id' , adminController.updateCoupon)
 
+//for admin order list 
+
+router.get('/admin-order',adminController.adminOrder)
+
+
+router.put('/admin-order-cancel/:id' ,adminController.cancelOrder); 
+
 
 //for session logout
 router.get('/logout',adminController.getLogout);

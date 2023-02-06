@@ -1,0 +1,31 @@
+.coup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background: black;
+}
+form{
+    background-color: rgb(174, 174, 174);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+#coupon{
+    background: rgb(255, 255, 255);
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+}
+#coupon-input{
+    background: rgb(210, 210, 210);
+    width:20rem;
+    margin-top:12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    color: black;
+    padding-right: 2rem;
+}

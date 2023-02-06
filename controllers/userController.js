@@ -95,6 +95,9 @@ const getProfile = async (req,res)=>{
 }
 
 
+
+
+
 module.exports = {
     registerUser,
     generateOtp,
@@ -102,7 +105,6 @@ module.exports = {
     checkOtp,
     getUserProducts,
     getSingleProduct,
-    getProfile  
+    getProfile ,
     
-
 }

@@ -3,6 +3,7 @@ const Order = require('../model/order');
 const Product = require('../model/product');
 const order = require('../model/order');
 const Razorpay = require('razorpay');
+const Coupon = require('../model/coupon')
 
 
 const getOrder = async (req, res) => {
@@ -93,8 +94,8 @@ const createOrder = async (req, res) => {
             const myOrder = await instance.orders.create({
                 amount: totalAmount * 100,
                 currency: "INR",
-                order_id:order.id,
-                receipt: order.id, 
+                order_id: order.id,
+                receipt: order.id,
             })
             console.log(myOrder);
 
@@ -113,7 +114,7 @@ const createOrder = async (req, res) => {
             //saving the order
             await newOrder.save();
             console.log('order saved in db!!!');
-            res.json({myOrder: myOrder , redirect: '/order/success'})
+            res.json({ myOrder: myOrder, redirect: '/order/success' })
             console.log('end');
         }
     } catch (e) {
@@ -162,7 +163,44 @@ const cancelOrder = async (req, res) => {
 
 }
 
+const getCouponpage = async (req, res) => {
+    res.render('user-coupon')
+}
 
+const applyCoupon = async (req, res) => {
+    const user = await User.find({ Email: req.session.email }).populate('cart.id');
+    console.log(user);
+
+    const coupon = await Coupon.find({ couponCode: req.body.coupon });
+    // console.log(coupon);
+
+    console.log(coupon[0].discountPercentage);
+
+    // console.log(coupon[0].users);
+   
+
+    //for cart items
+    const cartItems = user[0].cart
+    console.log(cartItems);
+
+
+    //for total quantity
+    const totalQuantity = cartItems.reduce((total , item) => {
+        return total+item.quantity;
+        } , 0);
+
+        console.log(totalQuantity);
+   
+        
+    //for total cart price 
+    let totalPrice = cartItems.reduce((total, item) => {
+        return total + (item.quantity * item.id.price)
+    }, 0);
+    console.log(totalPrice);
+
+
+
+}
 
 module.exports = {
     getOrder,
@@ -170,5 +208,7 @@ module.exports = {
     createOrder,
     orderSuccess,
     getUserOrder,
-    cancelOrder
+    cancelOrder,
+    getCouponpage,
+    applyCoupon
 }

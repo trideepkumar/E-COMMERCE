@@ -2,7 +2,7 @@ body{
     background: white;
     height: 100vh;
 }
-form{
+#order{
     margin-top:4rem;
     background-color:rgb(185, 228, 235);
     height:80rem;
@@ -68,6 +68,8 @@ a.btn{
 #address{
     width:2rem;
 }
-#coupon{
-    width: 35rem;
+.coupon-container{
+    background: black;
+    width: 20rem;
+    margin-right:100rem;
 }

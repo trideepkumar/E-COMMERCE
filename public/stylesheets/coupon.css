@@ -21,14 +21,15 @@ h3{
     justify-content: flex-end;
 }
 .create{
-    background: rgb(185, 185, 184);
+    background: rgb(198, 198, 198);
     display: flex;
     justify-content: center;
     align-content: center;
     align-items: center;
     height: 4rem;
     margin-top: 1rem;
-    margin-right: 2rem;
+    margin-right:4rem;
+    
 }
 thead{
     background:  grey;
@@ -47,4 +48,10 @@ thead{
     gap:5rem;
     font-size: 2rem;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.btn{
+    width: 7rem;
+}
+.coupon-div{
+    display:grid;
 }

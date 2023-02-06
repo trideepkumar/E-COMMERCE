@@ -81,12 +81,12 @@ let orderContainer = document.querySelector('.userorder-container');
 if (orderContainer) {
     orderContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('order-cancel-btn')) {
-            removeOrder(e);
+            cancelOrder(e);
         }
     })
 }
 
-async function removeOrder(e) {
+async function cancelOrder(e) {
     const orderId = e.target.dataset.url
     // console.log(orderId)
     const url = `http://localhost:4000/order/cancel/${orderId}`;

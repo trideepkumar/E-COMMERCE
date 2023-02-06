@@ -10,9 +10,10 @@ if(couponItems) {
 }
 
 async function couponActivate(e) {
-    console.log('coupon fn working');
+    alert('are you sure ?')
+    // console.log('coupon fn working');
     const couponId = e.target.dataset.url;
-    console.log(couponId);
+    // console.log(couponId);
     const url = `http://localhost:4000/admin/updatecoupon/${couponId}`;
     const res = await fetch(url, {
                     method: 'PUT',

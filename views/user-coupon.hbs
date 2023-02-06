@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="/public/stylesheets/user-add-coupon.css">
+
+<section class="coup">
+    <h3>APPLY COUPON</h3>
+    {{!-- {{#if isCouponExist}} --}}
+    <form action="/order/coupon" method="post" class="coupon-container">
+        <div class="input-container">
+            <input type="text" name="coupon" placeholder="Enter coupon code" id="coupon">
+            <input type="submit" value="Apply" id="coupon-input">
+        </div>
+    </form>
+    {{!-- {{/if}} --}}
+    {{!-- {{#if isCouponUsed}} --}}
+    <p style="font-size: 1.2rem;">{{couponMsg}}</p>
+    {{!-- {{/if}} --}}
+</section>
