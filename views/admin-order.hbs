@@ -1,16 +1,15 @@
-
 <link rel="stylesheet" href="/public/stylesheets/admin-order.css">
 
 <div class="main-container" style="height:100vh">
-  <aside class="aside" style="position: fixed;  padding-top:5rem;">
-    <a href="/admin/admin-dash" class="admin-dash p-5"><i class="fa-solid fa-table-columns"></i>dashboard</a>
-    <a href="/admin/category" class="admin-dash p-5"><i class="fa-solid fa-user"></i>categories</a>
-    <a href="/admin/products" class="admin-dash p-5"><i class="fa-solid fa-bag-shopping"></i>products</a>
-    <a href="" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"></i></i>coupons</a>
-    <a href="" class="admin-dash p-5"><i class="fa-solid fa-cart-flatbed-suitcase"></i>orders</a>
-    <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"></i>users</a>
-    <a href="/admin/logout" class="logout-button">logout</a>
-  </aside>
+    <aside class="aside" style="position: fixed;  padding-top:5rem;">
+        <a href="/admin/admin-dash" class="admin-dash p-5"><i class="fa-solid fa-table-columns"></i>dashboard</a>
+        <a href="/admin/category" class="admin-dash p-5"><i class="fa-solid fa-user"></i>categories</a>
+        <a href="/admin/products" class="admin-dash p-5"><i class="fa-solid fa-bag-shopping"></i>products</a>
+        <a href="" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"></i></i>coupons</a>
+        <a href="/admin/admin-order" class="admin-dash p-5"><i class="fa-solid fa-cart-flatbed-suitcase"></i>orders</a>
+        <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"></i>users</a>
+        <a href="/admin/logout" class="logout-button">logout</a>
+    </aside>
 
 
 
@@ -31,7 +30,7 @@
                 <div class="order-payment-mode">
                     ORDER STATUS:
                     {{#if isDelivered}}
-                    <h4>Deleivered</h4>
+                    <h4>Delivered</h4>
                     {{else}}
                     {{#if isCancelled}}
                     <h4>Cancelled</h4>
@@ -48,9 +47,21 @@
                     TOTAL AMOUNT:
                     <h4>RS.{{totalAmount}}/-</h4>
                 </div>
+                {{#if isReturn}}
+                {{#if isReturnStatus}}
+                   <div class="order-return">
+                    <a class="btn btn-warning approve-refund success" data-url="{{id}}" >Approve Refund</a>
+                </div>
+                {{else}}
+                <div class="order-return">
+                    <a class="btn btn-warning approve-return success" data-url="{{id}}" >Approve Return</a>
+                </div>
+                <div class="order-refund mt-2">
+                    <a class="btn btn-danger decline-return success" data-url="{{id}}" >Decline Return</a>
+                </div>
                 {{#if isDelivered}}
                 <div class="order-cancel">
-                    <a class="success">Success</a>
+                    <a class="success">Order Completed Successfully!</a>
                 </div>
                 {{else}}
                 <div class="order-cancel">
@@ -63,42 +74,22 @@
                     <a data-url="{{id}}" class="btn order-cancel-btn">
                         Cancel Order
                     </a>
+                    <a data-url="{{id}}" class="btn order-deliver">
+                        Order Delivered
+                    </a>
                     {{/if}}
                     {{/if}}
                 </div>
+              {{/if}}
+                {{/if}}
                 {{/if}}
             </div>
             <br>
+
             {{/each}}
         </div>
     </section>
- 
+
 </div>
 
 <script src="/public/javascript/admin-order.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

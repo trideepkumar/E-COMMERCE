@@ -10,6 +10,7 @@ const xlsx = require('xlsx')
 const Coupon = require('../model/coupon');
 
 
+
 //for admin login
 const myemail = "trideep@gmail.com"
 const mypassword = "trideep123"
@@ -95,7 +96,7 @@ const getchartData = async (req, res) => {
 //for pdf and excel download
 
 
-const getreportDownload = async (req,res)=>{
+const getreportDownload = async (req, res) => {
 
 
 
@@ -103,7 +104,7 @@ const getreportDownload = async (req,res)=>{
 
 
     try {
-  
+
         // Create a browser instance
         const browser = await puppeteer.launch();
         // Create a new page
@@ -118,10 +119,10 @@ const getreportDownload = async (req,res)=>{
         await page.emulateMediaType('screen');
 
         const pdf = await page.pdf({
-          path: 'result.pdf',
-        //   margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
-          printBackground: true,
-          format: 'A4',
+            path: 'result.pdf',
+            //   margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+            printBackground: true,
+            format: 'A4',
         });
 
         res.download('result.pdf');
@@ -129,99 +130,99 @@ const getreportDownload = async (req,res)=>{
 
         await browser.close();
 
-  } catch(e) {
-     console.log(e);
-  }
+    } catch (e) {
+        console.log(e);
+    }
 
 
-//     try {
-//         // const productWiseSale = await Order.aggregate(
-//         //     [
-//         //         {
-//         //             '$lookup': {
-//         //                 'from': 'products',
-//         //                 'localField': 'orderItems.id',
-//         //                 'foreignField': '_id',
-//         //                 'as': 'test'
-//         //             }
-//         //         }, {
-//         //             '$unwind': {
-//         //                 'path': '$test'
-//         //             }
-//         //         }, {
-//         //             '$group': {
-//         //                 '_id': '$test.name',
-//         //                 'totalAmount': {
-//         //                     '$sum': '$totalAmount'
-//         //                 }
-//         //             }
-//         //         }
-//         //     ]
-//         // )
-//         // console.log(productWiseSale);
-//         console.log('pdf controller works')
-//         const browser = await puppeteer.launch();
-//         const page = await browser.newPage();
-//         // console.log(page);
-//         await page.goto('http://localhost:4000/admin/report-Download', { waitUntil: 'networkidle0' });
-//         await page.pdf({ path: 'productsalesreport.pdf', format: 'A4' });
-//         res.download('productsalesreport.pdf');
-//         await browser.close();
-//     }
-//     // res.render('productPdf',{productWiseSale:productWiseSale})
-//     // const browser = await puppeteer.launch();
-//     // const page = await browser.newPage();
-//     // const url = 'http://localhost:4000/admin/report-Download';
-//     // await page.goto(url, { waitUntil: 'networkidle0' });
-//     // await page.emulateMediaType('screen');
-//     // await page.goto('http://localhost:4000/admin/report-Download');
-//     // await page.pdf({ path: 'productsalesreport.pdf' });
-//     // const pdf = await page.pdf({
-//     //     path: 'productsalesreport.pdf',
-//     //     margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
-//     //     // printBackground: true,
-//     //     format: 'A4',
-//     // });
-//     // console.log(pdf);
-//     // res.download('productsalesreport.pdf');
-//     // await browser.close();
-//     // res.redirect('/admin/admin-dash')
-//     catch (err) {
-//         console.log(err);
-//     }
-// }
+    //     try {
+    //         // const productWiseSale = await Order.aggregate(
+    //         //     [
+    //         //         {
+    //         //             '$lookup': {
+    //         //                 'from': 'products',
+    //         //                 'localField': 'orderItems.id',
+    //         //                 'foreignField': '_id',
+    //         //                 'as': 'test'
+    //         //             }
+    //         //         }, {
+    //         //             '$unwind': {
+    //         //                 'path': '$test'
+    //         //             }
+    //         //         }, {
+    //         //             '$group': {
+    //         //                 '_id': '$test.name',
+    //         //                 'totalAmount': {
+    //         //                     '$sum': '$totalAmount'
+    //         //                 }
+    //         //             }
+    //         //         }
+    //         //     ]
+    //         // )
+    //         // console.log(productWiseSale);
+    //         console.log('pdf controller works')
+    //         const browser = await puppeteer.launch();
+    //         const page = await browser.newPage();
+    //         // console.log(page);
+    //         await page.goto('http://localhost:4000/admin/report-Download', { waitUntil: 'networkidle0' });
+    //         await page.pdf({ path: 'productsalesreport.pdf', format: 'A4' });
+    //         res.download('productsalesreport.pdf');
+    //         await browser.close();
+    //     }
+    //     // res.render('productPdf',{productWiseSale:productWiseSale})
+    //     // const browser = await puppeteer.launch();
+    //     // const page = await browser.newPage();
+    //     // const url = 'http://localhost:4000/admin/report-Download';
+    //     // await page.goto(url, { waitUntil: 'networkidle0' });
+    //     // await page.emulateMediaType('screen');
+    //     // await page.goto('http://localhost:4000/admin/report-Download');
+    //     // await page.pdf({ path: 'productsalesreport.pdf' });
+    //     // const pdf = await page.pdf({
+    //     //     path: 'productsalesreport.pdf',
+    //     //     margin: { top: '100px', right: '50px', bottom: '100px', left: '50px' },
+    //     //     // printBackground: true,
+    //     //     format: 'A4',
+    //     // });
+    //     // console.log(pdf);
+    //     // res.download('productsalesreport.pdf');
+    //     // await browser.close();
+    //     // res.redirect('/admin/admin-dash')
+    //     catch (err) {
+    //         console.log(err);
+    //     }
+    // }
 }
 
-  const generateTable = async(req,res)=>{
-      const productSale = await Order.aggregate(
-            [
-                {
-                    '$lookup': {
-                        'from': 'products',
-                        'localField': 'orderItems.id',
-                        'foreignField': '_id',
-                        'as': 'test'
-                    }
-                }, {
-                    '$unwind': {
-                        'path': '$test'
-                    }
-                }, {
-                    '$group': {
-                        '_id': '$test.name',
-                        'totalAmount': {
-                            '$sum': '$totalAmount'
-                        }
+const generateTable = async (req, res) => {
+    const productSale = await Order.aggregate(
+        [
+            {
+                '$lookup': {
+                    'from': 'products',
+                    'localField': 'orderItems.id',
+                    'foreignField': '_id',
+                    'as': 'test'
+                }
+            }, {
+                '$unwind': {
+                    'path': '$test'
+                }
+            }, {
+                '$group': {
+                    '_id': '$test.name',
+                    'totalAmount': {
+                        '$sum': '$totalAmount'
                     }
                 }
-            ]
-        )
-        console.log(productSale);
-    res.render('productPdf',{productSale:productSale})
+            }
+        ]
+    )
+    console.log(productSale);
+    res.render('productPdf', { productSale: productSale })
 }
 
 
-const excelTable = async(req,res)=>{
+const excelTable = async (req, res) => {
     const productSale = await Order.aggregate(
         [
             {
@@ -246,32 +247,32 @@ const excelTable = async(req,res)=>{
         ]
     )
     // console.log(productSale);
-     let saleReport =[]
-   productSale.forEach(items =>{
-     excel = {
-        Product :  items._id,
-        TotalAmount : items.totalAmount,
+    let saleReport = []
+    productSale.forEach(items => {
+        excel = {
+            Product: items._id,
+            TotalAmount: items.totalAmount,
 
-    }
-    saleReport.push(excel)
-   })
-   
-   console.log(saleReport);
-   //creating a workBook
-   let newWB = xlsx.utils.book_new()
-   //creating a worksheet
-   let newWS = xlsx.utils.json_to_sheet(saleReport)
-   //worksheet to workbook
-   xlsx.utils.book_append_sheet(newWB,newWS,'SalesReport')
-   //write to excel 
-   xlsx.writeFile(newWB,'./public/files/SalesReport.xlsx')
-   res.download('./public/files/SalesReport.xlsx','salesReport.xlsx')
-     
+        }
+        saleReport.push(excel)
+    })
+
+    console.log(saleReport);
+    //creating a workBook
+    let newWB = xlsx.utils.book_new()
+    //creating a worksheet
+    let newWS = xlsx.utils.json_to_sheet(saleReport)
+    //worksheet to workbook
+    xlsx.utils.book_append_sheet(newWB, newWS, 'SalesReport')
+    //write to excel 
+    xlsx.writeFile(newWB, './public/files/SalesReport.xlsx')
+    res.download('./public/files/SalesReport.xlsx', 'salesReport.xlsx')
+
     // const ws = reader.utils.json_to_sheet(saleReport)
     // reader.utils.book_append_sheet(file,ws,"Sheet3")
     // // Writing to our file
     // reader.writeFile(file,'./test.xlsx')
-  
+
     // res.render('excel',{productSale:productSale})
 }
 
@@ -550,61 +551,63 @@ const deleteProduct = async (req, res) => {
 
 }
 
-const getcouponDash = async(req,res)=>{
-    try{
-          const  coupon = await Coupon.find({})
-          res.render('coupon',{coupon:coupon})
-    }catch(err){
+const getcouponDash = async (req, res) => {
+    try {
+        const coupon = await Coupon.find({})
+        res.render('coupon', { coupon: coupon })
+    } catch (err) {
         console.log(err);
     }
 
 }
 
-const addCoupons = async(req,res)=>{
-   return res.render('add-coupons')
+const addCoupons = async (req, res) => {
+    return res.render('add-coupons')
 }
 
-const postaddCoupon = async(req,res)=>{
-    let {couponCode , expiryDate , minDiscountAmount  , discountPercentage} = req.body ;
+const postaddCoupon = async (req, res) => {
+    let { couponCode, expiryDate, minDiscountAmount, discountPercentage } = req.body;
     try {
         const coupon = await Coupon.create({
-            couponCode: couponCode ,
-            expiryDate: new Date(expiryDate) ,
-            minDiscountAmount: parseInt(minDiscountAmount) ,
+            couponCode: couponCode,
+            expiryDate: new Date(expiryDate),
+            minDiscountAmount: parseInt(minDiscountAmount),
             discountPercentage: parseInt(discountPercentage),
-            isAvailable:true,
+            isAvailable: true,
         });
         console.log(coupon);
         await coupon.save();
         res.redirect('/admin/coupons');
-}catch(err){
-    console.log(err);
-}
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 //for blocking unblocking coupon
-const updateCoupon = async(req,res)=>{
-    const {id} = req.params ;
+const updateCoupon = async (req, res) => {
+    const { id } = req.params;
     try {
         // console.log('block works');
-        const coupon = await Coupon.findById({ _id: id});
-        const isAvailable = coupon.isAvailable ;
+        const coupon = await Coupon.findById({ _id: id });
+        const isAvailable = coupon.isAvailable;
         coupon.isAvailable = !isAvailable;
         await coupon.save();
-        res.json({redirect: '/admin/coupons'});
-    } catch(e) {
+        res.json({ redirect: '/admin/coupons' });
+    } catch (e) {
         console.log(e);
     }
-  }
+}
 
-const adminOrder = async(req,res)=>{
+
+//for admin orders
+const adminOrder = async (req, res) => {
     console.log('admin-order works!!')
     const orders = await Order.find({})
     // console.log(orders)
     if (orders.length == 0) {
         res.render('user-order-empty')
     } else {
-        res.render('admin-order', { order: orders})
+        res.render('admin-order', { order: orders })
     }
 }
 
@@ -626,6 +629,41 @@ const cancelOrder = async (req, res) => {
 
 }
 
+
+const deliverOrder = async (req, res) => {
+    console.log('deliver order works!')
+    const id = req.params.id
+    const user = await User.find({ Email: req.session.email })
+    console.log(user);
+    console.log(id);
+    try {
+        const order = await Order.find({ id: id })
+        console.log(order);
+        const cancelOrder = await Order.findOneAndUpdate({ _id: id }, { isDelivered: true }, { user: user });
+        res.json({ redirect: '/admin/admin-order' });
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
+const returnOrder = async (req, res) => {
+    console.log('return order works!')
+    const id = req.params.id
+    const user = await User.find({ Email: req.session.email })
+    console.log(user);
+    console.log(id);
+    try {
+        const order = await Order.find({ id: id })
+        // console.log(order);
+        console.log('1');
+        const cancelOrder = await Order.findOneAndUpdate({ _id: id }, {isReturnStatus : true }, { user: user });
+        console.log('2');
+        res.json({ redirect: '/admin/admin-order' });
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 module.exports = {
     getLogin,
@@ -653,6 +691,8 @@ module.exports = {
     postaddCoupon,
     updateCoupon,
     adminOrder,
-    cancelOrder
+    cancelOrder,
+    deliverOrder,
+    returnOrder
 }
 

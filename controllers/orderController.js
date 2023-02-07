@@ -3,7 +3,8 @@ const Order = require('../model/order');
 const Product = require('../model/product');
 const order = require('../model/order');
 const Razorpay = require('razorpay');
-const Coupon = require('../model/coupon')
+const Coupon = require('../model/coupon');
+const { LogarithmicScale } = require('chart.js');
 
 
 const getOrder = async (req, res) => {
@@ -168,39 +169,85 @@ const getCouponpage = async (req, res) => {
 }
 
 const applyCoupon = async (req, res) => {
-    const user = await User.find({ Email: req.session.email }).populate('cart.id');
-    console.log(user);
 
-    const coupon = await Coupon.find({ couponCode: req.body.coupon });
-    // console.log(coupon);
+    try {
+        const user = await User.find({ Email: req.session.email }).populate('cart.id');
+        console.log(user);
+        // console.log(user[0]._id);
 
-    console.log(coupon[0].discountPercentage);
+        const coupon = await Coupon.find({ couponCode: req.body.coupon });
+        // console.log(coupon);
+        // console.log(coupon[0].users);
 
-    // console.log(coupon[0].users);
-   
+        // console.log(coupon[0].discountPercentage);
+        //for cart items
+        const cartItems = user[0].cart
+        // console.log(cartItems);
 
-    //for cart items
-    const cartItems = user[0].cart
-    console.log(cartItems);
+        //for total quantity
+        const totalQuantity = cartItems.reduce((total, item) => {
+            return total + item.quantity;
+        }, 0);
 
+        // console.log(totalQuantity);
 
-    //for total quantity
-    const totalQuantity = cartItems.reduce((total , item) => {
-        return total+item.quantity;
-        } , 0);
+        //for total cart price 
+        let totalPrice = cartItems.reduce((total, item) => {
+            return total + (item.quantity * item.id.price)
+        }, 0);
+        // console.log(totalPrice);
 
-        console.log(totalQuantity);
-   
-        
-    //for total cart price 
-    let totalPrice = cartItems.reduce((total, item) => {
-        return total + (item.quantity * item.id.price)
-    }, 0);
-    console.log(totalPrice);
-
-
+        if (coupon.length === 0) {
+            console.log('if worked');
+            res.render('user-coupon', { couponMessage: 'Please enter a valid coupon' });
+        } else if (totalPrice <= coupon[0].minDiscountAmount) {
+            res.render('user-coupon', { couponMessage: 'Coupon is not applicable for this price !!' });
+        }
+        else {
+            let isCouponUsed = coupon[0].users.some((item) => {
+                return item.id.valueOf() === `${req.session._userId}`
+            });
+            if (isCouponUsed) {
+                res.render('user-coupon', { couponMessage: 'Oops ..!! Coupon already used' });
+            } else {
+                console.log('else working');
+                // console.log(user);
+                // console.log(coupon[0].users);
+                console.log(req.session.user);
+                let userCoupon = { id: req.session.user._id }
+                coupon[0].users.push(userCoupon)
+                // console.log( coupon.users[0].push(user));
+                await coupon[0].save();
+                totalPrice = totalPrice - (totalPrice * coupon[0].discountPercentage) / 100;
+                console.log(totalPrice);
+                let couponApplied = true;
+                res.render('order', { user: user[0], totalPrice: totalPrice, totalQuantity: totalQuantity, couponMessage: 'Coupon applied 🎁', couponApplied:couponApplied })
+            }
+        }
+    } catch (err) {
+        console.log(err);
+    }
 
 }
+
+const  returnOrder = async(req,res)=>{
+    console.log('return order works!')
+    const id = req.params.id
+    console.log(id);
+    const user = await User.find({ Email: req.session.email })
+    console.log(user);
+    try {
+        const {id} = req.params ;
+        const order = await Order.find({_id: id});
+        order[0].isReturn = true ;
+        await order[0].save();
+        res.json({redirect: '/order/user-order'});
+     } catch(e) {
+        console.log(e);
+     }
+   
+}
+
 
 module.exports = {
     getOrder,
@@ -210,5 +257,7 @@ module.exports = {
     getUserOrder,
     cancelOrder,
     getCouponpage,
-    applyCoupon
+    applyCoupon,
+    returnOrder,
+    
 }

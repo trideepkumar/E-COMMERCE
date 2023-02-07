@@ -82,9 +82,13 @@ if (orderContainer) {
     orderContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('order-cancel-btn')) {
             cancelOrder(e);
+        }else if(e.target.classList.contains('order-return')){
+            console.log('order-return btn works');
+            returnOrder(e);
         }
     })
 }
+
 
 async function cancelOrder(e) {
     const orderId = e.target.dataset.url
@@ -100,6 +104,24 @@ async function cancelOrder(e) {
         }
     });
 
+    const redirectPath = await res.json()
+    window.location.href = redirectPath.redirect
+}
+
+async function  returnOrder(e){
+    console.log('return order function works!!');
+    const orderId = e.target.dataset.url
+    console.log(orderId);
+    const url = `http://localhost:4000/order/return/${orderId}`;
+    console.log(url);
+    alert('are you sure to return the order ? ')
+    const res = await fetch(url, {
+        method: 'PUT',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
     const redirectPath = await res.json()
     window.location.href = redirectPath.redirect
 }

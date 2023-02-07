@@ -18,6 +18,9 @@ router.get('/user-order',userAuth.isLoggedIn,orderController.getUserOrder)
 
 router.put('/cancel/:id' ,orderController.cancelOrder); 
 
+router.put('/return/:id',orderController.returnOrder)
+
+
 
 
 //for coupon apply

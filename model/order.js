@@ -60,13 +60,24 @@ const orderSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    isReturn: {
+        type: Boolean,  
+        default:false
+    },  
+    isReturnStatus: {
+        type: Boolean,  
+        default:false
+    },  
     createdAt: {
         type: Date,
         default: Date.now()
     },
     deliveredAt: {
         type: Date
-    }
+    },
+    paymentId: {
+        type: String
+    } 
 })
 
 module.exports = mongoose.model('order', orderSchema)

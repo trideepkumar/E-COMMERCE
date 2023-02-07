@@ -72,6 +72,7 @@ router.post('/signin', async (req, res) => {
             }
             else {
                 let session = req.session;
+                req.session.user=user;
                 session.email = req.body.email;
                 res.redirect('/user/home')
             }

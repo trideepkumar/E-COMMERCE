@@ -43,13 +43,17 @@
                 </div>
                 <div class="order-payment-mode">
                     ORDER STATUS:
+                    {{#if isReturn}}
+                    <h4>Return Processing</h4>
+                    {{else}}
                     {{#if isDelivered}}
-                    <h4>Deleivered</h4>
+                    <h4>delivered</h4>
                     {{else}}
                     {{#if isCancelled}}
                     <h4>Cancelled</h4>
                     {{else}}
                     <h4>Processing</h4>
+                    {{/if}}
                     {{/if}}
                     {{/if}}
                 </div>
@@ -63,8 +67,17 @@
                 </div>
                 {{#if isDelivered}}
                 <div class="order-cancel">
-                    <a class="success">Success</a>
+                    <a class="success">Order Completed</a>
                 </div>
+                {{#if isReturn}}
+                <div class="order-cancel">
+                    <a class="success text-danger">Return Processing</a>
+                </div>
+                {{else}}
+                <a data-url="{{id}}" class="btn btn-danger order-return mt-2 ">
+                    Return Order
+                </a>
+                {{/if}}
                 {{else}}
                 <div class="order-cancel">
                     {{#if isDelivered}}

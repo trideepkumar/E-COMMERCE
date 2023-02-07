@@ -5,6 +5,7 @@ const session = require('express-session');
 const adminController = require('../../controllers/adminController');
 const {uploadOptions} = require('../../config/multer')
 const adminAuth=require('../../middlewares/adminAuth')
+const order = require('../../model/order');
 
 
 
@@ -64,8 +65,11 @@ router.put('/updatecoupon/:id' , adminController.updateCoupon)
 
 router.get('/admin-order',adminController.adminOrder)
 
-
 router.put('/admin-order-cancel/:id' ,adminController.cancelOrder); 
+
+router.put('/admin-deliver-order/:id',adminController.deliverOrder)
+
+router.put('/admin-return-order/:id',adminController.returnOrder)
 
 
 //for session logout

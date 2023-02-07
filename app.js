@@ -91,6 +91,7 @@ app.use('/order' , orderRouter);
 
 
 
+
 //mongoose
 
 mongoose.set('strictQuery', true);
@@ -106,3 +107,9 @@ mongoose.connect(process.env.MONGO_URL)
     console.log(err);
     console.log('Server is down')
   })
+
+
+
+app.use((req,res,next)=>{
+  res.status(404).render('common-error')
+})

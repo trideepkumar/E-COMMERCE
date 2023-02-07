@@ -36,7 +36,11 @@
                 </div>
             </div>
             <p>{{message}}</p>
+            {{#if couponApplied}}
+            <p style="color: rgb(255, 0, 0); display:flex; justify-content:center; alig-items:center; background:rgb(255, 255, 255)" class="btn mb-3">{{couponMessage}}</p>
+            {{else}}
             <a href="/order/user-coupon" class="btn btn-payment   mb-3" style="background:white;">Apply Coupon</a>
+            {{/if}}
             <a class="btn btn-payment btn-cod bg-primary mb-3">Cash On Delivery</a>
             <a class="btn btn-razor bg-info mb-3">Razor pay</a>
             <a class="btn btn-paypal bg-success mb-3">paypal</a>
