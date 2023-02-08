@@ -29,6 +29,9 @@
                 </div>
                 <div class="order-payment-mode">
                     ORDER STATUS:
+                    {{#if isReturnStatus}}
+                    <h4>Returned</h4>
+                    {{else}}
                     {{#if isDelivered}}
                     <h4>Delivered</h4>
                     {{else}}
@@ -36,6 +39,7 @@
                     <h4>Cancelled</h4>
                     {{else}}
                     <h4>Processing</h4>
+                    {{/if}}
                     {{/if}}
                     {{/if}}
                 </div>
@@ -48,25 +52,30 @@
                     <h4>RS.{{totalAmount}}/-</h4>
                 </div>
                 {{#if isReturn}}
+                 <div class="order-return">
+                    <a class="btn btn-warning approve-return success" data-url="{{id}}">Approve Return</a>
+                </div>
+                 <div class="order-refund mt-2">
+                    <a class="btn btn-danger decline-return success" data-url="{{id}}">Decline Return</a>
+                </div>
                 {{#if isReturnStatus}}
-                   <div class="order-return">
-                    <a class="btn btn-warning approve-refund success" data-url="{{id}}" >Approve Refund</a>
-                </div>
-                {{else}}
-                <div class="order-return">
-                    <a class="btn btn-warning approve-return success" data-url="{{id}}" >Approve Return</a>
-                </div>
-                <div class="order-refund mt-2">
-                    <a class="btn btn-danger decline-return success" data-url="{{id}}" >Decline Return</a>
-                </div>
-                {{#if isDelivered}}
+                 <strong style="color: red;">ReturnSuccessfull</strong><br>
+                  <div class="order-return">
+                    <a class="btn btn-warning approve-refund success" data-url="{{id}}">Approve Refund</a>
+                </div> 
+                 {{#if isRefundStatus}}
+                  <strong style="color: red;">RefundSuccessfull</strong>
+               {{else}}
+               
+               
+               {{/if}}
+               {{else}}
+               
+                {{/if}}
+                {{/if}}
                 <div class="order-cancel">
-                    <a class="success">Order Completed Successfully!</a>
-                </div>
-                {{else}}
-                <div class="order-cancel">
-                    {{#if isDelivered}}
-                    <a class="success">Processed</a>
+                    {{#if isDelivered }}
+                    <a class="success">Delivered</a>
                     {{else}}
                     {{#if isCancelled}}
                     <a class=" " style="height:5rem; width:2rem; color:red; border-radius:10px">Cancelled</a>
@@ -80,9 +89,6 @@
                     {{/if}}
                     {{/if}}
                 </div>
-              {{/if}}
-                {{/if}}
-                {{/if}}
             </div>
             <br>
 

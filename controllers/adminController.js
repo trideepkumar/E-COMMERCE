@@ -8,6 +8,7 @@ const Order = require('../model/order');
 const puppeteer = require('puppeteer');
 const xlsx = require('xlsx')
 const Coupon = require('../model/coupon');
+const Razorpay = require('razorpay');
 
 
 
@@ -657,12 +658,55 @@ const returnOrder = async (req, res) => {
         const order = await Order.find({ id: id })
         // console.log(order);
         console.log('1');
-        const cancelOrder = await Order.findOneAndUpdate({ _id: id }, {isReturnStatus : true }, { user: user });
+        const cancelOrder = await Order.findOneAndUpdate({ _id: id }, {isReturnStatus : true } ,{ user: user });
         console.log('2');
         res.json({ redirect: '/admin/admin-order' });
     } catch (err) {
         console.log(err);
     }
+}
+
+const refundOrder = async(req,res)=>{
+
+    console.log('return order works!')
+    const id = req.params.id
+    // console.log(req.params.id);
+    const user = await User.find({ Email: req.session.email })
+    // console.log(user);
+    console.log(id);
+    try {
+        const {id} = req.params ;
+        const order = await Order.find({_id: id});
+        // console.log(order);
+
+        let instance = new Razorpay({ key_id: 'rzp_test_yoGhuX06uJTTMD' , key_secret: 'dPnKGP0F5TByLAAyNJ3a04SA' })
+  
+        instance.payments.refund(order[0].paymentId , {
+            amount: order[0].totalAmount * 100,
+            speed: "normal",
+        })
+  
+        order[0].isRefundStatus = true;
+        await order[0].save();
+        res.json({ redirect: '/admin/admin-order' });
+  
+
+
+
+
+
+
+
+        // const order = await Order.find({ id: id })
+        // console.log(order);
+        // console.log('1');
+        // const cancelOrder = await Order.findOneAndUpdate({ _id: id }, {isRefundStatus : true }, { user: user });
+        // console.log('2');
+      
+    } catch (err) {
+        console.log(err);
+    }  
+
 }
 
 module.exports = {
@@ -693,6 +737,7 @@ module.exports = {
     adminOrder,
     cancelOrder,
     deliverOrder,
-    returnOrder
+    returnOrder,
+    refundOrder
 }
 

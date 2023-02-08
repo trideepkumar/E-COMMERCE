@@ -11,6 +11,9 @@ if (orderContainer) {
         }else  if (e.target.classList.contains('approve-return')) {
             console.log('return approval  works');
             returnOrder(e)
+        } else  if (e.target.classList.contains('approve-refund')) {
+            console.log('refund approval  works');
+             refundOrder(e)
         }
     })
 }
@@ -61,6 +64,26 @@ async function returnOrder(e) {
     const url = `http://localhost:4000/admin/admin-return-order/${orderId}`;
     console.log(url)
     alert('are you sure to take return the order ?')
+    const res = await fetch(url, {
+        method: 'PUT',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    const redirectPath = await res.json()
+    window.location.href = redirectPath.redirect
+}
+
+
+async function refundOrder(e) {
+    console.log('refund fnctn works!!');
+    const orderId = e.target.dataset.url
+    // console.log(orderId)
+    const url = `http://localhost:4000/admin/admin-refund-order/${orderId}`;
+    console.log(url)
+    alert('are you sure to refund the payment ?')
     const res = await fetch(url, {
         method: 'PUT',
         credentials: "same-origin",

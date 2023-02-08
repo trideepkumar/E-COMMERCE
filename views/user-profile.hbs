@@ -78,6 +78,18 @@
                     Return Order
                 </a>
                 {{/if}}
+                 {{#if isRefundStatus}}
+                 <div class="order-cancel">
+                    <a class="success text-danger">Return Successfull</a>
+                </div>
+                <div class="order-cancel">
+                    <a class="success text-danger">Refund Successfull</a>
+                </div>
+                {{!-- {{else}}
+                <a data-url="{{id}}" class="btn btn-danger order-return mt-2 ">
+                    Return Order
+                </a> --}}
+                {{/if}}
                 {{else}}
                 <div class="order-cancel">
                     {{#if isDelivered}}

@@ -71,6 +71,12 @@ router.put('/admin-deliver-order/:id',adminController.deliverOrder)
 
 router.put('/admin-return-order/:id',adminController.returnOrder)
 
+//for refund 
+router.put('/admin-refund-order/:id',adminController.refundOrder)
+
+
+
+
 
 //for session logout
 router.get('/logout',adminController.getLogout);

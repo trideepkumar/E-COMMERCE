@@ -4,7 +4,7 @@ const Product = require('../model/product');
 const order = require('../model/order');
 const Razorpay = require('razorpay');
 const Coupon = require('../model/coupon');
-const { LogarithmicScale } = require('chart.js');
+// const { LogarithmicScale } = require('chart.js');
 
 
 const getOrder = async (req, res) => {
@@ -85,7 +85,8 @@ const createOrder = async (req, res) => {
             await newOrder.save();
             console.log('order saved in db!!!');
             res.json({ redirect: '/order/success' });
-        } else if (paymentMethod === 'Razor pay') {
+        } 
+        else if (paymentMethod === 'Razor pay') {
             console.log('if razor pay controller wroks!!')
             let instance = new Razorpay({
                 key_id: 'rzp_test_yoGhuX06uJTTMD',
@@ -107,16 +108,17 @@ const createOrder = async (req, res) => {
                 totalAmount: totalAmount,
                 orderStatus: orderStatus,
                 paymentMode: paymentMethod,
-            })
+                orderId: myOrder.id
+            });
             // console.log(newOrder);
             user[0].cart.splice(0);
             // console.log(user[0].cart);
             await user[0].save({ validateBeforeSave: false });
             //saving the order
             await newOrder.save();
-            console.log('order saved in db!!!');
+            // console.log('order saved in db!!!');
             res.json({ myOrder: myOrder, redirect: '/order/success' })
-            console.log('end');
+            // console.log('end');
         }
     } catch (e) {
         console.log(e);
@@ -248,6 +250,36 @@ const  returnOrder = async(req,res)=>{
    
 }
 
+const razorPaySuccess = async (req,res) => {
+    const {id} = req.params ;
+    const {paymentId} = req.body ;
+
+    console.log(id);
+    console.log(paymentId);
+    // console.log(req.body.paymentId);
+
+    try {
+        console.log('try works!');``
+        console.log(req.session.user._id);
+        const user = await User.find({_id:req.session.user_id});
+        const order = await Order.find({orderId: id});
+        console.log(order[0]);
+        order[0].paymentId = req.body.paymentId ;
+    
+    
+    
+   //    removing the cart items
+    //    await user[0].cart.splice(0);
+    //    await user[0].save({validateBeforeSave: false});
+       await order[0].save({validateBeforeSave:false});
+       res.json({redirect: '/order/success'});
+
+    }  catch(e) {
+        console.log(e);
+    }
+
+}
+
 
 module.exports = {
     getOrder,
@@ -259,5 +291,5 @@ module.exports = {
     getCouponpage,
     applyCoupon,
     returnOrder,
-    
+    razorPaySuccess, 
 }

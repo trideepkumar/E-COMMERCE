@@ -52,11 +52,13 @@ async function createOrder(e) {
         // console.log(redirectPath.myOrder)
         var options = {
             key: "rzp_test_yoGhuX06uJTTMD", // Key ID
-            amount: redirectPath.myOrder.amount * 100, // Amount is in paise
+            amount: redirectPath.myOrder.amount * 100, 
             currency: "INR",
-            order_id: redirectPath.myOrder.id, //This is a sample Order ID
-            handler: function() {
-                window.location.href = redirectPath.redirect;
+            order_id: redirectPath.myOrder.id, 
+            handler: function(response) {
+                // window.location.href = redirectPath.redirect;
+                 console.log(response.razorpay_payment_id);
+                orderSuccess(response.razorpay_order_id ,response.razorpay_payment_id); 
             }
         };
         console.log(options);
@@ -68,12 +70,27 @@ async function createOrder(e) {
         console.log('Y');
         window.location.href = redirectPath.redirect; 
     }
-      
-
-
-
-
 }
+
+//for payment success
+async function orderSuccess(orderId , paymentId) {
+    const url = `/order/success/${orderId}`;
+    const res = await fetch(url, {
+                    method: 'PUT',
+                    credentials: "same-origin",
+                    headers: {
+                    'Content-Type' : 'application/json'
+                    } ,
+                    body: JSON.stringify({
+                        paymentId : paymentId
+                    })
+                });
+
+    const redirectPath = await res.json();
+    window.location.href = redirectPath.redirect;
+    
+}
+
 
 //for cancelleing order
 

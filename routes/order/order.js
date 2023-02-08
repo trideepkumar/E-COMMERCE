@@ -14,6 +14,13 @@ router.post('/create',userAuth.isLoggedIn ,orderController.createOrder );
 
 router.get('/success',userAuth.isLoggedIn,orderController.orderSuccess)
 
+//for razor pay order success
+
+// razorpay success
+router.put('/success/:id' , orderController.razorPaySuccess );
+
+
+
 router.get('/user-order',userAuth.isLoggedIn,orderController.getUserOrder)
 
 router.put('/cancel/:id' ,orderController.cancelOrder); 

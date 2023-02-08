@@ -29,7 +29,7 @@ const orderSchema = new mongoose.Schema({
         }
     },
     user: {
-        type:mongoose.SchemaTypes.ObjectId,
+        type: mongoose.SchemaTypes.ObjectId,
         ref: "User",
         required: true
     },
@@ -43,9 +43,15 @@ const orderSchema = new mongoose.Schema({
                 type: Number
             }
         }
-    ],
+    ], 
+    orderId: {
+        type: String
+    },
+    paymentId: {
+        type: String
+    },
     totalAmount: {
-        type:Number,
+        type: Number,
         required: true
     },
     paymentMode: {
@@ -61,13 +67,17 @@ const orderSchema = new mongoose.Schema({
         default: false
     },
     isReturn: {
-        type: Boolean,  
-        default:false
-    },  
+        type: Boolean,
+        default: false
+    },
     isReturnStatus: {
-        type: Boolean,  
-        default:false
-    },  
+        type: Boolean,
+        default: false
+    },
+    isRefundStatus: {
+        type: Boolean,
+        default: false
+    },
     createdAt: {
         type: Date,
         default: Date.now()
@@ -77,7 +87,7 @@ const orderSchema = new mongoose.Schema({
     },
     paymentId: {
         type: String
-    } 
+    }
 })
 
 module.exports = mongoose.model('order', orderSchema)
