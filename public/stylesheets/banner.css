@@ -1,0 +1,16 @@
+.banner-head {
+    color:white;
+    margin-top: 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background: grey;
+    height: 8rem;
+    margin-left: 11rem;
+    width: 83%;
+}
+.add{
+    margin-left:55rem;
+    background: rgb(220, 220, 220);
+}

@@ -75,8 +75,13 @@ router.put('/admin-return-order/:id',adminController.returnOrder)
 router.put('/admin-refund-order/:id',adminController.refundOrder)
 
 
+///for banners
 
+router.get('/banner',adminController.getBanner)
 
+router.get('/add-banner', adminController.getAddBanner)
+
+router.post('/post-add-banner',adminController.addBanner)
 
 //for session logout
 router.get('/logout',adminController.getLogout);

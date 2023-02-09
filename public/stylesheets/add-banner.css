@@ -1,0 +1,15 @@
+form{
+    margin-top:40rem;
+    height:45rem;
+}
+label{
+    color: black;
+}
+.sub{
+    color:white;
+    background:grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}

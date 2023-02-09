@@ -1,0 +1,59 @@
+{{> admin-nav}}
+<link rel="stylesheet" href="/stylesheets/banner.css">
+<div class="banner-head">
+    <h1>Banners</h1>
+    <a class="btn add" href="/admin/add-banner"> Add banner</a>
+</div>
+<div class="container vh-100% mx-auto" style="margin-top:0rem;">
+    <table class="table align-middle text-center mt-4" id="datatable">
+        <thead class="bg-dark text-light">
+            <tr>
+                <th style="width: 40.66%; padding-left:10rem;">Banner Name</th>
+                <th style="width: 35.66%">Caption</th>
+                <th style="width: 10.66%">Image</th>
+                {{!-- <th style="width: 16.66%">Set Default</th>
+                <th style="width: 16.66%">Action</th> --}}
+            </tr>
+        </thead>
+        {{#each banner}}
+        <tbody>
+
+            <tr>
+                <td>
+                    <p class="mx-0 mb-0 d-flex justify-content-start ">{{this.name}}</p>
+                </td>
+
+                <td>
+                    <p class="mx-0 mb-0 d-flex justify-content-start ">{{this.caption}}</p>
+                </td>
+
+                <td>
+                    <div class="d-flex align-items-center">
+                        <img src="	http://localhost:4000/uploads/{{this.image.[0]}}" alt="image"
+                            style="width: 45px; height: 45px; display: block; margin-left: auto; margin-right: auto;"
+                            class="mx-0 mb-0 d-flex justify-content-start rounded" />
+                    </div>
+                </td>
+                {{!-- <td>
+                    <p class="mx-0 mb-0 d-flex justify-content-start ">{{setDefault}}</p>
+                </td>
+                <td>
+                    <p class="mx-0 mb-0 d-flex justify-content-start ">{{Delete}}</p>
+                </td> --}}
+                {{!-- <td class="text-center ">
+                    <ul class="mx-4 d-flex flex-row" style="list-style-type: none;">
+                        <li class="px-lg-3">
+                            <a class="mx-0 mb-0 d-flex justify-content-start btn btn-success "
+                                href="/admin/edit/product/{{_id}}">Edit</a>
+                        </li>
+                        <li class="px-lg-3">
+                            <a class="mx-0 mb-0 d-flex justify-content-start btn btn-danger delete-prod"
+                                data-url={{_id}}>Delete</a>
+                        </li>
+                    </ul>
+                </td> --}}
+            </tr>
+        </tbody>
+        {{/each}}
+    </table>
+</div>

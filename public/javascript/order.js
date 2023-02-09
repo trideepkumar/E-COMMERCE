@@ -61,6 +61,7 @@ async function createOrder(e) {
                 orderSuccess(response.razorpay_order_id ,response.razorpay_payment_id); 
             }
         };
+        console.log('options are here');
         console.log(options);
         var rzp1 = new Razorpay(options);
         rzp1.open();

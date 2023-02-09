@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="/public/stylesheets/add-banner.css">
+{{> admin-nav}}
+ <div class="col-12 my-5">
+      <form action="/admin/post-add-banner" method="post" >
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" name="name" class="form-control" id="name" required>
+        </div>
+        <div class="mb-3">
+          <label for="caption" class="form-label">Caption</label>
+          <input type="text" name="caption" class="form-control" id="caption" required>
+        </div>
+        <div class="input-group mb-3">
+          <label class="form-label" for="image">Upload Image</label>
+          <input multiple type="file" name="image" class="form-control" id="image" required>  
+        </div>
+        <div class="d-flex justify-content-end mt-5">
+          {{!-- <button type="submit" class="btn btn-primary">Add Banner</button> --}}
+          <input type="submit" value="Submit" class="btn sub">
+        </div>
+      </form>
+    </div>

@@ -1,0 +1,102 @@
+body{
+    background: white;
+}
+
+form{
+    background: rgb(252, 252, 252);
+    height:64rem;
+    width: 50rem;
+}
+label{
+    color:black;
+}
+input{
+    width: 100%;  
+    border: solid;
+    border-width: 1px;
+    border-color: black; 
+    color: black;
+}
+.sub{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    background: gray;
+}
+
+
+section{
+    margin-top: 10rem;
+    padding-top: 2rem;
+    background: rgb(228, 231, 233);
+    width:85%;
+    height:24rem;
+    margin-left:3rem;
+    border-radius: 10px;
+    padding-left: 2rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    
+}
+.flex{
+    display: flex;  
+}
+.main{
+    width:20%;
+    position:fixed;
+}
+
+
+section:hover{
+    background-color: rgb(192, 240, 240);
+    color: black;
+    border-style: solid;
+    border-width:1px;
+    border-color: black ;
+}
+
+
+
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    height:4rem;
+    background-color: bisque;
+    margin-left: 3rem;
+    margin-top: 2rem;
+    border-radius:5px;
+    text-decoration:none;
+    color:black;
+}
+.button:hover{
+   background-color: lemonchiffon;
+   border-style: solid;
+   border-width:1px;
+   border-color: black ;
+}
+.button2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    height:4rem;
+    background-color: bisque;
+    margin-left: 3rem;
+    margin-top:0.3rem;
+    border-radius:5px;
+    text-decoration:none;
+    color:black;
+}
+.button2:hover{
+   background-color: lemonchiffon;
+   border-style: solid;
+   border-width:1px;
+   border-color: black ;
+}
+
+h1{
+    color: grey;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}

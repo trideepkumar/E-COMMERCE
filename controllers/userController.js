@@ -95,8 +95,41 @@ const getProfile = async (req,res)=>{
 }
 
 
+//for edit-user profile
 
+ const geteditProfile = async(req,res)=>{
+    const user = await User.find({ Email: req.session.email });
+    console.log(user);
+    res.render('edit-user-profile', {user: user[0]})
+ }
+ 
+const  updateUser = async(req,res)=>{
+    console.log(' user update working started!!');
+    console.log(req.params);
+    const id = req.params.id
+    console.log(id);
+    console.log(req.body);
+    // console.log(req.files);
+    // console.log(id);
+    try {
+        // console.log(id);
+        // console.log(req.body.firstname)
+        // console.log(req.body.lastname)
+        // console.log(req.body.email);
+        // console.log(req.body.phone);
+        console.log('work update!!');
+        await User.findByIdAndUpdate(id, req.body);
+        console.log(' user edit updated ?');
+        return res.redirect('/user/edit-profile')
+    } catch (e) {
+        console.log(e);
+    }
 
+}
+
+const getAbout = async(req,res)=>{
+    res.render('about')
+}
 
 module.exports = {
     registerUser,
@@ -106,5 +139,7 @@ module.exports = {
     getUserProducts,
     getSingleProduct,
     getProfile ,
-    
+    geteditProfile,
+    updateUser,
+    getAbout
 }

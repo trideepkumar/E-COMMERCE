@@ -79,6 +79,10 @@ app.engine(
   })
 );
 
+//for partial setup
+
+hbs.create().getPartials().then(function(partials) {})
+
 //route set up for user
 
 app.use('/user', userRoute);

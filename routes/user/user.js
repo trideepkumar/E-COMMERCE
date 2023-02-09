@@ -7,6 +7,7 @@ const { emitKeypressEvents } = require('readline');
 const session = require('express-session');
 const userController = require('../../controllers/userController')
 const userAuth = require('../../middlewares/userAuth');
+const Banner = require('../../model/banner');
 
 // const adminAuth = require('../../middlewares/adminAuth');
 
@@ -33,8 +34,10 @@ router.get('/signin',userAuth.isLoggedOut,userAuth.isLoggedOut, (req, res) => {
 })
 
 
-router.get('/home', userAuth.isLoggedIn,(req, res) => {
-    res.render('home')
+router.get('/home', userAuth.isLoggedIn, async(req, res) => {
+    const banner=await Banner.find({})
+    console.log(banner);
+    res.render('home',{banner:banner})
 })
 
 //for session logout
@@ -88,9 +91,13 @@ router.post('/signin', async (req, res) => {
 
 router.get('/profile',userController.getProfile)
 
+router.get('/edit-profile', userController.geteditProfile)
 
+//for editing profile
 
+router.post('/edit-user/:id',userController.updateUser)
 
+router.get('/about',userController.getAbout)
 
 
 

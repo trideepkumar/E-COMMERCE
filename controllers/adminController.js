@@ -9,6 +9,7 @@ const puppeteer = require('puppeteer');
 const xlsx = require('xlsx')
 const Coupon = require('../model/coupon');
 const Razorpay = require('razorpay');
+const Banner = require('../model/banner');
 
 
 
@@ -55,8 +56,6 @@ const getadminDash = async (req, res) => {
 
 }
 
-
-
 //for chart
 
 const getchartData = async (req, res) => {
@@ -95,7 +94,6 @@ const getchartData = async (req, res) => {
 }
 
 //for pdf and excel download
-
 
 const getreportDownload = async (req, res) => {
 
@@ -222,7 +220,6 @@ const generateTable = async (req, res) => {
     res.render('productPdf', { productSale: productSale })
 }
 
-
 const excelTable = async (req, res) => {
     const productSale = await Order.aggregate(
         [
@@ -277,12 +274,10 @@ const excelTable = async (req, res) => {
     // res.render('excel',{productSale:productSale})
 }
 
-
 const adminUser = async (req, res) => {
     const user = await Register.find();
     res.render('admin-user', { users: user })
 }
-
 
 const getLogout = (req, res) => {
     req.session.destroy();
@@ -338,7 +333,6 @@ const getAddCategory = (req, res) => {
     res.render('add-category')
 }
 
-
 const getAddproducts = async (req, res) => {
 
     const category = await Category.find({});
@@ -373,7 +367,6 @@ const addCategory = async (req, res) => {
         }
     }
 }
-
 
 const deleteCategory = async (req, res) => {
     const id = req.params.id
@@ -420,7 +413,6 @@ const getProducts = async (req, res) => {
     }
     res.render('admin-products', { productList })
 }
-
 
 const addProducts = async (req, res) => {
     try {
@@ -474,7 +466,6 @@ const addProducts = async (req, res) => {
 
 }
 
-
 const editProduct = async (req, res) => {
     try {
         // console.log("edit product working started!");
@@ -524,7 +515,6 @@ const updateProduct = async (req, res) => {
 
 
 }
-
 
 const deleteProduct = async (req, res) => {
     console.log("delete working started!")
@@ -599,7 +589,6 @@ const updateCoupon = async (req, res) => {
     }
 }
 
-
 //for admin orders
 const adminOrder = async (req, res) => {
     console.log('admin-order works!!')
@@ -611,7 +600,6 @@ const adminOrder = async (req, res) => {
         res.render('admin-order', { order: orders })
     }
 }
-
 
 const cancelOrder = async (req, res) => {
     console.log('cancel order works!')
@@ -630,7 +618,6 @@ const cancelOrder = async (req, res) => {
 
 }
 
-
 const deliverOrder = async (req, res) => {
     console.log('deliver order works!')
     const id = req.params.id
@@ -647,7 +634,6 @@ const deliverOrder = async (req, res) => {
     }
 }
 
-
 const returnOrder = async (req, res) => {
     console.log('return order works!')
     const id = req.params.id
@@ -658,7 +644,7 @@ const returnOrder = async (req, res) => {
         const order = await Order.find({ id: id })
         // console.log(order);
         console.log('1');
-        const cancelOrder = await Order.findOneAndUpdate({ _id: id }, {isReturnStatus : true } ,{ user: user });
+        const cancelOrder = await Order.findOneAndUpdate({ _id: id }, { isReturnStatus: true }, { user: user });
         console.log('2');
         res.json({ redirect: '/admin/admin-order' });
     } catch (err) {
@@ -666,7 +652,7 @@ const returnOrder = async (req, res) => {
     }
 }
 
-const refundOrder = async(req,res)=>{
+const refundOrder = async (req, res) => {
 
     console.log('return order works!')
     const id = req.params.id
@@ -675,21 +661,21 @@ const refundOrder = async(req,res)=>{
     // console.log(user);
     console.log(id);
     try {
-        const {id} = req.params ;
-        const order = await Order.find({_id: id});
+        const { id } = req.params;
+        const order = await Order.find({ _id: id });
         // console.log(order);
+        console.log('workkk pay id');
+        // let instance = new Razorpay({ key_id: 'rzp_test_yoGhuX06uJTTMD', key_secret: 'dPnKGP0F5TByLAAyNJ3a04SA' })
+        // console.log('22');
+        // instance.payments.refund(order[0].paymentId, {
+        //     amount: order[0].totalAmount * 100,
+        //     speed: "normal",
+        // })
 
-        let instance = new Razorpay({ key_id: 'rzp_test_yoGhuX06uJTTMD' , key_secret: 'dPnKGP0F5TByLAAyNJ3a04SA' })
-  
-        instance.payments.refund(order[0].paymentId , {
-            amount: order[0].totalAmount * 100,
-            speed: "normal",
-        })
-  
         order[0].isRefundStatus = true;
         await order[0].save();
         res.json({ redirect: '/admin/admin-order' });
-  
+
 
 
 
@@ -702,12 +688,73 @@ const refundOrder = async(req,res)=>{
         // console.log('1');
         // const cancelOrder = await Order.findOneAndUpdate({ _id: id }, {isRefundStatus : true }, { user: user });
         // console.log('2');
-      
+
     } catch (err) {
         console.log(err);
-    }  
+    }
 
 }
+
+const getBanner = async (req, res) => {
+    try {
+        const banner = await Banner.find({});
+        res.render('banner', { banner: banner });
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+const getAddBanner = async (req, res) => {
+    res.render('add-banner')
+}
+
+const addBanner = async (req, res) => {
+    try {
+        // console.log('addBanner works ..');
+        // console.log(req.body.name);
+        // console.log(req.body.caption);
+        // console.log(req.body.image);
+        // console.log(req.body);
+        // // const images = []
+        let images = req.body.image
+    
+        // const banner = await Banner.find({})
+
+        for (key in req.files) {
+            console.log('for in works');
+            const imPath = req.files[key].path
+            const path = imPath.substring(imPath.lastIndexOf("/") - 8);
+            // images.push(req.files[key].path);
+            images.push(path);
+        }
+
+        const banner = await Banner.create({
+            name: req.body.name,
+            caption: req.body.caption,
+            image:images
+        });
+
+        console.log(banner);
+        await banner.save();
+        let image = images
+
+        console.log(image);
+
+        image.forEach(() => {
+            image.splice(1);
+        })
+
+        console.log(image);
+
+
+        res.render('banner',{banner:banner});
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+
+
 
 module.exports = {
     getLogin,
@@ -738,6 +785,9 @@ module.exports = {
     cancelOrder,
     deliverOrder,
     returnOrder,
-    refundOrder
+    refundOrder,
+    getBanner,
+    getAddBanner,
+    addBanner
 }
 
