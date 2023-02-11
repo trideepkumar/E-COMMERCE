@@ -3,16 +3,8 @@ const User = require('../model/user')
 
 const getCart = async (req, res) => {
     try {
-        // console.log(req.session.email);
-        // const id = req.params.id
-        // console.log(id);
-        // find the user and user's cart
+       
         const user = await User.find({ Email: req.session.email }).populate('cart.id');
-        // console.log(cart.id);
-        // console.log(user);
-        // console.log('getcart works');
-        // console.log(user[0]);
-        // console.log(user[0].cart);
         if (user[0].cart.length === 0) {
             res.render('empty-cart');
         }
@@ -34,8 +26,23 @@ const getCart = async (req, res) => {
             }, 0);
             console.log(totalPrice);
 
+           //for default button select
+            const radioButtons = [
+                { value: 'Option 1', label: 'Option 1', isSelected: false },
+                { value: 'Option 2', label: 'Option 2', isSelected: false },
+                { value: 'Option 3', label: 'Option 3', isSelected: false }
+              ];
 
-            res.render('cart', { cartItems: cartItems, totalPrice: totalPrice })
+              const selectedValue = 'Option 1';
+
+              radioButtons.forEach(button => {
+                if (button.value === selectedValue) {
+                  button.isSelected = true;
+                }
+              });
+
+
+            res.render('cart', { cartItems: cartItems, totalPrice: totalPrice,  radioButtons  })
 
         }
     } catch (err) {

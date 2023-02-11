@@ -1,0 +1,26 @@
+body{
+    background: white;
+}
+form{
+    margin-top: 0px;
+    background: rgb(226, 226, 226);
+    height: auto;
+    width: 40%;
+}
+input{
+    width: 100%;
+    color: black;
+}
+label{
+    color: grey;
+}
+.sub{
+    background: rgb(181, 181, 181);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+section{
+  background:rgb(228, 231, 233);
+  height:auto;
+}

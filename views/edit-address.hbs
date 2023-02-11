@@ -1,0 +1,80 @@
+
+
+
+
+
+    {{> user-nav}}
+<link rel="stylesheet" href="/public//stylesheets/edit-user-profile.css">
+<div class="flex">
+    <div class="main">
+        <section class=" ">
+            <p style="display: flex; justify-content:center; align-items:center; text-decoration:underline">User Address
+            </p>
+            <div class="add" style="color:rgb(0, 0, 0); ">
+
+               Housename: <p>{{user.address.[0].houseName}}</p>
+                City: <p>{{user.address.[0].city}}</p>
+                Pin: <p>{{user.address.[0].postalCode}}</p>
+                State:<p>{{user.address.[0].state}}</p>
+                Country:<p>{{user.address.[0].coutry}}</p>
+                {{!-- <p>{{id}}</p> --}}
+
+            </div>
+        </section>
+        <div class="buttons" style="margin-top:2rem;">
+            <div class="btn button ">
+                <a href="/order/user-order">my orders</a>
+            </div>
+            <div class="btn button2 ">
+                <a href="/user/edit-profile">Change Profile </a>
+            </div>
+            <div class="btn button2 ">
+                <a href="/user/products">Change Password</a>
+            </div>
+            <div class="btn button2 ">
+                <a href="/user/products">LogOut</a>
+            </div>
+        </div>
+    </div>
+
+
+ <link rel="stylesheet" href="/public/stylesheets/edit-address.css">
+ <form class="adress-update-form" action="/user/edit-address/{{user.id}}" method="post">
+        <h1 class="address-heading " style="margin-left: 10rem;">Update Address</h1>
+        <div class="row-one">
+            <div class="input-container">
+                <label for="houseName"> House Name</label>
+                <input type="text" name="houseName" id="houseName" value="{{user.address.[0].houseName}}" required>
+            </div>
+            <div class="input-container">
+                <label for="city"> City</label>
+                <input type="text" name="city" id="city" value="{{user.address.[0].city}}" required>
+            </div>
+             <div class="input-container">
+                <label for="postalCode">Postalcode</label>
+                <input type="postalCode" name="postalCode" id="postalCode" value="{{user.address.[0].postalCode}}" required>
+            </div>
+             <div class="input-container">
+                <label for="state">City</label>
+                <input type="state" name="state" id="state" value="{{user.address.[0].state}}" required>
+            </div>
+             <div class="input-container">
+                <label for="coutry">Country</label>
+                <input type="coutry" name="coutry" id="coutry" value="{{user.address.[0].coutry}}" required>
+            </div>
+            {{!-- <div class="input-container">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" value="{{user.Email}}" required>
+            </div>
+            <div class="input-container">
+                <label for="phone">Phone</label>
+                <input type="number" name="phone" id="phone" value="{{user.phone}}" required>
+            </div> --}}
+        </div>
+        {{!-- <div class="error text-danger">{{message}}</div> --}}
+        <div class="row-one">
+            <input type="submit" value="Update" class="btn-address sub mt-5" id="btn-address-update"
+                data-url="{{user.id}}">
+        </div>
+     
+ 

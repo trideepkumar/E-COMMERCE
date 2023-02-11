@@ -66,7 +66,7 @@ router.post('/signin', async (req, res) => {
             console.log('try works!!');
             const match = await bcrypt.compare(req.body.password,user.password)
             console.log(match);
-            if (!match) {
+            if (!match && !user.password) {
                 console.log('1');
                 return res.render('signin', { message2: 'invalid password entered!' })
             } else if (user.Action == false) {
@@ -93,12 +93,21 @@ router.get('/profile',userController.getProfile)
 
 router.get('/edit-profile', userController.geteditProfile)
 
+router.get('/edit-address',userController.geteditAddress)
+
+router.delete('/address-delete/:id',userController.deleteAddress)
+
 //for editing profile
 
 router.post('/edit-user/:id',userController.updateUser)
 
+router.post('/edit-address/:id',userController.updateAddress)
+
 router.get('/about',userController.getAbout)
 
+//for order view page 
+
+router.get('/order-product-view-page', userController.getorderProductview)
 
 
 module.exports = router

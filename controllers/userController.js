@@ -99,7 +99,7 @@ const getProfile = async (req,res)=>{
 
  const geteditProfile = async(req,res)=>{
     const user = await User.find({ Email: req.session.email });
-    console.log(user);
+    // console.log(user);
     res.render('edit-user-profile', {user: user[0]})
  }
  
@@ -117,6 +117,7 @@ const  updateUser = async(req,res)=>{
         // console.log(req.body.lastname)
         // console.log(req.body.email);
         // console.log(req.body.phone);
+        
         console.log('work update!!');
         await User.findByIdAndUpdate(id, req.body);
         console.log(' user edit updated ?');
@@ -131,6 +132,64 @@ const getAbout = async(req,res)=>{
     res.render('about')
 }
 
+const geteditAddress = async(req,res)=>{
+    const user = await User.find({Email:req.session.email})
+    // console.log(user);
+    // console.log(user[0].address);
+    res.render('edit-address',{user:user[0]})
+}
+
+const updateAddress = async(req,res)=>{
+    console.log('update address working');
+    const id = req.params.id    
+    try{
+        const user = await User.find({ Email: req.session.email });
+        // console.log(user[0].address);
+        // console.log(req.body)
+        const { houseName , phone , city , postalCode , state, coutry } = req.body ;
+        user[0].address[0].houseName = req.body.houseName;
+        user[0].address[0].city = req.body.city;
+        user[0].address[0].postalCode = req.body.postalCode;
+        user[0].address[0].state =req.body.state;
+        user[0].address[0].coutry = req.body.coutry;
+        await user[0].save();
+        console.log('update finished');
+        return res.redirect('/user/edit-address')
+    }catch(err){
+        console.log(err);
+    }
+} 
+
+const deleteAddress = async(req,res)=>{
+    console.log('delete works started!!');
+    const { id } = req.params;
+    try {
+        const user = await User.find({ Email: req.session.email });
+        console.log(user);
+        const index = user[0].address.findIndex((item) => {
+            return item._id.valueOf() === id ;
+        })
+        // console.log(index);
+        user[0].address.splice(index , 1);
+        await user[0].save();
+    console.log('saved');
+        res.json({redirect: `/order`});
+    } catch (err) {
+        console.log(err);
+    }
+
+}
+//for order view product
+
+const getorderProductview = async(req,res)=>{
+    // console.log('productvi');
+    const user = await User.find({ Email: req.session.email }).populate('order.id');
+    console.log(user);
+    const orderItems = order.orderItems;
+    console.log(orderItems);
+    res.render('user-order-view-page', {cartItems: cartItems})
+}
+
 module.exports = {
     registerUser,
     generateOtp,
@@ -141,5 +200,9 @@ module.exports = {
     getProfile ,
     geteditProfile,
     updateUser,
-    getAbout
+    getAbout,
+    geteditAddress,
+    updateAddress,
+    deleteAddress,
+    getorderProductview
 }

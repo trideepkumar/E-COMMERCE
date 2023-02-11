@@ -54,8 +54,8 @@ input{
     padding-left: 2rem;
 }
 .add{ 
-        display: grid;
-        justify-content:flex-start; 
+    margin-top:0rem;
+    display:flex;     
 }
 a.btn{
     width: 50rem;
@@ -73,3 +73,21 @@ a.btn{
     width: 20rem;
     margin-right:100rem;
 }
+ 
+/* for delete icon */ 
+.delete-icon {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    /* display: inline-block; */
+    font-size: 20px;
+    color: #f59595;
+    width:4rem;
+    height:3rem;
+    
+  }
+  
+  .delete-icon:hover {
+    color:#f44336;
+   
+  }

@@ -6,22 +6,25 @@
     <section class="adress-details-card-container">
         <h5>current address:</h5>
         <div class="add">
-            {{#each user.address}}
-            <input type="radio" id="address" name="address" value="{{_id}}">
+            {{#each user.address}}<br>
+            <input type="radio" id="address" name="address" value="{{_id}}" {{#if this.isSelected}}checked{{/if}}><br>
             {{houseName}},
             {{phone}},
             {{city}} , {{pincode}}
             {{state}} , {{coutry}}
+            <button class="delete-icon" data-url={{_id}}>
+                <i class="fa fa-trash"></i>
+            </button>
             {{/each}}
-            
+
         </div>
-        
+
     </section>
 
 
 
     <section class="order-page-right" style="background-color: antiquewhite;">
-       
+
         </div>
         <div class="order-summary">
             <div class="orders">
@@ -32,12 +35,13 @@
                 </div>
                 <div class="total-order-items">
                     <h3>Total Payable : Rs.<span style="color:#388e3c;" class="order-price">{{totalPrice}}</span></h3>
-              
+
                 </div>
             </div>
             <p>{{message}}</p>
             {{#if couponApplied}}
-            <p style="color: rgb(255, 0, 0); display:flex; justify-content:center; alig-items:center; background:rgb(255, 255, 255)" class="btn mb-3">{{couponMessage}}</p>
+            <p style="color: rgb(255, 0, 0); display:flex; justify-content:center; alig-items:center; background:rgb(255, 255, 255)"
+                class="btn mb-3">{{couponMessage}}</p>
             {{else}}
             <a href="/order/user-coupon" class="btn btn-payment   mb-3" style="background:white;">Apply Coupon</a>
             {{/if}}
@@ -49,7 +53,7 @@
     </section>
 
 
- 
+
 
     <section class="adress-form-container" id="adress-form">
         <form action="/order/address/{{user.id}}" method="POST" class="adress-form" id="order">
@@ -86,7 +90,7 @@
                 <input type="submit" value="Save" class="btn btn-success btn-address ">
             </div>
         </form>
-    </section> 
+    </section>
 
     <script src="/public/javascript/order.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>

@@ -13,7 +13,7 @@
 
 
 
-
+    {{!--
     <section class="userorder-container mt-5" id="order">
         <h1 style="display: flex; justify-content:center; align-items:center; color: #8AAAE5">MY ORDERS</h1><br>
         <hr>
@@ -52,25 +52,25 @@
                     <h4>RS.{{totalAmount}}/-</h4>
                 </div>
                 {{#if isReturn}}
-                 <div class="order-return">
+                <div class="order-return">
                     <a class="btn btn-warning approve-return success" data-url="{{id}}">Approve Return</a>
                 </div>
-                 <div class="order-refund mt-2">
+                <div class="order-refund mt-2">
                     <a class="btn btn-danger decline-return success" data-url="{{id}}">Decline Return</a>
                 </div>
                 {{#if isReturnStatus}}
-                 <strong style="color: red;">ReturnSuccessfull</strong><br>
-                  <div class="order-return">
+                <strong style="color: red;">ReturnSuccessfull</strong><br>
+                <div class="order-return">
                     <a class="btn btn-warning approve-refund success" data-url="{{id}}">Approve Refund</a>
-                </div> 
-                 {{#if isRefundStatus}}
-                  <strong style="color: red;">RefundSuccessfull</strong>
-               {{else}}
-               
-               
-               {{/if}}
-               {{else}}
-               
+                </div>
+                {{#if isRefundStatus}}
+                <strong style="color: red;">RefundSuccessfull</strong>
+                {{else}}
+
+
+                {{/if}}
+                {{else}}
+
                 {{/if}}
                 {{/if}}
                 <div class="order-cancel">
@@ -94,8 +94,119 @@
 
             {{/each}}
         </div>
-    </section>
+    </section> --}}
+
+
+    <div class="p-5" style="margin-left:22rem; margin-top:7rem; background:rgb(235, 235, 235); border-radius:2px;">
+
+        <table id="data-table" class="table table-striped" style="width:30%;">
+            <thead>
+                <tr>
+                    <th>PRODUCT VIEW</th>
+                    <th>ADDRESS</th>
+                    <th>ORDER STATUS</th>
+                    <th>PAYMENT METHOD</th>
+                    <th>TOTAL AMOUNT</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each order}}
+                <tr>
+                    <td><pclass=" product-view">{{orderItems.length}} items Ordered</p></td>
+                    <td> ADDRESS: <p>{{shippingInfo.houseName}}</p>
+                        PHONE: <p>{{shippingInfo.phone}}</p>
+                        PINCODE: <p> {{shippingInfo.postalCode}}</p>
+                        COUNTRY: <p>{{shippingInfo.city}},{{shippingInfo.state}} , {{shippingInfo.coutry}},
+                            ordered time:{{createdAt}}
+                        </p>
+                    </td>
+                    <td>
+                        <div class="order-payment-mode">
+                            {{#if isRefundStatus}}
+                            <p>Refund Successfull<p>
+                            {{/if}}
+                            {{#if isReturnStatus}}
+                            {{#if (eq isRefundStatus false)}}
+                            <p>Return Successfull</p>
+                            {{else}}
+                            {{/if}}
+                            {{else}}
+                            {{#if isReturn}}
+                            <p>Return submitted</p>
+                            {{else}}
+                            {{#if isCancelled}}
+                            <p>Cancelled</p>
+                            {{else}}
+                            {{#if isDelivered}}
+                            <p>Delivered Successfully</p>
+                            {{else}}
+                            {{/if}}
+                            {{/if}}
+                            {{/if}}
+                            {{/if}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="order-payment-status">
+
+                            <h4>{{paymentMode}}</h4>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="order-total">
+                            <h4>RS.{{totalAmount}}/-</h4>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="userorder-container">
+                            {{#if isRefundStatus}}
+                            <p href="">Refund Successfull</p>
+                            {{/if}}
+                            {{#if isReturnStatus}}
+                            {{#if (eq isRefundStatus false)}}
+                            <a href="">Return Successfull</a>
+                            <a data-url="{{id}}" class="btn btnnn  order-approve-refund-btn " id="deliverButton">Approve Refund</a> 
+                            {{else}}
+                            {{/if}}
+                            {{else}}
+                            {{#if isReturn}}
+                            <p >Return submitted</p>
+                             <a data-url="{{id}}" class="btn btnnn order-approve-return-btn " id="deliverButton">Approve Return</a> </a>
+                            {{else}}
+                            {{#if isCancelled}}
+                            <p>Cancelled</p>
+                            {{else}}
+                            {{#if isDelivered}}
+                            <p>Delivered Successfully</p>
+                            {{else}}
+                            {{#if (eq isDelivered false)}}
+                            {{#if (eq isRefundStatus false)}}
+                            <a data-url="{{id}}" class="btn btnnn order-deliver-btn " id="deliverButton">Deliver Order </a>
+                            {{else}}
+                            {{/if}}
+                            {{else}}
+                            {{/if}}
+                            {{/if}}
+                            {{/if}}
+                            {{/if}}
+                            {{/if}}
+
+                            {{!-- {{#if isCancelled}}
+                            <a class=" " style="height:5rem; width:2rem; color:red; border-radius:10px">Cancelled</a>
+                            {{else}}
+                            <a data-url="{{id}}" class="btn order-cancel-btn"> Cancel Order</a>
+                            {{/if}}
+                        </div> --}}
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+    </div>
 
 </div>
 
 <script src="/public/javascript/admin-order.js"></script>
+{{> datatable}}

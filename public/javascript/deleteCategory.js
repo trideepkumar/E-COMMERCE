@@ -3,8 +3,8 @@ let datatable = document.getElementById("datatable")
 if(datatable){
     console.log("table found by id?")
  datatable.addEventListener('click', (e)=>{
-    console.log("button click works")
-    console.log(e.target.classList.contains('delete-cat'))
+    // console.log("button click works")
+    // console.log(e.target.classList.contains('delete-cat'))
     if(e.target.classList.contains('delete-cat')){
         alert('are you sure ?')
         deleteCat(e)

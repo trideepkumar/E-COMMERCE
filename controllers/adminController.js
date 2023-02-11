@@ -605,12 +605,12 @@ const cancelOrder = async (req, res) => {
     console.log('cancel order works!')
     const id = req.params.id
     const user = await User.find({ Email: req.session.email })
-    console.log(user);
+    // console.log(user);
     // console.log(id);
     try {
         const order = await Order.find({ id: id })
-        console.log(order);
-        const cancelOrder = await Order.findOneAndUpdate({ _id: id }, { isCancelled: true }, { user: user });
+        // console.log(order);
+        const cancelOrder = await Order.findOneAndUpdate({ _id: id }, { isCancelled: true , isDelivered:false}, { user: user });
         res.json({ redirect: '/admin/admin-order' });
     } catch (err) {
         console.log(err);
@@ -671,7 +671,7 @@ const refundOrder = async (req, res) => {
         //     amount: order[0].totalAmount * 100,
         //     speed: "normal",
         // })
-
+        
         order[0].isRefundStatus = true;
         await order[0].save();
         res.json({ redirect: '/admin/admin-order' });

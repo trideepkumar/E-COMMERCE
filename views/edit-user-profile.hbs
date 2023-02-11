@@ -1,4 +1,5 @@
-{{!-- <link rel="stylesheet" href="/public/stylesheets/user-profile.css"> --}}
+{{!--
+<link rel="stylesheet" href="/public/stylesheets/user-profile.css"> --}}
 {{> user-nav}}
 <link rel="stylesheet" href="/public//stylesheets/edit-user-profile.css">
 <div class="flex">
@@ -7,12 +8,12 @@
             <p style="display: flex; justify-content:center; align-items:center; text-decoration:underline">User Profile
             </p>
             <div class="add" style="color:rgb(0, 0, 0);">
-                
+
                 NAME: <p>{{user.firstname}}{{user.lastname}}</p>
                 EMAIL: <p>{{user.Email}}</p>
                 PHONE: <p>{{user.phone}}</p>
                 {{!-- <p>{{id}}</p> --}}
-              
+
             </div>
         </section>
         <div class="buttons">
@@ -30,33 +31,34 @@
             </div>
         </div>
     </div>
-      
-                    
-                    <form  class="adress-update-form"  action="/user/edit-user/{{user.id}}" method="post">
-                        <h1 class="address-heading  ml-5 ">Update Your Profile</h1> 
-                        <div class="row-one">
-                            <div class="input-container">
-                                <label for="name"> first Name</label>
-                                <input type="text" name="firstname" id="firstname" value="{{user.firstname}}" required>
-                            </div>
-                            <div class="input-container">
-                                <label for="name"> last Name</label>
-                                <input type="text" name="lastname" id="lastname" value="{{user.lastname}}" required>
-                            </div>
-                            <div class="input-container">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" value="{{user.Email}}" required>
-                            </div>
-                             <div class="input-container">
-                                <label for="phone">Phone</label>
-                                <input type="number" name="phone" id="phone" value="{{user.phone}}" required>
-                            </div>
-                        </div>
-                        <div class="addr-error"></div>
-                        <div class="row-one">
-                            <input type="submit" value="Update" class="btn-address sub mt-5" 
-                            id="btn-address-update" data-url="{{user.id}}">
-                        </div>
-                    </form>
-                     
-             
+
+
+    <form class="adress-update-form" action="/user/edit-user/{{user.id}}" method="post">
+        <h1 class="address-heading  ml-5 ">Update Your Profile</h1>
+        <div class="row-one">
+            <div class="input-container">
+                <label for="name"> first Name</label>
+                <input type="text" name="firstname" id="firstname" value="{{user.firstname}}" required>
+            </div>
+            <div class="input-container">
+                <label for="name"> last Name</label>
+                <input type="text" name="lastname" id="lastname" value="{{user.lastname}}" required>
+            </div>
+            {{!-- <div class="input-container">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" value="{{user.Email}}" required>
+            </div>
+            <div class="input-container">
+                <label for="phone">Phone</label>
+                <input type="number" name="phone" id="phone" value="{{user.phone}}" required>
+            </div> --}}
+        </div>
+        {{!-- <div class="error text-danger">{{message}}</div> --}}
+        <div class="row-one">
+            <input type="submit" value="Update" class="btn-address sub mt-5" id="btn-address-update"
+                data-url="{{user.id}}">
+        </div>
+         <div class="row-one">
+            <a value="Update Address" href="/user/edit-address" class="btn sub mt-5">Update Adreess </a>
+        </div>
+    </form>

@@ -29,7 +29,7 @@
         </div>
     </div>
 
-    <section class="userorder-container mt-5" id="order">
+    {{!-- <section class="userorder-container mt-5" id="order">
         <h1 style="display: flex; justify-content:center; align-items:center; color: #8AAAE5">MY ORDERS</h1><br>
         <hr>
         <div class="one">
@@ -79,17 +79,13 @@
                     Return Order
                 </a>
                 {{/if}}
-                 {{#if isRefundStatus}}
-                 <div class="order-cancel">
+                {{#if isRefundStatus}}
+                <div class="order-cancel">
                     <a class="success text-danger">Return Successfull</a>
                 </div>
                 <div class="order-cancel">
                     <a class="success text-danger">Refund Successfull</a>
                 </div>
-                {{!-- {{else}}
-                <a data-url="{{id}}" class="btn btn-danger order-return mt-2 ">
-                    Return Order
-                </a> --}}
                 {{/if}}
                 {{else}}
                 <div class="order-cancel">
@@ -110,6 +106,117 @@
             <br>
             {{/each}}
         </div>
-    </section>
+    </section> --}}
+    <div class="p-5" style="margin-left:28rem; margin-top:10rem; background:rgb(235, 235, 235); border-radius:2px;">
+
+        <table id="data-table" class="table table-striped" style="width:30%;">
+            <thead>
+                <tr>
+                    <th>VIEW PRODUCT</th>
+                    <th>ADDRESS</th>
+                    <th>ORDER STATUS</th>
+                    <th>PAYMENT METHOD</th>
+                    <th>TOTAL AMOUNT</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each order}}
+                <tr>
+
+                    <td><a href="/user/order-product-view-page" class="btn btnnn">view product</a><p>{{orderItems.length}} items Ordered</p></td>
+                    <td> ADDRESS: <p>{{shippingInfo.houseName}}</p>
+                        PHONE: <p>{{shippingInfo.phone}}</p>
+                        PINCODE: <p> {{shippingInfo.postalCode}}</p>
+                        COUNTRY: <p>{{shippingInfo.city}},{{shippingInfo.state}} , {{shippingInfo.coutry}}</p>
+                        ORDERD TIME:{{createdAt}}
+                    </td>
+                    <td>
+                        <div class="order-payment-mode">
+                             {{#if isRefundStatus}}
+                            <a href="">Refund Successfull</a>
+                            {{/if}}
+                            {{#if isReturnStatus}}
+                            {{#if (eq isRefundStatus false)}}
+                            <a href="">Return Successfull</a>
+                            {{else}}
+                            {{/if}}
+                            {{else}}
+                            {{#if isReturn}}
+                            <a href="">Return submitted</a>
+                            {{else}}
+                            {{#if isCancelled}}
+                            <a href="#">Cancelled</a>
+                            {{else}}
+                            {{#if isDelivered}}
+                            <a class="success">Delivered Successfully</a>
+                            {{else}}
+                            {{/if}}
+                            {{/if}}
+                            {{/if}}
+                            {{/if}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="order-payment-status">
+
+                            <h4>{{paymentMode}}</h4>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="order-total">
+                            <h4>RS.{{totalAmount}}/-</h4>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="user-cancel-order">
+                             {{#if isRefundStatus}}
+                            <a href="">Refund Successfull</a>
+                            {{/if}}
+                             {{#if isReturnStatus}}
+                              {{#if (eq isRefundStatus false)}}
+                            <a href="">Return Successfull</a>
+                            {{else}}
+                            {{/if}}
+                            {{else}}
+                            {{#if isReturn}}
+                            <a href="">Return submitted</a>
+                            {{else}}
+                            {{#if isDelivered}}
+                            <a class="success">Delivered Successfully</a>
+                            <a data-url="{{id}}" class="btn btnnn  order-return-btn">Return Order</a>
+                            {{else}}
+                            {{#if (eq isCancelled false)}}
+                            {{#if (eq isRefundStatus false)}}
+                            <a data-url="{{id}}" class="btn  btnnn order-cancel-btn" id="cancelButton">Cancel Order </a>
+                            {{else}}
+                            {{/if}}
+                            {{else}}
+                            {{#if isCancelled}}
+                            <a href="#">Cancelled</a>
+                            {{else}}
+                           
+                            {{/if}}
+                            {{/if}}
+                            {{/if}}
+                            {{/if}}
+                            {{/if}}
+
+                            {{!-- {{#if isCancelled}}
+                            <a class=" " style="height:5rem; width:2rem; color:red; border-radius:10px">Cancelled</a>
+                            {{else}}
+                            <a data-url="{{id}}" class="btn order-cancel-btn"> Cancel Order</a>
+                            {{/if}}
+                        </div> --}}
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+
+
 </div>
 <script src="/javascript/order.js"></script>
+{{> datatable}}

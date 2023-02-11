@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="/public/stylesheets/order-product-view.css">
+{{> user-nav}}
+{{#each cartItems}}
+<div class="card-body order-product-view">
+
+    <div class="row d-flex justify-content-between  " style="background-color:rgb(212, 214, 214) ; border-radius:10px;">
+        <div class="col-md-2  ">
+            <img src="{{id.image.[0]}}" class="img-fluid" alt="product images">
+        </div>
+        <div class="col-md-2   pt-5">
+            <div>
+                <p class="lead text-muted mb-4  pb-2">Name:{{id.name}}</p>
+                <p class="lead fw-normal mb-0">RS.{{id.price}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+
+<a href="/order/user-order" class="btn goback">go back</a>

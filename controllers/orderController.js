@@ -131,15 +131,15 @@ const orderSuccess = async (req, res) => {
 }
 
 const getUserOrder = async (req, res) => {
-    console.log('getUser order works!');
-    console.log(req.session.userid);
+    // console.log('getUser order works!');
+    // console.log(req.session.userid);
     const user = await User.find({ Email: req.session.email });
     // console.log(user[0]._id);
     const userId = user[0]._id
-    console.log(userId);
+    // console.log(userId);
 
     const orders = await Order.find({ user: userId }).populate('orderItems.id');
-    console.log(orders)
+    // console.log(orders)
     // const user = await User.find({ Email: req.session.email })
     // console.log(user)
     if (orders.length == 0) {
@@ -156,9 +156,11 @@ const cancelOrder = async (req, res) => {
     console.log(user);
     // console.log(id);
     try {
-        const order = await Order.find({ id: id })
+        const order = await Order.find({_id: id })
+        console.log('1');
         console.log(order);
-        const cancelOrder = await Order.findOneAndUpdate({ _id: id }, { isCancelled: true }, { user: user });
+        console.log('1');
+        await Order.findOneAndUpdate({ _id: id }, { isCancelled: true , isDelivered:false }, { user: user });
         res.json({ redirect: '/order/user-order' });
     } catch (err) {
         console.log(err);
@@ -242,6 +244,7 @@ const  returnOrder = async(req,res)=>{
         const {id} = req.params ;
         const order = await Order.find({_id: id});
         order[0].isReturn = true ;
+        order[0].isDelivered = false;
         await order[0].save();
         res.json({redirect: '/order/user-order'});
      } catch(e) {

@@ -26,6 +26,7 @@ const userRoute = require('./routes/user/user');
 const adminRoute= require('./routes/admin/admin');
 const cartController = require('./routes/cart/cart');
 const orderRouter = require('./routes/order/order');
+const { helpers } = require('handlebars');
 //for session
 
 //session to db
@@ -75,7 +76,8 @@ app.engine(
     defaultLayout: "layout",
     layoutDir: __dirname + "/views/layout/",
     partialsDir: __dirname + "/views/partials",
-    handlebars: allowInsecurePrototypeAccess(Handlebars)
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+    helpers:require('./config/helpers')
   })
 );
 

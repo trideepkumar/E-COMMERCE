@@ -1,0 +1,19 @@
+.order-product-view{
+    margin-top: 5rem;
+    margin-left: 35rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.card-body{
+   width: 50%;
+}
+.goback{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    margin-left: 55rem;
+    background-color: rgb(167, 167, 167);
+}

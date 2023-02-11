@@ -93,14 +93,19 @@ async function orderSuccess(orderId , paymentId) {
 }
 
 
+
+
+//for hiding the cancel button
+
+
 //for cancelleing order
 
-let orderContainer = document.querySelector('.userorder-container');
+let orderContainer = document.querySelector('.user-cancel-order');
 if (orderContainer) {
     orderContainer.addEventListener('click', (e) => {
         if (e.target.classList.contains('order-cancel-btn')) {
             cancelOrder(e);
-        }else if(e.target.classList.contains('order-return')){
+        }else if(e.target.classList.contains('order-return-btn')){
             console.log('order-return btn works');
             returnOrder(e);
         }
@@ -120,10 +125,9 @@ async function cancelOrder(e) {
         headers: {
             'Content-Type': 'application/json'
         }
-    });
-
+    })
     const redirectPath = await res.json()
-    window.location.href = redirectPath.redirect
+    window.location.href = redirectPath.redirect;
 }
 
 async function  returnOrder(e){
@@ -143,3 +147,33 @@ async function  returnOrder(e){
     const redirectPath = await res.json()
     window.location.href = redirectPath.redirect
 }
+
+let deleteAddress = document.querySelector('.adress-details-card-container');
+
+if(deleteAddress){
+   deleteAddress.addEventListener('click', (e)=>{
+    if(e.target.classList.contains('delete-icon')){
+        console.log('delete fe');
+        deletingAddr(e)
+    }
+   })
+}
+
+async function   deletingAddr(e){
+    console.log('return order function works!!');
+    const deleteId = e.target.dataset.url
+    const url = `http://localhost:4000/user/address-delete/${deleteId}`;
+    console.log(url);
+    alert('are you sure to delete the Address ? ')
+    const res = await fetch(url, {
+        method: 'DELETE',
+        credentials: "same-origin",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const redirectPath = await res.json()
+    window.location.href = redirectPath.redirect
+}
+
+
