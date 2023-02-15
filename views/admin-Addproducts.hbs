@@ -1,6 +1,6 @@
 <script defer src="https://cdn.crop.guide/loader/l.js?c=RJGPKF"></script>
 {{> admin-nav}}
-<form style="height:67rem; width:60rem" method="post" action="/admin/add-products" enctype="multipart/form-data">
+<form style="height:72rem; width:60rem" method="post" action="/admin/add-products" enctype="multipart/form-data" id="form">
   <h3 style="margin-top:10px;"> ADD PRODUCTS</h3>
   <div class="form">
     <label for="exampleFormControlInput1" style="color: black;">Product name</label>
@@ -32,5 +32,7 @@
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="description"></textarea>
   </div>
   <button type="submit" class="btn btn-grey mt-4 btn-success " >Add</button>
-  <div  class="error">{{message}}</div>
-</form>
+  <div  class="error" style=" margin-top:2rem">{{errorMessage}}</div>
+ </form>
+
+<script src="/public/javascript/add-products.js"></script>

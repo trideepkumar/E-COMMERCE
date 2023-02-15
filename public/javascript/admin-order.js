@@ -117,7 +117,7 @@ async function refundOrder(e) {
 //     // console.log(orderId)
 //     const url = `http://localhost:4000/admin/order-product-view/${orderId}`;
 //     console.log(url)
-//     alert('fuck you')
+//     alert('are you sure to open the produt view ')
 
 //     const res = await fetch(url, {
 //         method: 'get',

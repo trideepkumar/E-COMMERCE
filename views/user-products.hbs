@@ -1,24 +1,34 @@
-<link rel="stylesheet" href="/stylesheets/product.css">
+<link rel="stylesheet" href="/public/stylesheets/products.css">
 {{> user-nav}}
+
+<div class="search">
+    <input type="text" name="search" id="search-input" autocomplete="off" value="{{search}}">
+    <input type="submit" value="Search" class="btn-srch">
+</div>
+
+
 <div class="prod" style="padding-left:6rem;">
-{{#each productList}}
-<div class="card col-md-3  ml-5  mb-0   " style="width: 22rem; margin-top:7rem;  height:44rem  ">
-    <img class="card-img-top" src="{{image.[0]}}" alt="Card image cap" style="width: 15rem; height:15rem  ">
-    <div class="card-body">
-        <h5 class="card-title">{{name}}</h5>
-        <p class="card-text"> RS.{{price}}</p>
+    {{#each productList}}
+    <div class="card col-md-3  ml-5  mb-0   " style="width: 22rem; margin-top:3rem;  height:44rem  ">
+        <img class="card-img-top" src="{{image.[0]}}" alt="Card image cap" style="width: 15rem; height:15rem  ">
+        <div class="card-body">
+            <h5 class="card-title">{{name}}</h5>
+            <p class="card-text"> RS.{{price}}</p>
+        </div>
+        <ul>
+            <li class="list-group-item">Category:{{category.name}}</li>
+            <li class="list-group-item">About:{{description}}</li>
+        </ul>
+        <div class="card-body">
+            <a href="/user/singleProduct/{{_id}}" class="card-link btn mb-2"
+                style="background-color:rgb(171, 195, 216); width:20rem ">view details</a><br>
+            <a href="/cart" class="card-link btn mb-2" style="background-color:rgb(162, 235, 248); width:20rem ">Go to
+                cart</a><br>
+        </div>
     </div>
-    <ul>
-        <li class="list-group-item">Category:{{category.name}}</li>
-        <li class="list-group-item">About:{{description}}</li>
-    </ul>
-    <div class="card-body">
-        <a href="/user/singleProduct/{{_id}}" class="card-link btn mb-2" style="background-color:rgb(171, 195, 216); width:20rem ">view details</a><br>
-                <a href="/cart" class="card-link btn mb-2" style="background-color:rgb(162, 235, 248); width:20rem ">Go to cart</a><br>
-
-    </div>
+    {{/each}}
 </div>
-{{/each}}
 </div>
-
 {{> user-foot}}
+
+<script src="/public/javascript/user-products.js"></script>

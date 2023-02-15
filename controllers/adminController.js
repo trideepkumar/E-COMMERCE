@@ -297,7 +297,7 @@ const actionBlock = async (req, res) => {
                     Action: false
                 }
             })
-            return res.json({
+            res.json({
                 redirect: 'http://localhost:4000/admin/admin-user'
             })
         } catch (error) {
@@ -435,11 +435,25 @@ const addProducts = async (req, res) => {
         })
         console.log(product)
         console.log(req.body)
-        if (existing.length == 0) {
-            if (images.length < 3) {
+            if (product.name.length < 3) {
+                return res.render('admin-Addproducts',{errorMessage:'Please enter a valid name'})
+            }
+            else if (!product.category) {
+                return res.render('admin-Addproducts',{errorMessage:'Category must be included'})
+            }else if (!product.price) {
+                return res.render('admin-Addproducts',{errorMessage:'Price must be included'})
+            } 
+            else if (images.length < 3) {
                 console.log('image not satisfied')
-                return res.redirect('/admin/add-products')
-            } else {
+                return res.render('admin-Addproducts',{errorMessage:'Minimum 4 images should be uploaded'})
+            }else if (!images) {
+                console.log('image not satisfied')
+                return res.render('admin-Addproducts',{errorMessage:'Ooops! This image file is not supported!'})
+            }
+            else if (!product.description && product.description < 5) {
+                return res.render('admin-Addproducts',{errorMessage:'Valid description must be included'})
+            } 
+             else {
                 try {
                     console.log('save entered')
                     product = await Product.create({
@@ -455,11 +469,6 @@ const addProducts = async (req, res) => {
                     return res.redirect('/admin/add-products')
                 }
             }
-        } else {
-            console.log('not working');
-            return res.redirect('/admin/add-products')
-
-        }
     } catch (error) {
         console.log(error)
     }

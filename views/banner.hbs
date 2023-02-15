@@ -1,11 +1,26 @@
 {{> admin-nav}}
+
+<div class="main-container">
+    <aside class="aside " style="position: fixed; margin: top 5rem; background:rgb(246, 246, 246)">
+        <a href="/admin/admin-dash" class="admin-dash p-5 mt-5"><i class="fa-sharp fa-solid fa-table-columns"> &nbsp; </i> Dashboard</a>
+        <a href="/admin/category" class="admin-dash p-5"><i class="fa-solid fa-user">&nbsp;  </i> Category</a>
+        <a href="/admin/products" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-bag-shopping">&nbsp; </i>Products</a>
+        <a href="/admin/coupons" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip">&nbsp;  </i>Coupons</a>
+        <a href="/admin/admin-order" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-calendar">&nbsp;  </i>Orders</a>
+        <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"> &nbsp; </i>Users</a>
+        <a href="/admin/banner" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"> &nbsp; </i>Banners</a>
+        <a href="/admin/logout" class="logout-button" style="background: rgb(238, 224, 224); color:red">Logout</a>
+    </aside>
+</div>
+
 <link rel="stylesheet" href="/stylesheets/banner.css">
-<div class="banner-head">
+<div class="main-banner" style="margin-left:20rem">
+<div class="banner-head" style="background: white; color:black;">
     <h1>Banners</h1>
     <a class="btn add" href="/admin/add-banner"> Add banner</a>
 </div>
-<div class="container vh-100% mx-auto" style="margin-top:0rem;">
-    <table class="table align-middle text-center mt-4" id="datatable">
+<div class="container vh-100% mx-auto" style="margin-top:0rem">
+    <table class="table align-middle text-center mt-4" id="datatable" style="">
         <thead class="bg-dark text-light">
             <tr>
                 <th style="width: 40.66%; padding-left:10rem;">Banner Name</th>
@@ -56,4 +71,5 @@
         </tbody>
         {{/each}}
     </table>
+</div>
 </div>

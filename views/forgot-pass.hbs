@@ -1,0 +1,27 @@
+{{> user-nav}}
+
+<div id="container" class="py-5">
+    <div>
+        <form  action="/user/forgot-pass" method="post" style="background:white;">
+            <h4 class="mt-5 mb-4" style="margin-left:5rem;">Enter your phone number</h4>
+            <div class="row mb-4 pt-4 ">
+                <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter Your number">
+            </div>
+            <div class="row mb-3 " style="margin-left: 12rem;">
+                <input type="submit" id="submit" class="btn btn-success" value="Submit"
+                    style="display: flex; justify-content:center; align-items:center">
+            </div>
+            <div class="row px-auto">
+                <b style="line-height:2rem; margin-left:10rem;" id="err" class="text-danger">{{message}}</b>
+            </div>
+    </div>
+</div>
+</div>
+
+<style>
+    body {
+        background: rgb(188, 217, 226);
+    }
+</style>
+
+<link rel="stylesheet" href="/stylesheets/signin.css">

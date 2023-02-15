@@ -1,13 +1,26 @@
+{{>admin-nav}}
 
+<div class="main-container">
+    <aside class="aside " style="position: fixed; margin: top 5rem; background:rgb(246, 246, 246)">
+        <a href="/admin/admin-dash" class="admin-dash p-5 mt-5"><i class="fa-sharp fa-solid fa-table-columns"> &nbsp; </i> Dashboard</a>
+        <a href="/admin/category" class="admin-dash p-5"><i class="fa-solid fa-user">&nbsp;  </i> Category</a>
+        <a href="/admin/products" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-bag-shopping">&nbsp; </i>Products</a>
+        <a href="/admin/coupons" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip">&nbsp;  </i>Coupons</a>
+        <a href="/admin/admin-order" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-calendar">&nbsp;  </i>Orders</a>
+        <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"> &nbsp; </i>Users</a>
+        <a href="/admin/banner" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"> &nbsp; </i>Banners</a>
+        <a href="/admin/logout" class="logout-button" style="background: rgb(238, 224, 224); color:red">Logout</a>
+    </aside>
+</div>
 
-<div class="container mx-auto d-flex justify-content-between  " style=" height:8rem">
+<div class="container mx-auto d-flex justify-content-between  " style=" height:8rem;">
     <h1 class=""  style="margin-top: 8rem;">Products List</h1>
     <div class="">
         <a class="btn btn-success  " href="/admin/add-products"  style="margin-top:8rem;">Add Product</a>
     </div>
 </div>
 <div class="container vh-100% mx-auto"  style="margin-top: 7rem;">
-    <table class="table align-middle text-center mt-4" id="datatable">
+    <table class="table align-middle text-center mt-4" id="datatable" style=" margin-left:12rem">
         <thead class="bg-dark text-light">
             <tr>
                 <th style="width: 16.66%">Product</th>
@@ -24,7 +37,7 @@
                 <td>
                     <p class="mx-0 mb-0 d-flex justify-content-start ">{{name}}</p>
                 </td>
-                <td class="mx-0 mb-0 d-flex justify-content-start ">{{price}}</td>
+                <td class="mx-0 mb-0 d-flex justify-content-start ">₹ {{price}}</td>
 
                 <td>
                     <div class="d-flex align-items-center">

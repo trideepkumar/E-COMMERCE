@@ -1,0 +1,40 @@
+form {
+    background: red;
+    height: 2rem;
+    width: 2rem;
+}
+
+.search {
+    margin-top:5rem;
+    background: whitesmoke;
+    height: 5rem;
+    margin-bottom: 0px;
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 5px;
+    border:snow;
+    border-color: white;
+}
+input:hover{
+    border:snow;
+    border-color: rgb(255, 255, 255);
+}
+input:active{
+    border:snow;
+    border-color: rgb(255, 255, 255);
+}
+
+
+.btn-srch{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left:0px;
+    width: 10rem;
+    
+}
+.btn-srch:hover{
+    border: solid;
+    border-color: rgb(255, 255, 255);
+}

@@ -1,16 +1,20 @@
 
 {{> admin-nav}}
 <div class="main-container">
-<aside class="aside" style="padding-top: 5rem;">
-    <a href="/admin/admin-dash" class="admin-dash p-5" ><i class="fa-solid fa-table-columns"></i>dashboard</a>
-    <a href="/admin/category" class="admin-dash p-5"><i class="fa-solid fa-user"></i>categories</a>
-    <a href="/admin/products" class="admin-dash p-5"><i class="fa-solid fa-bag-shopping"></i>products</a>
-    <a href="" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"></i></i>coupons</a>
-    <a href="/admin/admin-order" class="admin-dash p-5"><i class="fa-solid fa-cart-flatbed-suitcase"></i>orders</a>
-    <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"></i>users</a>
-       <a href="/admin/logout" class="logout-button">logout</a>
-</aside>
-<section class="container " style="padding-top: 10rem;">
+<div class="main-container">
+    <aside class="aside " style="position: fixed; margin: top 5rem; background:rgb(246, 246, 246)">
+        <a href="/admin/admin-dash" class="admin-dash p-5 mt-5"><i class="fa-sharp fa-solid fa-table-columns"> &nbsp; </i> Dashboard</a>
+        <a href="/admin/category" class="admin-dash p-5"><i class="fa-solid fa-user">&nbsp;  </i> Category</a>
+        <a href="/admin/products" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-bag-shopping">&nbsp; </i>Products</a>
+        <a href="/admin/coupons" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip">&nbsp;  </i>Coupons</a>
+        <a href="/admin/admin-order" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-calendar">&nbsp;  </i>Orders</a>
+        <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"> &nbsp; </i>Users</a>
+        <a href="/admin/banner" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"> &nbsp; </i>Banners</a>
+        <a href="/admin/logout" class="logout-button" style="background: rgb(238, 224, 224); color:red">Logout</a>
+    </aside>
+</div>
+<section class="container " style="padding-top: 10rem; margin-left:22rem;">
+  <h1 style="margin-left: 40rem;">USERS</h1><hr>
     <div class="row">
       <div class="col-12 table-overflow">
         <table id="datatable" class="table table-striped">

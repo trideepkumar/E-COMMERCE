@@ -1,0 +1,26 @@
+{{> user-nav}}
+
+<div id="container" class="py-5">
+
+    <div>
+        <form id="otp" action="/user/change-pass" method="post">
+            <h3 class="mt-5 mb-4 ">Enter New Password</h3>
+            <div class="row mb-4">
+                <h6 class="text-dark">Enter Your Password</h6>
+                <input type="text" id="password1" name="password1" class="form-control" placeholder="Enter New Password">
+            </div>
+            <div class="row mb-4">
+                <h6 class="text-dark">Re-Enter Your Password</h6>
+                <input type="text" id="password2" name="password2" class="form-control" placeholder="Re-enter New Password">
+            </div>
+            <div class="row mb-3">
+                <input type="submit" id="submit" class="btn btn-success" value="Submit">
+            </div>
+            <div class="row px-auto">
+                <b style="line-height:2rem" id="err" class="text-danger">{{message}}</b>
+            </div>
+    </div>
+</div>
+</div>
+
+<link rel="stylesheet" href="/stylesheets/signin.css">

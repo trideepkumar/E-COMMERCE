@@ -1,5 +1,5 @@
 body {
-    background: rgb(194, 192, 192);
+    
     width: 100vw;
 }
 
@@ -27,19 +27,19 @@ body {
     padding-bottom: 5rem;
     border-width: 0px;
     border-radius: 15px;
-    transition: transform 1.8s;
-    box-shadow: 6px 15px 2px 2px rgb(183, 183, 183);
+    transition: transform 2s;
+    box-shadow: 1px 1px 1px 1px rgb(183, 183, 183);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .box:hover {
     border-radius: 15%;
-    border-color:#ccfd39;
-    border-width: 3px;
+    border-color:#b9b9b9;
+    
     /* transform: scale(1.1); */
     transform: scale(1.05);
     /* border-color: rgb(255, 255, 255); */
-    background: #ebeaea;
+    background: #ffffff;
 }
 
 .chart {
@@ -50,7 +50,7 @@ body {
 }
 
 .download {
-    background-color: rgb(182, 223, 184);
+    background-color: rgb(109, 242, 116);
     height: 3.5rem;
     margin-left: 10rem;
 }
@@ -68,3 +68,5 @@ body {
     height: 1rem;
     margin-top: 7rem;
 }
+
+

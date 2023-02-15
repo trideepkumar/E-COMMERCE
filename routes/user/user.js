@@ -109,5 +109,20 @@ router.get('/about',userController.getAbout)
 
 router.get('/order-product-view-page', userController.getorderProductview)
 
+router.get('/forgot-pass',userController.getForgotpass)
+
+router.post('/forgot-pass', userController.phoneverification,userController.generateOtp)
+
+router.get('/forgot-otp',userController.getForgototp)
+
+router.post('/forgot-otp',userController.forgototpVerification)
+
+router.get('/change-pass', userController.changePassword)
+
+router.post('/change-pass',userController.changePasswordpost)
+
+//for searching products
+
+router.post('/search',userController.searchProducts)
 
 module.exports = router
