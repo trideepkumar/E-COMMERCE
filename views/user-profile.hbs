@@ -15,7 +15,7 @@
         </section>
         <div class="buttons log">
             <div class="btn button ">
-                <a href="/order/user-order">my orders</a>
+                <a href="/order/user-order">My Orders</a>
             </div>
             <div class="btn button2 ">
                 <a href="/user/edit-profile">Change Profile </a>
@@ -107,9 +107,10 @@
             {{/each}}
         </div>
     </section> --}}
-    <div class="p-5" style="margin-left:28rem; margin-top:10rem; background:rgb(235, 235, 235); border-radius:2px;">
+    <div class="p-5"
+        style="margin-left:28rem; margin-top:3rem; height:100vh; background:rgb(235, 235, 235); border-radius:2px;">
 
-        <table id="data-table" class="table table-striped" style="width:30%;">
+        <table id="data-table" class="table table-striped" style="width:110rem; color:black; ">
             <thead>
                 <tr>
                     <th>VIEW PRODUCT</th>
@@ -124,17 +125,19 @@
                 {{#each order}}
                 <tr>
 
-                    <td><a href="/user/order-product-view-page" class="btn btnnn">view product</a>
+                    <td>
+                        {{!-- <a href="/user/order-product-view-page" class="btn btnnn">view product</a> --}}
                         <p>{{orderItems.length}} items Ordered</p>
                     </td>
                     <td> ADDRESS: <p>{{shippingInfo.houseName}}</p>
                         PHONE: <p>{{shippingInfo.phone}}</p>
                         PINCODE: <p> {{shippingInfo.postalCode}}</p>
                         COUNTRY: <p>{{shippingInfo.city}},{{shippingInfo.state}} , {{shippingInfo.coutry}}</p>
-                        ORDERD TIME:{{createdAt}}
+                        ORDERD TIME:&nbsp;{{newDAte}}
                     </td>
                     <td>
                         <div class="order-payment-mode">
+                            
                             {{#if isRefundStatus}}
                             <a href="">Refund Successfull</a>
                             {{/if}}
@@ -153,6 +156,10 @@
                             {{#if isDelivered}}
                             <a class="success">Delivered Successfully</a>
                             {{else}}
+                            {{#if (eq isDelivered false)}}
+                            <a class="success">Order Processed</a>
+                            {{else}}
+                            {{/if}}
                             {{/if}}
                             {{/if}}
                             {{/if}}
@@ -172,6 +179,7 @@
                     </td>
                     <td>
                         <div class="user-cancel-order">
+                            
                             {{#if isRefundStatus}}
                             <a href="">Refund Successfull</a>
                             {{/if}}
@@ -180,7 +188,7 @@
                             <a href="">Return Successfull</a>
                             {{else}}
                             {{/if}}
-                            
+
                             {{else}}
                             {{#if isReturn}}
                             <a href="">Return submitted</a>
@@ -198,7 +206,8 @@
                             {{#if isCancelled}}
                             <a href="#">Cancelled</a>
                             {{else}}
-
+                           
+                            
                             {{/if}}
                             {{/if}}
                             {{/if}}

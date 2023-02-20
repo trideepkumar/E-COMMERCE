@@ -16,7 +16,7 @@ router.get('/admin-dash',adminAuth.isLoggedIn,adminController.getadminDash );
 //for chart 
 router.get('/chart',adminAuth.isLoggedIn,adminController.getchartData)
 
-router.get('/generateTable',adminAuth.isLoggedIn,adminController.generateTable)
+router.get('/generateTable',adminController.generateTable)
 
 router.get('/report-Download',adminAuth.isLoggedIn,adminController.getreportDownload)
 

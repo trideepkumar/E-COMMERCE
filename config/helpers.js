@@ -3,5 +3,12 @@ module.exports ={
         if(a == b){
             return true
         }
+     },
+
+     gt : function (a,b) {
+        if(a < b){
+            return true
+        }
      }
 }
+

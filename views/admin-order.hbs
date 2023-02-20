@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="/public/stylesheets/admin-order.css">
+<link rel="stylesheet" href="/public/stylesheets/admin-dash.css">
+
 {{> admin-nav}}
 <div class="main-container log">
    <aside class="aside " style="position: fixed; margin: top 5rem; background:rgb(246, 246, 246)">
@@ -9,7 +11,7 @@
         <a href="/admin/admin-order" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-calendar">&nbsp;  </i>Orders</a>
         <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"> &nbsp; </i>Users</a>
         <a href="/admin/banner" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"> &nbsp; </i>Banners</a>
-        <a href="/admin/logout" class="logout-button logout" style="background: rgb(238, 224, 224); color:red">Logout</a>
+        <a href="/admin/logout" class="logout-button logout" style="background: rgb(238, 224, 224); color:red"><i class="fa-solid fa-power-off"></i>Logout</a>
     </aside>
 </div>
 
@@ -99,9 +101,9 @@
     </section> --}}
 
 
-    <div class="p-5" style="margin-left:22rem; margin-top:7rem; background:rgb(191, 231, 237); border-radius:2px;">
+    <div class="p-5" style="margin-left:20rem; margin-top:6rem; background:rgb(218, 218, 218); border-radius:2px;">
 
-        <table id="data-table" class="table table-striped" style="width:30%;">
+        <table id="data-table" class="table " style="width:30%;">
             <thead>
                 <tr>
                     <th>PRODUCT VIEW</th>
@@ -119,9 +121,8 @@
                     <td> ADDRESS: <p>{{shippingInfo.houseName}}</p>
                         PHONE: <p>{{shippingInfo.phone}}</p>
                         PINCODE: <p> {{shippingInfo.postalCode}}</p>
-                        COUNTRY: <p>{{shippingInfo.city}},{{shippingInfo.state}} , {{shippingInfo.coutry}},
-                            ordered time:{{createdAt}}
-                        </p>
+                        COUNTRY: <p>{{shippingInfo.city}},{{shippingInfo.state}} , {{shippingInfo.coutry}},</p>
+                        ORDERD TIME:<p>&nbsp;{{newDAte}}</p>
                     </td>
                     <td>
                         <div class="order-payment-mode">

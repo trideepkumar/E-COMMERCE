@@ -11,7 +11,7 @@ if(cartCard) {
         else if(e.target.classList.contains('quantity-minus')) {
             decrementQuantity(e);
         }    
-        else if(e.target.classList.contains('delete-btn')) {
+        else if(e.target.classList.contains('delete')) {
             deleteCart(e);
         }
     })
@@ -47,6 +47,12 @@ async function incrementQuantity(e) {
 async function decrementQuantity(e) {
     console.log('decrement fetch works!!');
     const productId = e.target.dataset.url;
+
+    const quantElem = e.target.parentNode.querySelector('#quant');
+    const quantText = quantElem.textContent;
+    // const quantValue = parseInt(quantText.match(/\d+(\.\d+)?/)[0]);
+    console.log(quantText)
+
     console.log(productId);
     const url = `http://localhost:4000/cart/qty-minus/${productId}` ;
     console.log(url);
@@ -55,7 +61,8 @@ async function decrementQuantity(e) {
                     credentials: "same-origin",
                     headers: {
                     'Content-Type' : 'application/json'
-                    }
+                    },
+                    body: JSON.stringify({quant:quantText})
                 });
                 
     const redirectPath = await res.json();

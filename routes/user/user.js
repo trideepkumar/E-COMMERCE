@@ -46,15 +46,15 @@ router.get('/logout',userAuth.isLoggedIn, (req, res) => {
     res.render('signin');
 });
 
-router.get('/products',userAuth.isLoggedIn, userController.getUserProducts)
+router.get('/products', userController.getUserProducts)
 
 router.get('/singleProduct/:id',userAuth.isLoggedIn, userController.getSingleProduct)
 
 
 
-router.post('/signup',userAuth.isLoggedIn, userController.registerUser, userController.generateOtp)
+router.post('/signup',userAuth.isLoggedOut,userController.registerUser, userController.generateOtp)
 
-router.post('/otp',userAuth.isLoggedIn, userController.checkOtp)
+router.post('/otp',userAuth.isLoggedOut, userController.checkOtp)
 
 
 router.post('/signin', async (req, res) => {
@@ -103,7 +103,7 @@ router.post('/edit-user/:id',userAuth.isLoggedIn,userController.updateUser)
 
 router.post('/edit-address/:id',userAuth.isLoggedIn,userController.updateAddress)
 
-router.get('/about',userAuth.isLoggedIn,userController.getAbout)
+router.get('/about',userController.getAbout)
 
 //for order view page 
 

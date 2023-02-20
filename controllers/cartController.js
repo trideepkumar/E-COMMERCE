@@ -15,9 +15,9 @@ const getCart = async (req, res) => {
            console.log(cartItems);
            console.log('here');
              const totalPrice = cartItems.reduce((total, item) => {
-                const itemPrice = Number(item.id.price);
+                const itemPrice = item.id.price;
                 console.log(itemPrice);
-               const itemQuantity = Number(item.quantity);
+               const itemQuantity = item.quantity;
                console.log(itemQuantity);
                 return total + (item.quantity * item.id.price)
             }, 0);
@@ -108,11 +108,37 @@ const decrement = async (req, res) => {
     console.log('decrement works!!');
     const { id } = req.params;
     try {
+        console.log('try start');
+        console.log(req.body.quant);
+       
+        console.log('above');
         const user = await User.find({ Email: req.session.email });
-        console.log(user);
-        const index = user[0].cart.findIndex((item) => { return item.id.valueOf() === `${id}` });
-        user[0].cart[index].quantity = user[0].cart[index].quantity - 1;
+        // console.log(user);
+        if(req.body.quant > 1){
+            const index = user[0].cart.findIndex((item) => { return item.id.valueOf() === `${id}` });
+            user[0].cart[index].quantity = user[0].cart[index].quantity - 1;
+        }else{
+            const index = user[0].cart.findIndex((item) => { return item.id.valueOf() === `${id}` });
+            user[0].cart.splice(index, 1); 
+           
+        }
+       
+        const cartItems = user[0].cart;
+        //    console.log(cartItems);
+        //    console.log('here');
+             const totalPrice = cartItems.reduce((total, item) => {
+                const itemPrice = Number(item.id.price);
+                // console.log(itemPrice);
+               const itemQuantity = item.quantity;
+               console.log(itemQuantity);
+                return total + (item.quantity * item.id.price)
+            }, 0);
+            // console.log(totalPrice);
+
+            
+
         await user[0].save();
+
         res.json({ redirect: '/cart' });
     } catch (e) {
         console.log(e);

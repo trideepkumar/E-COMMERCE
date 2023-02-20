@@ -54,7 +54,7 @@ const sendOtp = (otp, number) => {
 }
 
 const checkOtp = async (req, res) => {
-
+     console.log('checking otp works and saving');
     //   console.log(otp)
     //   console.log(req.body.otp)
     //   console.log(req.session.user)

@@ -139,32 +139,33 @@ const getUserOrder = async (req, res) => {
     // console.log(userId);
 
     const orders = await Order.find({ user: userId }).sort({'createdAt': -1}).populate('orderItems.id');
-    // console.log(orders)
+    console.log(orders)
     // const user = await User.find({ Email: req.session.email })
     // console.log(user)
 
-   
-orders.forEach(order => {
-    const date = new Date(order.createdAt);
-    const formattedDate = date.toLocaleDateString(); // customize this as per your requirements
-    const formattedTime = date.toLocaleTimeString(); // customize this as per your requirements
-  
-    // display the formatted date and time on the order view page
-    // you can replace this with code that adds the formatted date and time to the DOM
-    console.log(`${formattedDate} ${formattedTime}`);
-   
-    console.log('logged');
-    const newDAte  =  `${formattedDate} ${formattedTime}`
-    console.log(newDAte);
-  });
+    //for sorting aggregate
 
-  
+    // const orders = await Order.aggregate([
+    //     { $match: { user: userId } },
+    //     { $sort: { 'createdAt': -1 } },
+    //     { $lookup: { from: 'orderItems', localField: 'orderItems.id', foreignField: '_id', as: 'orderItems' } }
+    //   ]);
+    //   console.log(orders);
+   
+    orders.forEach(order => {
+        const date = new Date(order.createdAt);
+        const formattedDate = date.toLocaleDateString(); // customize this as per your requirements
+        const formattedTime = date.toLocaleTimeString(); // customize this as per your requirements
+        const newDate = `${formattedDate} ${formattedTime}`;
+        order.newDAte = newDate;
+    });
 
     if (orders.length == 0) {
-        res.render('user-order-empty')
+        res.render('user-order-empty');
     } else {
-        res.render('user-profile', { order: orders, id: req.session.id, user: user })
+        res.render('user-profile', { order: orders, id: req.session.id, user: user});
     }
+
 }
 
 const cancelOrder = async (req, res) => {

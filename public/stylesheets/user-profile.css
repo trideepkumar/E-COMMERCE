@@ -46,6 +46,7 @@ section:hover{
    border-style: solid;
    border-width:1px;
    border-color: black ;
+   text-decoration: none !important;
 }
 .button2{
     display: flex;
@@ -57,7 +58,7 @@ section:hover{
     margin-left: 3rem;
     margin-top:0.3rem;
     border-radius:5px;
-    text-decoration:none;
+    text-decoration:none !important;
     color:black;
 }
 .button2:hover{

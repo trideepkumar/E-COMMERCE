@@ -97,13 +97,13 @@ const getchartData = async (req, res) => {
 
 const getreportDownload = async (req, res) => {
     try {
-
+         
         // Create a browser instance
         const browser = await puppeteer.launch();
         // Create a new page
         const page = await browser.newPage();
 
-        // this needs to change {Hosting}
+        // this is the page where puppeteer take scrnshot 
         const website_url = 'http://localhost:4000/admin/generateTable';
 
         await page.goto(website_url, { waitUntil: 'networkidle0' });
@@ -187,6 +187,7 @@ const getreportDownload = async (req, res) => {
 }
 
 const generateTable = async (req, res) => {
+    console.log('generating table to take screenshot');
     const productSale = await Order.aggregate(
         [
             {
@@ -638,13 +639,28 @@ const updateCoupon = async (req, res) => {
 //for admin orders
 const adminOrder = async (req, res) => {
     console.log('admin-order works!!')
-    const orders = await Order.find({})
+    // const orders = await Order.find({})
+    
+    const orders = await Order.find({}).sort({'createdAt': -1}).populate('orderItems.id');
     // console.log(orders)
+   
+   
+   
+    orders.forEach(order => {
+        const date = new Date(order.createdAt);
+        const formattedDate = date.toLocaleDateString(); // customize this as per your requirements
+        const formattedTime = date.toLocaleTimeString(); // customize this as per your requirements
+        const newDate = `${formattedDate} ${formattedTime}`;
+        order.newDAte = newDate;
+        console.log(newDate);
+    });
+
     if (orders.length == 0) {
-        res.render('user-order-empty')
+        res.render('user-order-empty');
     } else {
-        res.render('admin-order', { order: orders })
+        res.render('admin-order', { order: orders});
     }
+
 }
 
 const cancelOrder = async (req, res) => {

@@ -35,7 +35,6 @@ body {
 .box:hover {
     border-radius: 15%;
     border-color:#b9b9b9;
-    
     /* transform: scale(1.1); */
     transform: scale(1.05);
     /* border-color: rgb(255, 255, 255); */
@@ -70,3 +69,11 @@ body {
 }
 
 
+a:hover{
+   color : rgb(113, 112, 112) !important;
+   text-decoration: none !important;
+}
+.logout{
+    background: none !important;
+    color: red !important;
+}
