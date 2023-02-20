@@ -24,6 +24,7 @@ background-color: #000000;
     justify-content: space-between;
     align-content: space-between;
     z-index: 10;
+   
 }
 
 /*signup form*/
@@ -57,6 +58,8 @@ input{
 }
 .navbarNav{
   width: 5rem;
+  
+
 }
 /*for responsive*/
 

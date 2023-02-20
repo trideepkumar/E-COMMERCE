@@ -1,0 +1,16 @@
+<link rel="stylesheet" href="/public/stylesheets/products.css">
+
+{{> user-nav}}
+<div class="search">
+    {{#each category}}
+    <a href="/user/category-wise/{{_id}}" class="btn cat-btn">{{name}}</a>
+    {{/each}}
+    <input type="text" name="search" id="search-input" autocomplete="off" value="{{search}}"
+        placeholder="Search Products here!">
+    <input type="submit" value="Search" class="btn-srch  glow-on-hover">
+</div>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_scgyykem.json" background="transparent" speed="1"
+    style="width: 800px; height: 800px; margin-left:31rem;" loop autoplay></lottie-player>
+
+    <script src="/public/javascript/user-products.js"></script>

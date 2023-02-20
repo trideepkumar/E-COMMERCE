@@ -1,8 +1,10 @@
 module.exports={
   isLoggedIn : (req, res, next) => {
+    
        if (req.session.email) {
          next()
-       } else {
+       }
+        else {
          res.redirect('/user/signin')
        }
      },

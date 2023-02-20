@@ -100,16 +100,18 @@ async function orderSuccess(orderId , paymentId) {
 
 //for cancelleing order
 
-let orderContainer = document.querySelector('.user-cancel-order');
+let orderContainer = document.querySelectorAll('.user-cancel-order');
 if (orderContainer) {
-    orderContainer.addEventListener('click', (e) => {
-        if (e.target.classList.contains('order-cancel-btn')) {
-            cancelOrder(e);
-        }else if(e.target.classList.contains('order-return-btn')){
-            console.log('order-return btn works');
-            returnOrder(e);
-        }
-    })
+    orderContainer.forEach((orderBut)=>{
+        orderBut.addEventListener('click', (e) => {
+            if (e.target.classList.contains('order-cancel-btn')) {
+                cancelOrder(e);
+            }else if(e.target.classList.contains('order-return-btn')){
+                console.log('order-return btn works');
+                returnOrder(e);
+            }
+        })
+    })  
 }
 
 

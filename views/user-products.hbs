@@ -2,18 +2,23 @@
 {{> user-nav}}
 
 <div class="search">
-    <input type="text" name="search" id="search-input" autocomplete="off" value="{{search}}">
-    <input type="submit" value="Search" class="btn-srch">
+    {{#each category}}
+  <a href="/user/category-wise/{{_id}}"  class="btn cat-btn">{{name}}</a>  
+  {{/each}}
+    <input type="text" name="search" id="search-input" autocomplete="off" value="{{search}}"
+        placeholder="Search Products here!">
+    <input type="submit" value="Search" class="btn-srch  glow-on-hover">
 </div>
 
 
 <div class="prod" style="padding-left:6rem;">
+
     {{#each productList}}
-    <div class="card col-md-3  ml-5  mb-0   " style="width: 22rem; margin-top:3rem;  height:44rem  ">
+    <div class="card col-md-3  ml-5  mb-0" style="width: 22rem; margin-top:3rem;  height:44rem  ">
         <img class="card-img-top" src="{{image.[0]}}" alt="Card image cap" style="width: 15rem; height:15rem  ">
         <div class="card-body">
             <h5 class="card-title">{{name}}</h5>
-            <p class="card-text"> RS.{{price}}</p>
+            <p class="card-text">Rs.{{price}}</p>
         </div>
         <ul>
             <li class="list-group-item">Category:{{category.name}}</li>
@@ -29,6 +34,6 @@
     {{/each}}
 </div>
 </div>
-{{> user-foot}}
+{{!-- {{> user-foot}} --}}
 
 <script src="/public/javascript/user-products.js"></script>

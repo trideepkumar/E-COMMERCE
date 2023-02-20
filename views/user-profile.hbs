@@ -13,7 +13,7 @@
                 {{/each}}
             </div>
         </section>
-        <div class="buttons">
+        <div class="buttons log">
             <div class="btn button ">
                 <a href="/order/user-order">my orders</a>
             </div>
@@ -23,8 +23,8 @@
             <div class="btn button2 ">
                 <a href="/user/forgot-pass">Change Password</a>
             </div>
-            <div class="btn button2 ">
-                <a href="/user/products">LogOut</a>
+            <div class="btn button2 logout">
+                <a href="/user/logout">LogOut</a>
             </div>
         </div>
     </div>
@@ -124,7 +124,9 @@
                 {{#each order}}
                 <tr>
 
-                    <td><a href="/user/order-product-view-page" class="btn btnnn">view product</a><p>{{orderItems.length}} items Ordered</p></td>
+                    <td><a href="/user/order-product-view-page" class="btn btnnn">view product</a>
+                        <p>{{orderItems.length}} items Ordered</p>
+                    </td>
                     <td> ADDRESS: <p>{{shippingInfo.houseName}}</p>
                         PHONE: <p>{{shippingInfo.phone}}</p>
                         PINCODE: <p> {{shippingInfo.postalCode}}</p>
@@ -133,7 +135,7 @@
                     </td>
                     <td>
                         <div class="order-payment-mode">
-                             {{#if isRefundStatus}}
+                            {{#if isRefundStatus}}
                             <a href="">Refund Successfull</a>
                             {{/if}}
                             {{#if isReturnStatus}}
@@ -170,14 +172,15 @@
                     </td>
                     <td>
                         <div class="user-cancel-order">
-                             {{#if isRefundStatus}}
+                            {{#if isRefundStatus}}
                             <a href="">Refund Successfull</a>
                             {{/if}}
-                             {{#if isReturnStatus}}
-                              {{#if (eq isRefundStatus false)}}
+                            {{#if isReturnStatus}}
+                            {{#if (eq isRefundStatus false)}}
                             <a href="">Return Successfull</a>
                             {{else}}
                             {{/if}}
+                            
                             {{else}}
                             {{#if isReturn}}
                             <a href="">Return submitted</a>
@@ -195,7 +198,7 @@
                             {{#if isCancelled}}
                             <a href="#">Cancelled</a>
                             {{else}}
-                           
+
                             {{/if}}
                             {{/if}}
                             {{/if}}
@@ -219,4 +222,5 @@
 
 </div>
 <script src="/javascript/order.js"></script>
+<script src="/javascript/logout.js"></script>
 {{> datatable}}

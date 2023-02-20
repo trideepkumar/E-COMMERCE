@@ -28,7 +28,7 @@ async function getChart() {
                     {
                         label: 'TOTAL PRODUCT WISE SALE',
                         data: chartData.productWiseSale.map(row => row.totalAmount),
-                        backgroundColor:['#57EBE0' ,'#EBE257 ','#EA7D51 ','#51B5EA'],
+                        backgroundColor:['#57EBE0' ,'#EBE257 ','#EA7D51 ','#51B5EA','#ff56','#aaaa'],
                     }
                 ]
             }

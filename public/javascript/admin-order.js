@@ -1,21 +1,26 @@
 
-let orderContainer = document.querySelector('.userorder-container');
+let orderContainer = document.querySelectorAll('.userorder-container');
 if (orderContainer) {
-    orderContainer.addEventListener('click', (e) => {
-        if (e.target.classList.contains('order-cancel-btn')) {
-            console.log('cancel order works');
-            cancelOrder(e);
-        }else  if (e.target.classList.contains('order-deliver-btn')) {
-            console.log('deliver order works');
-           deliverOrder(e)
-        }else  if (e.target.classList.contains('order-approve-return-btn')) {
-            console.log('return approval  works');
-            returnOrder(e)
-        } else  if (e.target.classList.contains('order-approve-refund-btn')) {
-            console.log('refund approval  works');
-             refundOrder(e)
-        }
+    orderContainer.forEach((orderBut)=>{
+
+        orderBut.addEventListener('click', (e) => {
+            if (e.target.classList.contains('order-cancel-btn')) {
+                console.log('cancel order works');
+                cancelOrder(e);
+            }else  if (e.target.classList.contains('order-deliver-btn')) {
+                console.log('deliver order works');
+               deliverOrder(e)
+            }else  if (e.target.classList.contains('order-approve-return-btn')) {
+                console.log('return approval  works');
+                returnOrder(e)
+            } else  if (e.target.classList.contains('order-approve-refund-btn')) {
+                console.log('refund approval  works');
+                 refundOrder(e)
+            }
+        })
     })
+
+ 
 }
 
 

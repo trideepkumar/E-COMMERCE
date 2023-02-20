@@ -7,11 +7,13 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const { Category } = require('../model/category')
 const { Product } = require('../model/product')
+const { ObjectId } = require('mongodb');
 
 
 //for saving userinfo in db 
 
 const registerUser = async (req, res, next) => {
+    console.log('register user works');
     const existing = await User.find({ $or: [{ Email: req.body.email }, { phone: req.body.phone }] })
     if (existing == 0) {
         req.session.user = {
@@ -21,6 +23,7 @@ const registerUser = async (req, res, next) => {
             phone: req.body.phone,
             password: req.body.password,
         }
+        console.log(req.session.user);
         res.render('user-otp')
         return next()
     } else {
@@ -72,11 +75,15 @@ const checkOtp = async (req, res) => {
 
 const getUserProducts = async (req, res) => {
     let productList = await Product.find().populate('category');
+    // let category =await Category.find()
     // console.log(productList)
+    const category = await Category.find({})
+    console.log(category);
+
     if (!productList) {
         res.staus(500).json({ success: false })
     }
-    res.render('user-products', { productList:req.session.productList ? req.session.productList:productList ,search:req.session.search?req.session.search:""})
+    res.render('user-products', { productList: req.session.productList ? req.session.productList : productList, search: req.session.search ? req.session.search : "", category: category })
 
 }
 
@@ -184,6 +191,7 @@ const deleteAddress = async (req, res) => {
 const getorderProductview = async (req, res) => {
     // console.log('productvi');
     const user = await User.find({ Email: req.session.email }).populate('order.id');
+
     console.log(user);
     const orderItems = order.orderItems;
     console.log(orderItems);
@@ -260,19 +268,52 @@ const searchProducts = async (req, res) => {
     // console.log(req.query.q);
     const searchTerm = req.body.input;
     try {
-      const productList = await Product.find({ name: { $regex: searchTerm, $options: 'i' } });
-      console.log(productList);
-    //   res.render('user-products',{productList:productList})
-    //  return res.json(productList);
-    req.session.search = searchTerm
-    req.session.productList =productList
-    return res.json({redirect:('/user/products')})
+        const productList = await Product.find({ name: { $regex: searchTerm, $options: 'i' } });
+        // console.log(productList);
+        console.log(productList.length);
+        req.session.search = searchTerm
+        req.session.productList = productList
 
+        if(productList.length === 0){
+            console.log('if works');
+            return res.json({ redirect: ('/user/empty-search') })
+        }else{
+            console.log('else works');
+            return res.json({ redirect: ('/user/products') })
+        }
+        
     } catch (error) {
-      res.status(500).send(error.message);
+        res.status(500).send(error.message);
     }
-    
+
 }
+
+
+
+const categoryWise = async (req, res) => {
+    console.log('category controller works!');
+    const { id } = req.params;
+    console.log(id);
+    const productList = await Product.find({ category: ObjectId(id) }).exec();
+    console.log('category wise filtration');
+    console.log(productList);
+    //   res.send(productList);
+    const category = await Category.find({})
+    console.log(category);
+    if (productList.length === 0) {
+        res.render('empty-cat-products', { search: req.session.search ? req.session.search : "", category: category })
+    } else {
+        res.render('user-products', { productList: productList, search: req.session.search ? req.session.search : "", category: category })
+    }
+};
+
+
+const emptySearch  = async (req,res)=>{
+    const category = await Category.find({})
+    console.log(category);
+    res.render('empty-cat-products',{ search: req.session.search ? req.session.search : "", category: category })
+}
+
 
 
 module.exports = {
@@ -296,5 +337,7 @@ module.exports = {
     forgototpVerification,
     changePassword,
     changePasswordpost,
-    searchProducts
+    searchProducts,
+    categoryWise,
+    emptySearch
 }

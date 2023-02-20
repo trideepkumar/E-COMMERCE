@@ -1,6 +1,6 @@
 {{> admin-nav}}
 
-<div class="main-container">
+<div class="main-container log">
     <aside class="aside " style="position: fixed; margin: top 5rem; background:rgb(246, 246, 246)">
         <a href="/admin/admin-dash" class="admin-dash p-5 mt-5"><i class="fa-sharp fa-solid fa-table-columns"> &nbsp; </i> Dashboard</a>
         <a href="/admin/category" class="admin-dash p-5"><i class="fa-solid fa-user">&nbsp;  </i> Category</a>
@@ -9,7 +9,7 @@
         <a href="/admin/admin-order" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-calendar">&nbsp;  </i>Orders</a>
         <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"> &nbsp; </i>Users</a>
         <a href="/admin/banner" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"> &nbsp; </i>Banners</a>
-        <a href="/admin/logout" class="logout-button" style="background: rgb(238, 224, 224); color:red">Logout</a>
+        <a href="/admin/logout" class="logout-button logout" style="background: rgb(238, 224, 224); color:red">Logout</a>
     </aside>
 </div>
 
@@ -46,7 +46,7 @@
                     <div class="d-flex align-items-center">
                         <img src="	http://localhost:4000/uploads/{{this.image.[0]}}" alt="image"
                             style="width: 45px; height: 45px; display: block; margin-left: auto; margin-right: auto;"
-                            class="mx-0 mb-0 d-flex justify-content-start rounded" />
+                            class="mx-0 mb-0 d-flex justify-content-start rounded" accept="image/*" />
                     </div>
                 </td>
                 {{!-- <td>
@@ -73,3 +73,5 @@
     </table>
 </div>
 </div>
+
+<script src="/public/javascript/logout.js"></script>

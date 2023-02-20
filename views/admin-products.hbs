@@ -1,6 +1,6 @@
 {{>admin-nav}}
 
-<div class="main-container">
+<div class="main-container log">
     <aside class="aside " style="position: fixed; margin: top 5rem; background:rgb(246, 246, 246)">
         <a href="/admin/admin-dash" class="admin-dash p-5 mt-5"><i class="fa-sharp fa-solid fa-table-columns"> &nbsp; </i> Dashboard</a>
         <a href="/admin/category" class="admin-dash p-5"><i class="fa-solid fa-user">&nbsp;  </i> Category</a>
@@ -9,7 +9,7 @@
         <a href="/admin/admin-order" class="admin-dash p-5"><i class="fa-sharp fa-solid fa-calendar">&nbsp;  </i>Orders</a>
         <a href="/admin/admin-user" class="admin-dash p-5"><i class="fa-solid fa-users"> &nbsp; </i>Users</a>
         <a href="/admin/banner" class="admin-dash p-5"><i class="fa-solid fa-id-card-clip"> &nbsp; </i>Banners</a>
-        <a href="/admin/logout" class="logout-button" style="background: rgb(238, 224, 224); color:red">Logout</a>
+        <a href="/admin/logout" class="logout-button logout" style="background: rgb(238, 224, 224); color:red">Logout</a>
     </aside>
 </div>
 
@@ -59,7 +59,14 @@
                                 href="/admin/edit/product/{{_id}}">Edit</a>
                         </li>
                         <li class="px-lg-3">
+                              {{#if action}}
+                            <a class="mx-0 mb-2 d-flex justify-content-start btn btn-danger action-prod" data-url={{_id}}>Unblock</a>
+                            {{else}}
+                            <a class="mx-0 mb-2 d-flex justify-content-start btn btn-success action-prod" data-url={{_id}}>Block</a>
+                           {{/if}}
                             <a class="mx-0 mb-0 d-flex justify-content-start btn btn-danger delete-prod" data-url={{_id}}>Delete</a>
+
+                          
                         </li>
                     </ul>
                 </td>
@@ -69,3 +76,4 @@
     </table>
 </div>
 <script src="/javascript/deleteProduct.js"></script>
+<script src="/public/javascript/logout.js"></script>

@@ -59,7 +59,7 @@ const getadminDash = async (req, res) => {
 //for chart
 
 const getchartData = async (req, res) => {
-    // console.log('getchartData controller works');
+    console.log('getchartData controller works');
     try {
 
         const productWiseSale = await Order.aggregate(
@@ -86,7 +86,7 @@ const getchartData = async (req, res) => {
             ]
         )
 
-        // console.log(productWiseSale);
+        console.log(productWiseSale);
         return res.json({ productWiseSale: productWiseSale })
     } catch (err) {
         console.log(err)
@@ -96,12 +96,6 @@ const getchartData = async (req, res) => {
 //for pdf and excel download
 
 const getreportDownload = async (req, res) => {
-
-
-
-
-
-
     try {
 
         // Create a browser instance
@@ -297,6 +291,7 @@ const actionBlock = async (req, res) => {
                     Action: false
                 }
             })
+            req.session.email = null;
             res.json({
                 redirect: 'http://localhost:4000/admin/admin-user'
             })
@@ -435,40 +430,40 @@ const addProducts = async (req, res) => {
         })
         console.log(product)
         console.log(req.body)
-            if (product.name.length < 3) {
-                return res.render('admin-Addproducts',{errorMessage:'Please enter a valid name'})
+        if (product.name.length < 3) {
+            return res.render('admin-Addproducts', { errorMessage: 'Please enter a valid name' })
+        }
+        else if (!product.category) {
+            return res.render('admin-Addproducts', { errorMessage: 'Category must be included' })
+        } else if (!product.price) {
+            return res.render('admin-Addproducts', { errorMessage: 'Price must be included' })
+        }
+        else if (images.length < 3) {
+            console.log('image not satisfied')
+            return res.render('admin-Addproducts', { errorMessage: 'Minimum 4 images should be uploaded' })
+        } else if (!images) {
+            console.log('image not satisfied')
+            return res.render('admin-Addproducts', { errorMessage: 'Ooops! This image file is not supported!' })
+        }
+        else if (!product.description && product.description < 5) {
+            return res.render('admin-Addproducts', { errorMessage: 'Valid description must be included' })
+        }
+        else {
+            try {
+                console.log('save entered')
+                product = await Product.create({
+                    name: req.body.name,
+                    category: req.body.category,
+                    price: req.body.price,
+                    description: req.body.description,
+                    image: images,
+                });
+                return res.redirect('/admin/products')
+            } catch (error) {
+                console.log(error)
+                return res.redirect('/admin/add-products')
             }
-            else if (!product.category) {
-                return res.render('admin-Addproducts',{errorMessage:'Category must be included'})
-            }else if (!product.price) {
-                return res.render('admin-Addproducts',{errorMessage:'Price must be included'})
-            } 
-            else if (images.length < 3) {
-                console.log('image not satisfied')
-                return res.render('admin-Addproducts',{errorMessage:'Minimum 4 images should be uploaded'})
-            }else if (!images) {
-                console.log('image not satisfied')
-                return res.render('admin-Addproducts',{errorMessage:'Ooops! This image file is not supported!'})
-            }
-            else if (!product.description && product.description < 5) {
-                return res.render('admin-Addproducts',{errorMessage:'Valid description must be included'})
-            } 
-             else {
-                try {
-                    console.log('save entered')
-                    product = await Product.create({
-                        name: req.body.name,
-                        category: req.body.category,
-                        price: req.body.price,
-                        description: req.body.description,
-                        image: images,
-                    });
-                    return res.redirect('/admin/products')
-                } catch (error) {
-                    console.log(error)
-                    return res.redirect('/admin/add-products')
-                }
-            }
+        }
     } catch (error) {
         console.log(error)
     }
@@ -551,6 +546,48 @@ const deleteProduct = async (req, res) => {
 
 }
 
+const softDelete = async(req,res)=>{
+    console.log('soft delte controller works');
+    console.log(req.params.id);
+    const id = req.params.id
+    console.log(id)
+   
+    const product = await Product.findById(id)
+    console.log(product);
+    // console.log(product.action);
+    // console.log(product.action);
+    if (product.action) {
+        try {
+            await Product.findOneAndUpdate({ _id: id }, {
+                $set: {
+                    action: false
+                }
+            })
+            res.json({
+                redirect: 'http://localhost:4000/admin/products'
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    } else {
+
+        try {
+            console.log('else working');
+            await Product.findOneAndUpdate({ _id: id }, {
+                $set: {
+                    action: true
+                }
+            })
+            return res.json({
+                redirect: 'http://localhost:4000/admin/products'
+            })
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
 const getcouponDash = async (req, res) => {
     try {
         const coupon = await Coupon.find({})
@@ -619,7 +656,7 @@ const cancelOrder = async (req, res) => {
     try {
         const order = await Order.find({ id: id })
         // console.log(order);
-        const cancelOrder = await Order.findOneAndUpdate({ _id: id }, { isCancelled: true , isDelivered:false}, { user: user });
+        const cancelOrder = await Order.findOneAndUpdate({ _id: id }, { isCancelled: true, isDelivered: false }, { user: user });
         res.json({ redirect: '/admin/admin-order' });
     } catch (err) {
         console.log(err);
@@ -680,7 +717,7 @@ const refundOrder = async (req, res) => {
         //     amount: order[0].totalAmount * 100,
         //     speed: "normal",
         // })
-        
+
         order[0].isRefundStatus = true;
         await order[0].save();
         res.json({ redirect: '/admin/admin-order' });
@@ -726,7 +763,7 @@ const addBanner = async (req, res) => {
         // console.log(req.body);
         // // const images = []
         let images = req.body.image
-    
+
         // const banner = await Banner.find({})
 
         for (key in req.files) {
@@ -740,23 +777,12 @@ const addBanner = async (req, res) => {
         const banner = await Banner.create({
             name: req.body.name,
             caption: req.body.caption,
-            image:images
+            image: images
         });
 
         console.log(banner);
         await banner.save();
-        let image = images
-
-        console.log(image);
-
-        image.forEach(() => {
-            image.splice(1);
-        })
-
-        console.log(image);
-
-
-        res.render('banner',{banner:banner});
+        res.render('banner', { banner: banner });
     } catch (err) {
         console.log(err);
     }
@@ -797,6 +823,7 @@ module.exports = {
     refundOrder,
     getBanner,
     getAddBanner,
-    addBanner
+    addBanner,
+    softDelete
 }
 

@@ -3,25 +3,22 @@ const User = require('../model/user')
 
 const getCart = async (req, res) => {
     try {
-       
+       console.log('get cart works!!');
         const user = await User.find({ Email: req.session.email }).populate('cart.id');
         if (user[0].cart.length === 0) {
+            console.log('empty cart');
             res.render('empty-cart');
         }
         else {
+            console.log('product added');
             const cartItems = user[0].cart;
-            cartItems.forEach((item) => {
-                if (item.quantity >= item.id.stock) {
-                    item.incremet = true
-                }
-                else if (item.quantity === 1) {
-                    // console.log('2 works!!');
-                    item.decrement = true;
-                }
-            })
-
-
-            const totalPrice = cartItems.reduce((total, item) => {
+           console.log(cartItems);
+           console.log('here');
+             const totalPrice = cartItems.reduce((total, item) => {
+                const itemPrice = Number(item.id.price);
+                console.log(itemPrice);
+               const itemQuantity = Number(item.quantity);
+               console.log(itemQuantity);
                 return total + (item.quantity * item.id.price)
             }, 0);
             console.log(totalPrice);
@@ -127,13 +124,23 @@ const deleteCart = async (req, res) => {
     const { id } = req.params;
     try {
         const user = await User.find({ Email: req.session.email });
-        console.log(user);
-        const index = user[0].cart.findIndex((item) => { return item.id.valueOf() === `${id}` })
+        console.log(user[0].cart);
+        // const index = user[0].cart.findIndex((item) => { return item.id.valueOf() === `${id}` })
+        // console.log(index);
+        // user[0].cart.splice(index, 1);
+        // await user[0].save();
+        // res.json({ redirect: '/cart' });
+
+        const index = user[0].cart.findIndex(item => item.id.valueOf() === id);
+        console.log(id);
         console.log(index);
-        console.log(index);
-        user[0].cart.splice(index, 1);
-        await user[0].save();
-        res.json({ redirect: '/cart' });
+        if (index != -1) {
+            user[0].cart.splice(index, 1); 
+            await user[0].save();
+         res.json({ redirect: '/cart' });        
+        } else {
+          res.sendStatus(404);
+        }
     } catch (err) {
         console.log(err);
     }

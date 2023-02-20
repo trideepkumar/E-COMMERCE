@@ -6,36 +6,36 @@ const order = require('../../model/order');
 
 
 
-router.get('/',userAuth.isLoggedIn,orderController.getOrder);
+router.get('/', userAuth.isLoggedIn, orderController.getOrder);
 
-router.post('/address/:id' , userAuth.isLoggedIn,orderController.newShippingAddress);
+router.post('/address/:id', userAuth.isLoggedIn, orderController.newShippingAddress);
 
-router.post('/create',userAuth.isLoggedIn ,orderController.createOrder );   
+router.post('/create', userAuth.isLoggedIn, orderController.createOrder);
 
-router.get('/success',userAuth.isLoggedIn,orderController.orderSuccess)
+router.get('/success', userAuth.isLoggedIn, orderController.orderSuccess)
 
 //for razor pay order success
 
 // razorpay success
-router.put('/success/:id' , orderController.razorPaySuccess );
+router.put('/success/:id', userAuth.isLoggedIn, orderController.razorPaySuccess);
 
 
 
-router.get('/user-order',userAuth.isLoggedIn,orderController.getUserOrder)
+router.get('/user-order', userAuth.isLoggedIn, orderController.getUserOrder)
 
-router.put('/cancel/:id' ,orderController.cancelOrder); 
+router.put('/cancel/:id', userAuth.isLoggedIn, orderController.cancelOrder);
 
-router.put('/return/:id',orderController.returnOrder)
+router.put('/return/:id', userAuth.isLoggedIn, orderController.returnOrder)
 
 
 
 
 //for coupon apply
 
-router.get('/user-coupon', orderController.getCouponpage)
+router.get('/user-coupon', userAuth.isLoggedIn, orderController.getCouponpage)
 
-router.post('/coupon',orderController.applyCoupon)
+router.post('/coupon', userAuth.isLoggedIn, orderController.applyCoupon)
 
 
 
-module.exports= router;
+module.exports = router;

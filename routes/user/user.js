@@ -21,11 +21,11 @@ router.get('/signup',userAuth.isLoggedOut, (req, res) => {
         return res.render('signup')
 })
 
-router.get('/otp',userAuth.isLoggedIn, (req, res) => {
+router.get('/otp',userAuth.isLoggedOut, (req, res) => {
     res.render('user-otp')
 })
 
-router.get('/signin',userAuth.isLoggedOut,userAuth.isLoggedOut, (req, res) => {
+router.get('/signin',userAuth.isLoggedOut, (req, res) => {
 
     if (req.session.email) {
         res.redirect('/user/home')
@@ -52,9 +52,9 @@ router.get('/singleProduct/:id',userAuth.isLoggedIn, userController.getSinglePro
 
 
 
-router.post('/signup', userController.registerUser, userController.generateOtp)
+router.post('/signup',userAuth.isLoggedIn, userController.registerUser, userController.generateOtp)
 
-router.post('/otp', userController.checkOtp)
+router.post('/otp',userAuth.isLoggedIn, userController.checkOtp)
 
 
 router.post('/signin', async (req, res) => {
@@ -89,25 +89,25 @@ router.post('/signin', async (req, res) => {
     }
 })
 
-router.get('/profile',userController.getProfile)
+router.get('/profile',userAuth.isLoggedIn,userController.getProfile)
 
-router.get('/edit-profile', userController.geteditProfile)
+router.get('/edit-profile',userAuth.isLoggedIn, userController.geteditProfile)
 
-router.get('/edit-address',userController.geteditAddress)
+router.get('/edit-address',userAuth.isLoggedIn,userController.geteditAddress)
 
-router.delete('/address-delete/:id',userController.deleteAddress)
+router.delete('/address-delete/:id',userAuth.isLoggedIn,userController.deleteAddress)
 
 //for editing profile
 
-router.post('/edit-user/:id',userController.updateUser)
+router.post('/edit-user/:id',userAuth.isLoggedIn,userController.updateUser)
 
-router.post('/edit-address/:id',userController.updateAddress)
+router.post('/edit-address/:id',userAuth.isLoggedIn,userController.updateAddress)
 
-router.get('/about',userController.getAbout)
+router.get('/about',userAuth.isLoggedIn,userController.getAbout)
 
 //for order view page 
 
-router.get('/order-product-view-page', userController.getorderProductview)
+router.get('/order-product-view-page',userAuth.isLoggedIn, userController.getorderProductview)
 
 router.get('/forgot-pass',userController.getForgotpass)
 
@@ -124,5 +124,11 @@ router.post('/change-pass',userController.changePasswordpost)
 //for searching products
 
 router.post('/search',userController.searchProducts)
+
+//for category filter
+
+router.get('/category-wise/:id', userController.categoryWise)
+
+router.get('/empty-search',userController.emptySearch)
 
 module.exports = router

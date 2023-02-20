@@ -138,10 +138,28 @@ const getUserOrder = async (req, res) => {
     const userId = user[0]._id
     // console.log(userId);
 
-    const orders = await Order.find({ user: userId }).populate('orderItems.id');
+    const orders = await Order.find({ user: userId }).sort({'createdAt': -1}).populate('orderItems.id');
     // console.log(orders)
     // const user = await User.find({ Email: req.session.email })
     // console.log(user)
+
+   
+orders.forEach(order => {
+    const date = new Date(order.createdAt);
+    const formattedDate = date.toLocaleDateString(); // customize this as per your requirements
+    const formattedTime = date.toLocaleTimeString(); // customize this as per your requirements
+  
+    // display the formatted date and time on the order view page
+    // you can replace this with code that adds the formatted date and time to the DOM
+    console.log(`${formattedDate} ${formattedTime}`);
+   
+    console.log('logged');
+    const newDAte  =  `${formattedDate} ${formattedTime}`
+    console.log(newDAte);
+  });
+
+  
+
     if (orders.length == 0) {
         res.render('user-order-empty')
     } else {
