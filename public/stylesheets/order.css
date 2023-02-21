@@ -1,6 +1,7 @@
 body{
     background: white;
     height: 100vh;
+    
 }
 #order{
     margin-top:4rem;
@@ -93,8 +94,14 @@ a.btn{
 
   form{
     box-shadow: none !important;
-    background-color: rgb(239, 239, 239) !important;
-  }
+    background-color: rgb(238, 238, 238) !important;
+    margin-bottom: 10rem !important;
+    /* padding-bottom: 10rem !important; */
+    height: 80rem !important;
+    margin-top:3rem !important; 
+    padding-top: 3rem !important;
+
+}
   label{
     color: rgb(161, 161, 161);
   }

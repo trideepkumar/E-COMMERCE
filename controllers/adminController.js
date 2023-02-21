@@ -104,7 +104,7 @@ const getreportDownload = async (req, res) => {
         const page = await browser.newPage();
 
         // this is the page where puppeteer take scrnshot 
-        // const website_url = 'http://localhost:4000/admin/generateTable';
+        // const website_url = '/admin/generateTable';
         // const currentUrl = page.url(); // get the current URL
         // const baseUrl = currentUrl.substring(0, currentUrl.indexOf('/', 8)); // get the base URL
         // const website_url = `${baseUrl}/admin/generateTable`; // construct the full URL
