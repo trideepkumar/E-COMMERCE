@@ -656,7 +656,7 @@ const adminOrder = async (req, res) => {
     });
 
     if (orders.length == 0) {
-        res.render('user-order-empty');
+        res.render('admin-order-empty');
     } else {
         res.render('admin-order', { order: orders});
     }

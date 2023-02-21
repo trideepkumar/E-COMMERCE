@@ -1,19 +1,35 @@
-body{
-    background: rgb(255, 255, 255);
-}
+body {
+    height: 100%;
+    background-color: rgb(211, 230, 246);
+  }
+  
+  
 
-.btn{
-    color:#ffffff;
+
+
+.btn {
+    color: #030202;
     transition: transform 1s;
 }
-.btn:hover{
+
+.btn:hover {
     transform: scale(1.05);
 }
-.buynow{
+
+.buynow {
     color: #ffffff;
     background-color: rgb(67, 211, 0);
     transition: background-color 1s ease;
 }
-.buynow:hover{
+
+.buynow:hover {
     background-color: rgb(231, 153, 93);
+}
+.card{
+ background: #ace7f6  !important;
+ box-shadow:none;
+ width: 100%;
+}
+p{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
