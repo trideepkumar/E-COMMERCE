@@ -31,7 +31,7 @@ if(cartCard) {
 async function incrementQuantity(e) {
     const productId = e.target.dataset.url;
     console.log(productId);
-    const url = `http://localhost:4000/cart/qty-plus/${productId}` ;
+    const url = `/cart/qty-plus/${productId}` ;
     console.log(url);
     const res = await fetch(url, {
                     method: 'PUT',
@@ -54,7 +54,7 @@ async function decrementQuantity(e) {
     console.log(quantText)
 
     console.log(productId);
-    const url = `http://localhost:4000/cart/qty-minus/${productId}` ;
+    const url = `/cart/qty-minus/${productId}` ;
     console.log(url);
     const res = await fetch(url, {
                     method: 'PUT',
@@ -73,7 +73,7 @@ async function deleteCart(e){
     console.log('Dlete');
     const id = e.target.dataset.url;
     console.log(id);
-    const url = `http://localhost:4000/cart/${id}` ;
+    const url = `/cart/${id}` ;
     console.log(url);
     const res = await fetch(url, {
                     method: 'DELETE',

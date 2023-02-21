@@ -97,14 +97,20 @@ const getchartData = async (req, res) => {
 
 const getreportDownload = async (req, res) => {
     try {
-         
+
         // Create a browser instance
         const browser = await puppeteer.launch();
         // Create a new page
         const page = await browser.newPage();
 
         // this is the page where puppeteer take scrnshot 
-        const website_url = 'http://localhost:4000/admin/generateTable';
+        // const website_url = 'http://localhost:4000/admin/generateTable';
+        // const currentUrl = page.url(); // get the current URL
+        // const baseUrl = currentUrl.substring(0, currentUrl.indexOf('/', 8)); // get the base URL
+        // const website_url = `${baseUrl}/admin/generateTable`; // construct the full URL
+        const website_url = `${req.protocol}://${req.get("host")}/admin/generateTable`;
+   
+        console.log(website_url);
 
         await page.goto(website_url, { waitUntil: 'networkidle0' });
 
@@ -157,7 +163,7 @@ const getreportDownload = async (req, res) => {
     //         const browser = await puppeteer.launch();
     //         const page = await browser.newPage();
     //         // console.log(page);
-    //         await page.goto('http://localhost:4000/admin/report-Download', { waitUntil: 'networkidle0' });
+    //         await page.goto('/admin/report-Download', { waitUntil: 'networkidle0' });
     //         await page.pdf({ path: 'productsalesreport.pdf', format: 'A4' });
     //         res.download('productsalesreport.pdf');
     //         await browser.close();
@@ -165,10 +171,10 @@ const getreportDownload = async (req, res) => {
     //     // res.render('productPdf',{productWiseSale:productWiseSale})
     //     // const browser = await puppeteer.launch();
     //     // const page = await browser.newPage();
-    //     // const url = 'http://localhost:4000/admin/report-Download';
+    //     // const url = '/admin/report-Download';
     //     // await page.goto(url, { waitUntil: 'networkidle0' });
     //     // await page.emulateMediaType('screen');
-    //     // await page.goto('http://localhost:4000/admin/report-Download');
+    //     // await page.goto('/admin/report-Download');
     //     // await page.pdf({ path: 'productsalesreport.pdf' });
     //     // const pdf = await page.pdf({
     //     //     path: 'productsalesreport.pdf',
@@ -294,7 +300,7 @@ const actionBlock = async (req, res) => {
             })
             req.session.email = null;
             res.json({
-                redirect: 'http://localhost:4000/admin/admin-user'
+                redirect: '/admin/admin-user'
             })
         } catch (error) {
             console.log(error)
@@ -308,7 +314,7 @@ const actionBlock = async (req, res) => {
                 }
             })
             return res.json({
-                redirect: 'http://localhost:4000/admin/admin-user'
+                redirect: '/admin/admin-user'
             })
 
         } catch (error) {
@@ -377,7 +383,7 @@ const deleteCategory = async (req, res) => {
                 }
             })
             return res.json({
-                redirect: 'http://localhost:4000/admin/category'
+                redirect: '/admin/category'
             })
         } catch (error) {
             console.log(error)
@@ -391,7 +397,7 @@ const deleteCategory = async (req, res) => {
                 }
             })
             return res.json({
-                redirect: 'http://localhost:4000/admin/category'
+                redirect: '/admin/category'
             })
 
         } catch (error) {
@@ -533,12 +539,12 @@ const deleteProduct = async (req, res) => {
         await Product.findByIdAndRemove(id)
             .then((product) => {
                 if (product) {
-                    return res.status(200).json({ redirect: "http://localhost:4000/admin/products" })
+                    return res.status(200).json({ redirect: "/admin/products" })
                 } else {
-                    return res.status(404).json({ redirect: "http://localhost:4000/admin/products" })
+                    return res.status(404).json({ redirect: "/admin/products" })
                 }
             }).catch(err => {
-                return res.status(400).json({ redirect: "http://localhost:4000/admin/products" })
+                return res.status(400).json({ redirect: "/admin/products" })
             })
 
     } catch (error) {
@@ -547,12 +553,12 @@ const deleteProduct = async (req, res) => {
 
 }
 
-const softDelete = async(req,res)=>{
+const softDelete = async (req, res) => {
     console.log('soft delte controller works');
     console.log(req.params.id);
     const id = req.params.id
     console.log(id)
-   
+
     const product = await Product.findById(id)
     console.log(product);
     // console.log(product.action);
@@ -565,7 +571,7 @@ const softDelete = async(req,res)=>{
                 }
             })
             res.json({
-                redirect: 'http://localhost:4000/admin/products'
+                redirect: '/admin/products'
             })
         } catch (error) {
             console.log(error)
@@ -580,7 +586,7 @@ const softDelete = async(req,res)=>{
                 }
             })
             return res.json({
-                redirect: 'http://localhost:4000/admin/products'
+                redirect: '/admin/products'
             })
 
         } catch (error) {
@@ -640,12 +646,12 @@ const updateCoupon = async (req, res) => {
 const adminOrder = async (req, res) => {
     console.log('admin-order works!!')
     // const orders = await Order.find({})
-    
-    const orders = await Order.find({}).sort({'createdAt': -1}).populate('orderItems.id');
+
+    const orders = await Order.find({}).sort({ 'createdAt': -1 }).populate('orderItems.id');
     // console.log(orders)
-   
-   
-   
+
+
+
     orders.forEach(order => {
         const date = new Date(order.createdAt);
         const formattedDate = date.toLocaleDateString(); // customize this as per your requirements
@@ -658,7 +664,7 @@ const adminOrder = async (req, res) => {
     if (orders.length == 0) {
         res.render('admin-order-empty');
     } else {
-        res.render('admin-order', { order: orders});
+        res.render('admin-order', { order: orders });
     }
 
 }

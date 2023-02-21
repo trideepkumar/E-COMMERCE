@@ -2,7 +2,7 @@
 
 getChart()
 async function getChart() {
-    const url = ` http://localhost:4000/admin/chart`;
+    const url = ` /admin/chart`;
     console.log(url);
     console.log('getchart() works!!');
 

@@ -20,7 +20,7 @@ async function deleteprod(e){
     console.log("working2")
     const data=e.target.dataset.url
     console.log(data)
-    const url = 'http://localhost:4000/admin/products/delete/'+data
+    const url = '/admin/products/delete/'+data
     console.log(url)
     const id=`${data}`
 
@@ -45,7 +45,7 @@ async function blockProduct(e){
     console.log("soft delete works")
     const data=e.target.dataset.url
     console.log(data)
-    const url = 'http://localhost:4000/admin/products/block-product/'+data
+    const url = '/admin/products/block-product/'+data
     console.log(url)
     const id=`${data}`
     console.log(id);

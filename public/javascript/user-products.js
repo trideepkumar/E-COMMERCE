@@ -11,7 +11,7 @@ if (orderContainer) {
 
 async function searchProducts(e){
     console.log('search fnctn works!!');
-    const url = `http://localhost:4000/user/search`;
+    const url = `/user/search`;
     console.log(url)
     const input = document.getElementById('search-input');
   const data = { input:input.value };

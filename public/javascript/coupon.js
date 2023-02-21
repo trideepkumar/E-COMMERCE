@@ -14,7 +14,7 @@ async function couponActivate(e) {
     // console.log('coupon fn working');
     const couponId = e.target.dataset.url;
     // console.log(couponId);
-    const url = `http://localhost:4000/admin/updatecoupon/${couponId}`;
+    const url = `/admin/updatecoupon/${couponId}`;
     const res = await fetch(url, {
                     method: 'PUT',
                     credentials: "same-origin",

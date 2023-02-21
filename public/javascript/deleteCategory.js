@@ -18,7 +18,7 @@ async function deleteCat(e){
     // console.log(`${userId}`)
     // console.log(userId)
     const id = `${userId}`
-    const url = `http://localhost:4000/admin/category/${userId}` ;
+    const url = `/admin/category/${userId}` ;
     console.log(url)
 
 

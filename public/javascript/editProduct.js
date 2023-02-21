@@ -11,7 +11,7 @@
 //   // console.log(name,price,description,category);
 
 //   const data = document.querySelector('#update-button').dataset.url
-//   const url = 'http://localhost:4000/admin/edit-product/' + data
+//   const url = '/admin/edit-product/' + data
 //   // console.log(data)
 //   // console.log(url)
 //   const error = document.querySelector('#error')

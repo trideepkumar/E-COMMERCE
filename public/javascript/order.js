@@ -21,7 +21,7 @@ if (razorbtn) {
 
 async function createOrder(e) {
     console.log('fun works!');
-    const url = `http://localhost:4000/order/create`;
+    const url = `/order/create`;
     console.log(url);
     let methodofPayment;
     if (e.target.classList.contains('btn-cod')) {
@@ -118,7 +118,7 @@ if (orderContainer) {
 async function cancelOrder(e) {
     const orderId = e.target.dataset.url
     // console.log(orderId)
-    const url = `http://localhost:4000/order/cancel/${orderId}`;
+    const url = `/order/cancel/${orderId}`;
     // console.log(url)
     alert('are you sure to cancel the order ? ')
     const res = await fetch(url, {
@@ -136,7 +136,7 @@ async function  returnOrder(e){
     console.log('return order function works!!');
     const orderId = e.target.dataset.url
     console.log(orderId);
-    const url = `http://localhost:4000/order/return/${orderId}`;
+    const url = `/order/return/${orderId}`;
     console.log(url);
     alert('are you sure to return the order ? ')
     const res = await fetch(url, {
@@ -164,7 +164,7 @@ if(deleteAddress){
 async function   deletingAddr(e){
     console.log('return order function works!!');
     const deleteId = e.target.dataset.url
-    const url = `http://localhost:4000/user/address-delete/${deleteId}`;
+    const url = `/user/address-delete/${deleteId}`;
     console.log(url);
     alert('are you sure to delete the Address ? ')
     const res = await fetch(url, {

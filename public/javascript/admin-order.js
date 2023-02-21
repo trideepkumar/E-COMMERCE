@@ -27,7 +27,7 @@ if (orderContainer) {
 async function cancelOrder(e) {
     const orderId = e.target.dataset.url
     // console.log(orderId)
-    const url = `http://localhost:4000/admin/admin-order-cancel/${orderId}`;
+    const url = `/admin/admin-order-cancel/${orderId}`;
     // console.log(url)
     alert('are you sure to cancel the order ? ')
     const res = await fetch(url, {
@@ -46,7 +46,7 @@ async function deliverOrder(e) {
     console.log('deliver fnctn works!!');
     const orderId = e.target.dataset.url
     // console.log(orderId)
-    const url = `http://localhost:4000/admin/admin-deliver-order/${orderId}`;
+    const url = `/admin/admin-deliver-order/${orderId}`;
     console.log(url)
     alert('are you sure to deliver the order ?')
     const res = await fetch(url, {
@@ -66,7 +66,7 @@ async function returnOrder(e) {
     console.log('deliver fnctn works!!');
     const orderId = e.target.dataset.url
     // console.log(orderId)
-    const url = `http://localhost:4000/admin/admin-return-order/${orderId}`;
+    const url = `/admin/admin-return-order/${orderId}`;
     console.log(url)
     alert('are you sure to take return the order ?')
     const res = await fetch(url, {
@@ -86,7 +86,7 @@ async function refundOrder(e) {
     console.log('refund fnctn works!!');
     const orderId = e.target.dataset.url
     // console.log(orderId)
-    const url = `http://localhost:4000/admin/admin-refund-order/${orderId}`;
+    const url = `/admin/admin-refund-order/${orderId}`;
     console.log(url)
     alert('are you sure to refund the payment ?')
     const res = await fetch(url, {
@@ -120,7 +120,7 @@ async function refundOrder(e) {
 //     console.log('productView works');
 //     const orderId = e.target.dataset.url
 //     // console.log(orderId)
-//     const url = `http://localhost:4000/admin/order-product-view/${orderId}`;
+//     const url = `/admin/order-product-view/${orderId}`;
 //     console.log(url)
 //     alert('are you sure to open the produt view ')
 
