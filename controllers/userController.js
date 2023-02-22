@@ -17,7 +17,7 @@ const Banner = require('../model/banner');
 const getLanding = async(req,res)=>{
     const banner=await Banner.find({})
     console.log(banner);
-    res.render('home',{banner:banner})
+    res.render('landing',{banner:banner})
 }
 
 const registerUser = async (req, res, next) => {
