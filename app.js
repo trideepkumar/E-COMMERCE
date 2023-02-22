@@ -88,6 +88,7 @@ app.engine(
 hbs.create().getPartials().then(function(partials) {})
 
 //route set up for user
+app.use('/',userRoute)
 
 app.use('/user', userRoute);
 

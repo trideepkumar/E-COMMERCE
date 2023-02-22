@@ -11,7 +11,14 @@ const Banner = require('../../model/banner');
 
 // const adminAuth = require('../../middlewares/adminAuth');
 
+
+router.get('/',(req,res)=>{
+    res.render('user-products')
+});
+
+
 //for cache control
+
 
 
 router.get('/signup',userAuth.isLoggedOut, (req, res) => {
