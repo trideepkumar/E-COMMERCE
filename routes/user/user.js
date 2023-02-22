@@ -12,9 +12,7 @@ const Banner = require('../../model/banner');
 // const adminAuth = require('../../middlewares/adminAuth');
 
 
-router.get('/',(req,res)=>{
-    res.render('user-products')
-});
+router.get('/',userController.getLanding);
 
 
 //for cache control

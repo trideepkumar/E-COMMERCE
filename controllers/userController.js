@@ -8,9 +8,17 @@ require('dotenv').config()
 const { Category } = require('../model/category')
 const { Product } = require('../model/product')
 const { ObjectId } = require('mongodb');
+const Banner = require('../model/banner');
+
 
 
 //for saving userinfo in db 
+
+const getLanding = async(req,res)=>{
+    const banner=await Banner.find({})
+    console.log(banner);
+    res.render('home',{banner:banner})
+}
 
 const registerUser = async (req, res, next) => {
     console.log('register user works');
@@ -339,5 +347,6 @@ module.exports = {
     changePasswordpost,
     searchProducts,
     categoryWise,
-    emptySearch
+    emptySearch,
+    getLanding
 }
